@@ -1,0 +1,723 @@
+/* ==========================================================================
+   URBANDROPS — Order Tracking Stylesheet
+   Palette:
+     Background: #0D0D0D
+     Card BG:    #1A1A1A
+     Text:       #FFFFFF
+     CTA:        #FF4D00
+     Accent:     #CCFF00
+   ========================================================================== */
+
+:root {
+  --ud-bg: #0D0D0D;
+  --ud-card: #1A1A1A;
+  --ud-surface-alt: #242424;
+  --ud-border: #2E2E2E;
+  --ud-text: #FFFFFF;
+  --ud-text-muted: #B8B8B8;
+  --ud-cta: #FF4D00;
+  --ud-cta-hover: #FF6726;
+  --ud-accent: #CCFF00;
+  --ud-pending: #525252;
+  --ud-error: #FF5C5C;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ud-bg);
+  color: var(--ud-text);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--ud-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 1100;
+  background-color: var(--ud-accent);
+  color: #0D0D0D;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* ---------- Header / Navigation (Reused) ---------- */
+.site-header {
+  background-color: rgba(13, 13, 13, 0.96);
+  border-bottom: 1px solid var(--ud-border);
+  backdrop-filter: blur(8px);
+}
+
+.brand-logo {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.brand-logo.is-hidden {
+  display: none;
+}
+
+.brand-wordmark {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--ud-text);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--ud-text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus-visible {
+  color: var(--ud-text);
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--ud-accent);
+}
+
+.navbar-toggler {
+  border-color: var(--ud-border);
+  padding: 0.35rem 0.55rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.header-search {
+  min-width: 210px;
+}
+
+.search-input {
+  background-color: var(--ud-card);
+  border: 1px solid var(--ud-border);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  color: var(--ud-text);
+  font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+  color: var(--ud-text-muted);
+}
+
+.search-input:focus {
+  background-color: var(--ud-card);
+  color: var(--ud-text);
+  border-color: var(--ud-accent);
+  box-shadow: none;
+}
+
+.search-btn {
+  background-color: var(--ud-card);
+  border: 1px solid var(--ud-border);
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+  color: var(--ud-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.7rem;
+}
+
+.search-btn:hover {
+  color: var(--ud-accent);
+  background-color: var(--ud-surface-alt);
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--ud-text);
+  text-decoration: none;
+  border-radius: 2px;
+  transition: color 0.15s ease;
+}
+
+.cart-link:hover {
+  color: var(--ud-accent);
+}
+
+.cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background-color: var(--ud-accent);
+  color: #0D0D0D;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* ---------- Headings, Cards & Search Form ---------- */
+.section-heading {
+  display: inline-block;
+  font-size: clamp(1.65rem, 2.8vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ud-text);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+  border-bottom: 4px solid var(--ud-cta);
+}
+
+.panel-card {
+  background-color: var(--ud-card);
+  border: 1px solid var(--ud-border);
+  border-radius: 2px;
+  padding: 1.4rem;
+}
+
+.panel-title {
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ud-text);
+}
+
+.ud-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ud-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.ud-input {
+  background-color: var(--ud-bg);
+  color: var(--ud-text);
+  border: 1px solid var(--ud-border);
+  border-radius: 2px;
+  font-size: 0.95rem;
+  padding: 0.7rem 0.85rem;
+}
+
+.ud-input::placeholder {
+  color: #8E8E8E;
+}
+
+.ud-input:focus {
+  background-color: var(--ud-bg);
+  color: var(--ud-text);
+  border-color: var(--ud-accent);
+  box-shadow: none;
+}
+
+.ud-input.is-field-invalid {
+  border-color: var(--ud-error);
+}
+
+.btn-cta {
+  background-color: var(--ud-cta);
+  border: 1px solid var(--ud-cta);
+  color: #0D0D0D;
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 0.75rem 1.25rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-cta:hover,
+.btn-cta:active {
+  background-color: var(--ud-cta-hover);
+  border-color: var(--ud-cta-hover);
+  color: #0D0D0D;
+}
+
+.search-error {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ud-error);
+}
+
+/* ---------- Tracking Result Header & Progress Track ---------- */
+.result-header {
+  border-bottom: 1px solid var(--ud-border);
+}
+
+.order-meta-text {
+  font-size: 0.88rem;
+  color: var(--ud-text-muted);
+}
+
+.order-id-highlight {
+  color: var(--ud-accent);
+  letter-spacing: 0.06em;
+}
+
+.eta-badge {
+  display: inline-block;
+  background-color: var(--ud-surface-alt);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 2px;
+}
+
+.tracking-progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tracking-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ud-accent) 0%, var(--ud-cta) 100%);
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.steps-hint {
+  font-size: 0.78rem;
+  color: var(--ud-text-muted);
+}
+
+.result-footer {
+  border-top: 1px solid var(--ud-border);
+}
+
+.carrier-note {
+  font-size: 0.8rem;
+  color: var(--ud-text-muted);
+}
+
+.continue-link {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ud-accent);
+  text-decoration: underline;
+}
+
+/* ---------- 4-Step Progress Bar with Expandable Details ---------- */
+.tracking-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.tracking-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Horizontal connector between step nodes */
+.tracking-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 22px);
+  width: calc(100% - 34px);
+  height: 3px;
+  background-color: var(--ud-pending);
+  z-index: 0;
+  transition: background-color 0.45s ease;
+}
+
+.tracking-step.is-completed:not(:last-child)::after {
+  background-color: var(--ud-accent);
+}
+
+.step-toggle-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 0.25rem 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.step-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: var(--ud-border);
+}
+
+.step-node {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 900;
+  background-color: var(--ud-surface-alt);
+  border: 2px solid var(--ud-pending);
+  color: var(--ud-text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.tracking-step.is-completed .step-node {
+  background-color: var(--ud-accent);
+  border-color: var(--ud-accent);
+  color: #0D0D0D;
+}
+
+.tracking-step.is-current .step-node {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+  color: #0D0D0D;
+  box-shadow: 0 0 0 4px rgba(255, 77, 0, 0.22);
+}
+
+.step-text-wrap {
+  min-width: 0;
+  width: 100%;
+}
+
+.step-title-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.step-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ud-text-muted);
+}
+
+.tracking-step.is-completed .step-title {
+  color: var(--ud-accent);
+}
+
+.tracking-step.is-current .step-title {
+  color: var(--ud-cta);
+}
+
+.step-chevron {
+  font-size: 0.72rem;
+  color: var(--ud-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.step-toggle-btn[aria-expanded="true"] .step-chevron {
+  transform: rotate(180deg);
+  color: var(--ud-accent);
+}
+
+.step-date {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ud-text);
+  margin-bottom: 0.15rem;
+}
+
+.step-city {
+  font-size: 0.76rem;
+  color: var(--ud-text-muted);
+  margin-bottom: 0;
+}
+
+.tracking-step.is-pending .step-date,
+.tracking-step.is-pending .step-city {
+  color: #8E8E8E;
+}
+
+/* Expandable Step Collapse Box */
+.step-collapse {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.step-detail-card {
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-left: 3px solid var(--ud-pending);
+  border-radius: 2px;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+
+.tracking-step.is-completed .step-detail-card {
+  border-left-color: var(--ud-accent);
+}
+
+.tracking-step.is-current .step-detail-card {
+  border-left-color: var(--ud-cta);
+}
+
+.step-detail-msg {
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--ud-text);
+  margin-bottom: 0.3rem;
+}
+
+.step-detail-time {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ud-text-muted);
+  margin-bottom: 0;
+}
+
+/* Stack steps vertically on small screens */
+@media (max-width: 767.98px) {
+  .panel-card {
+    padding: 1.1rem;
+  }
+
+  .tracking-steps {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tracking-step {
+    align-items: stretch;
+  }
+
+  .tracking-step:not(:last-child)::after {
+    top: 44px;
+    left: 23px;
+    width: 3px;
+    height: calc(100% + 1rem - 40px);
+  }
+
+  .step-toggle-btn {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.9rem;
+    padding: 0.25rem;
+  }
+
+  .step-node {
+    flex: 0 0 40px;
+    margin-bottom: 0;
+  }
+
+  .step-title-row {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .step-collapse {
+    padding-left: 3.35rem;
+    margin-top: 0.25rem;
+  }
+}
+
+/* ---------- CSS-Only Map Placeholder Card ---------- */
+.live-pill {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #0D0D0D;
+  background-color: var(--ud-accent);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
+.css-map-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  flex: 1 1 auto;
+  border: 1px solid var(--ud-border);
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: #111111;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to right, rgba(204, 255, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(204, 255, 0, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 80px 80px, 80px 80px;
+}
+
+.css-map-arterial-h {
+  position: absolute;
+  top: 42%;
+  left: -10%;
+  width: 120%;
+  height: 10px;
+  background-color: #202020;
+  border-top: 1px solid #323232;
+  border-bottom: 1px solid #323232;
+  transform: rotate(-8deg);
+}
+
+.css-map-arterial-v {
+  position: absolute;
+  top: -10%;
+  left: 56%;
+  width: 10px;
+  height: 120%;
+  background-color: #202020;
+  border-left: 1px solid #323232;
+  border-right: 1px solid #323232;
+  transform: rotate(12deg);
+}
+
+.css-map-route {
+  position: absolute;
+  top: 47%;
+  left: 18%;
+  width: 39%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--ud-accent),
+    var(--ud-accent) 8px,
+    transparent 8px,
+    transparent 14px
+  );
+  transform: rotate(-16deg);
+}
+
+.css-map-pin-ring {
+  position: absolute;
+  top: 42%;
+  left: 55%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 77, 0, 0.55);
+  background-color: rgba(255, 77, 0, 0.15);
+  transform: translate(-50%, -50%);
+}
+
+.css-map-pin {
+  position: absolute;
+  top: 42%;
+  left: 55%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--ud-cta);
+  border: 3px solid var(--ud-accent);
+  transform: translate(-50%, -50%);
+}
+
+.css-map-coords {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  background-color: rgba(13, 13, 13, 0.9);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.45rem;
+}
+
+.location-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ud-accent);
+}
+
+.location-city {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--ud-text);
+}
+
+.location-facility {
+  font-size: 0.82rem;
+  color: var(--ud-text-muted);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background-color: var(--ud-bg);
+  border-top: 1px solid var(--ud-border);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ud-text);
+}
+
+.footer-tagline {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ud-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tracking-progress-fill,
+  .tracking-step::after,
+  .step-chevron {
+    transition: none;
+  }
+}

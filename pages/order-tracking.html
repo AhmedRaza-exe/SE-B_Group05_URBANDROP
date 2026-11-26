@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Track your URBANDROPS streetwear order status and view its last known shipping location."
+  />
+  <title>Order Tracking | URBANDROPS</title>
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- Page-specific Stylesheet -->
+  <link rel="stylesheet" href="../css/order-tracking.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ========== SHARED HEADER START (Swap with shared header later) ========== -->
+  <header class="site-header sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Primary navigation">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS logo"
+            class="brand-logo"
+            width="36"
+            height="36"
+          />
+          <span class="brand-wordmark">URBANDROPS</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <a
+            href="cart-checkout.html"
+            class="cart-link position-relative"
+            aria-label="Shopping cart"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="cart-badge" class="cart-badge" aria-live="polite">0</span>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNavbar">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="womens-catalog.html">WOMEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mens-catalog.html">MEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="womens-catalog.html#new-arrivals">NEW DROPS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">ABOUT</a>
+            </li>
+          </ul>
+
+          <form
+            id="header-search-form"
+            class="header-search d-flex me-lg-3 mt-2 mt-lg-0"
+            role="search"
+            action="womens-catalog.html"
+            method="get"
+          >
+            <label for="header-search-input" class="visually-hidden">
+              Search URBANDROPS catalog
+            </label>
+            <input
+              id="header-search-input"
+              class="form-control search-input"
+              type="search"
+              name="q"
+              placeholder="Search drops..."
+              autocomplete="off"
+            />
+            <button class="btn search-btn" type="submit" aria-label="Search products">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== SHARED HEADER END ========== -->
+
+  <main id="main-content" class="tracking-main py-4 py-md-5">
+    <div class="container">
+      <!-- Order Search Section -->
+      <section class="search-section panel-card mb-4" aria-labelledby="track-order-heading">
+        <div class="mb-3">
+          <h1 id="track-order-heading" class="section-heading">Track Your Order</h1>
+        </div>
+
+        <form id="tracking-search-form" class="row g-2 g-md-3 align-items-end" novalidate>
+          <div class="col-12 col-md-8 col-lg-9">
+            <label for="order-id-input" class="form-label ud-label">Order ID</label>
+            <input
+              id="order-id-input"
+              type="text"
+              class="form-control ud-input"
+              placeholder="Enter your Order ID (e.g. #UD-1042)"
+              autocomplete="off"
+              aria-describedby="tracking-search-error"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-lg-3">
+            <button id="track-order-btn" type="submit" class="btn btn-cta w-100">
+              TRACK ORDER
+            </button>
+          </div>
+        </form>
+
+        <p
+          id="tracking-search-error"
+          class="search-error mt-2 mb-0 d-none"
+          role="alert"
+          aria-live="assertive"
+        ></p>
+      </section>
+
+      <!-- Tracking Result & CSS Map Layout -->
+      <div
+        id="tracking-content"
+        class="row g-4 align-items-stretch"
+        aria-live="polite"
+        aria-atomic="false"
+      >
+        <!-- Left: Tracking Result Card -->
+        <div class="col-12 col-lg-8">
+          <section class="panel-card h-100 d-flex flex-column justify-content-between" aria-labelledby="tracking-result-heading">
+            <div>
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 pb-3 mb-3 result-header">
+                <div>
+                  <h2 id="tracking-result-heading" class="panel-title mb-1">TRACKING RESULT</h2>
+                  <p class="order-meta-text mb-0">
+                    Order <strong id="result-order-id" class="order-id-highlight">#UD-1042</strong>
+                    &bull;
+                    <span id="result-status-summary">In Transit</span>
+                  </p>
+                </div>
+                <span id="result-eta-badge" class="eta-badge">EST. DELIVERY: NOV 28, 2026</span>
+              </div>
+
+              <!-- Animated Progress Fill Bar -->
+              <div
+                id="tracking-progressbar"
+                class="tracking-progress-track mb-4"
+                role="progressbar"
+                aria-label="Order delivery progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div id="tracking-progress-fill" class="tracking-progress-fill"></div>
+              </div>
+
+              <p class="steps-hint mb-3">
+                Select any step below to view detailed status updates and timestamps.
+              </p>
+
+              <!-- 4-Step Progress Bar with Expandable Details (Populated by JS) -->
+              <ol
+                id="tracking-steps-list"
+                class="tracking-steps list-unstyled mb-0"
+                aria-label="Order delivery steps"
+              ></ol>
+            </div>
+
+            <div class="result-footer mt-4 pt-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+              <p id="result-carrier-note" class="carrier-note mb-0">
+                Carrier: URBANDROPS Express Logistics
+              </p>
+              <a href="womens-catalog.html" class="continue-link">
+                Back to Catalog
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right (Below on Mobile): CSS-Only Map Placeholder Card -->
+        <div class="col-12 col-lg-4">
+          <aside class="panel-card map-card h-100 d-flex flex-column" aria-labelledby="map-card-heading">
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+              <h2 id="map-card-heading" class="panel-title mb-0">LAST KNOWN LOCATION</h2>
+              <span class="live-pill">LIVE GPS</span>
+            </div>
+
+            <!-- Pure CSS Map Graphic (No external images or iframes) -->
+            <div class="css-map-canvas mb-3" aria-hidden="true">
+              <div class="css-map-arterial-h"></div>
+              <div class="css-map-arterial-v"></div>
+              <div class="css-map-route"></div>
+              <div class="css-map-pin-ring"></div>
+              <div class="css-map-pin"></div>
+              <span id="map-coords-tag" class="css-map-coords">41.8781&deg; N, 87.6298&deg; W</span>
+            </div>
+
+            <div class="location-details mt-auto">
+              <p class="location-label mb-1">CURRENT CHECKPOINT</p>
+              <p id="map-location-city" class="location-city mb-1">Chicago, IL</p>
+              <p id="map-location-facility" class="location-facility mb-0">
+                Midwest Streetwear Sort Facility &bull; Scan updated
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========== SHARED FOOTER START (Swap with shared footer later) ========== -->
+  <footer class="site-footer py-4 mt-auto">
+    <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+      <p class="footer-copy mb-0">URBANDROPS &copy; 2026</p>
+      <p class="footer-tagline mb-0">WOMEN'S STREETWEAR COLLECTION</p>
+    </div>
+  </footer>
+  <!-- ========== SHARED FOOTER END ========== -->
+
+  <!-- Bootstrap 5 JS Bundle (CDN) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Page-specific JavaScript -->
+  <script src="../js/order-tracking.js"></script>
+</body>
+</html>
