@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIP Member Profile | URBANDROPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/drops-member.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Top Drop Ticker -->
+  <div class="ud-ticker text-center">
+    <div class="container">
+      URBANDROPS MEMBER VAULT // VIP PLATINUM PERKS ACTIVE // EARN 2X LOYALTY PTS ON LIMITED DROPS
+    </div>
+  </div>
+
+  <!-- Shared URBANDROPS Top Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top ud-navbar" aria-label="Primary Navigation">
+    <div class="container">
+      <a class="ud-brand" href="../index.html">
+        <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.classList.add('is-missing'); this.style.display='none';">
+        <span class="ud-brand-fallback" aria-hidden="true">UD</span>
+        <span class="ud-brand-text">URBANDROPS</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#udMainNavbar" aria-controls="udMainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="ud-navbar-toggler-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="udMainNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="limited-drops.html">Limited Drops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="womens-catalog.html">Women</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mens-catalog.html">Men</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="wishlist.html">Wishlist</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="user-profile.html">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact-support.html">Support</a>
+          </li>
+        </ul>
+
+        <div class="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2">
+          <form id="udNavSearchForm" class="ud-search-form" role="search">
+            <input id="udNavSearchInput" class="form-control ud-search-input" type="search" placeholder="Search vouchers..." aria-label="Search URBANDROPS">
+            <button class="ud-search-btn" type="submit" aria-label="Submit search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+
+          <a href="cart.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>Cart</span>
+            <span id="cart-badge" class="ud-cart-badge" data-cart-badge>0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="ud-page-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="ud-eyebrow">Member Dashboard // Vault ID #UD-VIP-8492</span>
+          <h1 class="ud-hero-title">Member Profile</h1>
+          <p class="ud-hero-subtitle">
+            Track your VIP Platinum tier status, redeem loyalty points for drop vouchers, and manage your urban streetwear profile.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="wishlist.html" class="btn ud-btn-outline me-2">Saved Wishlist</a>
+          <a href="limited-drops.html" class="btn ud-btn-cta">Next Drop</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Left Column: User Details & VIP Platinum Card -->
+        <div class="col-lg-4">
+          <section class="ud-card p-4 h-100" aria-labelledby="memberDetailsHeading">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="ud-avatar-monogram" aria-hidden="true">AK</div>
+              <div>
+                <h2 id="memberDetailsHeading" class="h4 fw-bold text-white mb-1">Aariz Khan</h2>
+                <div class="ud-mono small text-secondary mb-2">@aariz.urban</div>
+                <span class="ud-vip-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  VIP Platinum
+                </span>
+              </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row g-2 mb-4">
+              <div class="col-4">
+                <div class="ud-stat-box text-center">
+                  <div class="ud-mono fw-bold fs-5 text-white">14</div>
+                  <div class="ud-mono text-secondary" style="font-size: 0.68rem;">ORDERS</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="ud-stat-box text-center">
+                  <div id="profileWishlistCount" class="ud-mono fw-bold fs-5 text-white">4</div>
+                  <div class="ud-mono text-secondary" style="font-size: 0.68rem;">SAVED</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="ud-stat-box text-center">
+                  <div id="profileRedeemedCount" class="ud-mono fw-bold fs-5" style="color: #CCFF00;">0</div>
+                  <div class="ud-mono text-secondary" style="font-size: 0.68rem;">VOUCHERS</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Member Details List -->
+            <div class="d-flex flex-column gap-3 small border-top border-secondary border-opacity-25 pt-3">
+              <div>
+                <div class="ud-mono text-secondary">MEMBER ID</div>
+                <div class="text-white fw-semibold">#UD-VIP-8492</div>
+              </div>
+              <div>
+                <div class="ud-mono text-secondary">EMAIL ADDRESS</div>
+                <div class="text-white fw-semibold">aariz.khan@urbandrops.pk</div>
+              </div>
+              <div>
+                <div class="ud-mono text-secondary">PRIMARY DISPATCH HUB</div>
+                <div class="text-white">Gulberg III, Lahore — Express Tier</div>
+              </div>
+              <div>
+                <div class="ud-mono text-secondary">SIZE PROFILE</div>
+                <div class="d-flex flex-wrap gap-2 mt-1">
+                  <span class="ud-badge-pill ud-badge-muted">TOPS: L</span>
+                  <span class="ud-badge-pill ud-badge-muted">CARGOS: 32</span>
+                  <span class="ud-badge-pill ud-badge-muted">SNEAKERS: US 10</span>
+                </div>
+              </div>
+              <div>
+                <div class="ud-mono text-secondary">ACTIVE PLATINUM PERKS</div>
+                <ul class="list-unstyled text-secondary mb-0 mt-1 d-flex flex-column gap-1">
+                  <li>&#10003; 24H Early Access on Limited Drops</li>
+                  <li>&#10003; Complimentary Express Nationwide Shipping</li>
+                  <li>&#10003; Priority Concierge Support (&lt; 6h SLA)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Column: Interactive Loyalty Progress & Redeemable Vouchers -->
+        <div class="col-lg-8 d-flex flex-column gap-4">
+          <!-- Interactive Loyalty Points Progress Card -->
+          <section class="ud-card p-4" aria-labelledby="loyaltyHeading">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
+              <div>
+                <span class="ud-eyebrow mb-1">URBANDROPS Rewards</span>
+                <h2 id="loyaltyHeading" class="h4 fw-bold text-uppercase mb-0">Loyalty Points Balance</h2>
+              </div>
+              <span id="loyaltyPercentBadge" class="ud-badge-pill ud-badge-volt">62.5% TO DIAMOND</span>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end gap-2 mb-2">
+              <div id="loyaltyPointsText" class="ud-mono fw-bold fs-3" style="color: #CCFF00;">1,250 / 2,000 pts</div>
+              <div id="loyaltyRemainingText" class="ud-mono small text-secondary">750 pts away from Diamond Black Tier</div>
+            </div>
+
+            <div class="ud-loyalty-progress-wrap mb-3">
+              <div
+                id="loyaltyProgressBar"
+                class="ud-loyalty-progress-bar"
+                role="progressbar"
+                style="width: 62.5%;"
+                aria-valuenow="1250"
+                aria-valuemin="0"
+                aria-valuemax="2000"
+                aria-label="Loyalty points progress toward Diamond Black Tier"
+              ></div>
+            </div>
+
+            <div class="d-flex justify-content-between ud-mono text-secondary mb-4" style="font-size: 0.7rem;">
+              <span>0 START</span>
+              <span>500 SILVER</span>
+              <span>1,000 GOLD</span>
+              <span class="text-white fw-bold">1,250 PLATINUM</span>
+              <span style="color: #CCFF00;">2,000 DIAMOND</span>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 pt-3 border-top border-secondary border-opacity-25">
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" id="claimBonusPointsBtn" class="btn ud-btn-accent btn-sm">
+                  +100 PTS DAILY CHECK-IN
+                </button>
+                <button type="button" id="resetLoyaltyBtn" class="btn ud-btn-outline btn-sm">
+                  RESET TO 1,250 PTS
+                </button>
+              </div>
+              <span class="ud-mono small text-secondary">REDEEMING VOUCHERS UPDATES BALANCE LIVE</span>
+            </div>
+          </section>
+
+          <!-- Redeemable Voucher Cards -->
+          <section aria-labelledby="vouchersHeading">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <span class="ud-eyebrow mb-1">Spend Your Points</span>
+                <h2 id="vouchersHeading" class="h4 fw-bold text-uppercase mb-0">Redeemable Vouchers</h2>
+              </div>
+              <span class="ud-mono small text-secondary">INSTANT CODE UNLOCK</span>
+            </div>
+
+            <div id="voucherCardsGrid" class="row g-4">
+              <!-- Populated dynamically by drops-member.js -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shared URBANDROPS Footer -->
+  <footer class="ud-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="ud-brand mb-3" href="../index.html">
+            <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.classList.add('is-missing'); this.style.display='none';">
+            <span class="ud-brand-fallback" aria-hidden="true">UD</span>
+            <span class="ud-brand-text">URBANDROPS</span>
+          </a>
+          <p class="text-secondary small mb-0">
+            Heavyweight silhouettes, limited-batch technical outerwear, and urban utility gear engineered for street culture.
+          </p>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
+          <h3 class="ud-footer-heading">Navigation</h3>
+          <ul class="list-unstyled mb-0">
+            <li><a class="ud-footer-link" href="../index.html">Home</a></li>
+            <li><a class="ud-footer-link" href="limited-drops.html">Limited Drops</a></li>
+            <li><a class="ud-footer-link" href="wishlist.html">Wishlist</a></li>
+            <li><a class="ud-footer-link" href="store-locator.html">Store Locator</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <h3 class="ud-footer-heading">Member &amp; Care</h3>
+          <ul class="list-unstyled mb-0">
+            <li><a class="ud-footer-link" href="user-profile.html">VIP Profile</a></li>
+            <li><a class="ud-footer-link" href="faq.html">FAQ &amp; Policies</a></li>
+            <li><a class="ud-footer-link" href="contact-support.html">Support Desk</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <h3 class="ud-footer-heading">Direct Support</h3>
+          <p class="text-secondary small mb-2">Need help with loyalty points or tier perks?</p>
+          <a href="contact-support.html" class="btn ud-btn-cta btn-sm">Open Support Ticket</a>
+        </div>
+      </div>
+      <div class="ud-footer-bottom d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+        <span class="ud-mono">&copy; 2026 URBANDROPS. ALL RIGHTS RESERVED.</span>
+        <span class="ud-mono">ISB // LHR // KHI</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/drops-member.js"></script>
+</body>
+</html>
