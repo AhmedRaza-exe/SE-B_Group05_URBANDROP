@@ -34,6 +34,7 @@
             class="brand-logo"
             width="36"
             height="36"
+            onerror="this.onerror=null;this.classList.add('is-hidden');"
           />
           <span class="brand-wordmark">URBANDROPS</span>
         </a>
@@ -269,6 +270,7 @@
                   src=""
                   alt=""
                   class="product-img"
+                  onerror="this.onerror=null;var w=this.closest('.product-img-wrapper');if(w)w.classList.add('is-fallback');"
                 />
                 <div class="img-fallback" aria-hidden="true">
                   <span class="fallback-brand">URBANDROPS</span>

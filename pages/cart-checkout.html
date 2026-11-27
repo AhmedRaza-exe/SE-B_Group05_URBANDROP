@@ -34,6 +34,7 @@
             class="brand-logo"
             width="36"
             height="36"
+            onerror="this.onerror=null;this.classList.add('is-hidden');"
           />
           <span class="brand-wordmark">URBANDROPS</span>
         </a>
@@ -140,7 +141,7 @@
     <div class="container">
       <!-- Active Cart & Checkout View -->
       <div id="checkout-view" class="row g-4 align-items-start">
-        <!-- Left Column: Cart Items, Promo Code & Order Summary -->
+        <!-- Left Column: Cart Items & Promo Code -->
         <div class="col-12 col-lg-7 d-flex flex-column gap-4">
           <section class="cart-section" aria-labelledby="your-cart-heading">
             <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
@@ -193,8 +194,11 @@
               aria-live="polite"
             ></p>
           </section>
+        </div>
 
-          <!-- Order Summary -->
+        <!-- Right Column: Order Summary & Revealed Shipping/Payment Step -->
+        <div class="col-12 col-lg-5 d-flex flex-column gap-4">
+          <!-- Order Summary & Proceed to Payment Gate -->
           <section class="panel-card" aria-labelledby="order-summary-heading">
             <h2 id="order-summary-heading" class="panel-title mb-3">ORDER SUMMARY</h2>
             <dl class="summary-list mb-0">
@@ -215,15 +219,38 @@
                 <dd id="summary-total">$0</dd>
               </div>
             </dl>
-          </section>
-        </div>
 
-        <!-- Right Column: Checkout & Shipping Form -->
-        <div class="col-12 col-lg-5">
-          <section class="panel-card checkout-card" aria-labelledby="checkout-heading">
-            <h2 id="checkout-heading" class="section-heading section-heading-sm mb-4">
-              CHECKOUT &amp; SHIPPING
-            </h2>
+            <p
+              id="proceed-cart-alert"
+              class="form-banner-error mt-3 mb-0 d-none"
+              role="alert"
+              aria-live="assertive"
+            ></p>
+
+            <button
+              id="proceed-payment-btn"
+              type="button"
+              class="btn btn-cta w-100 mt-3"
+              aria-expanded="false"
+              aria-controls="shipping-payment-section"
+            >
+              PROCEED TO PAYMENT
+            </button>
+          </section>
+
+          <!-- Step 2: Shipping & Payment Details (Revealed on Proceed to Payment) -->
+          <section
+            id="shipping-payment-section"
+            class="panel-card checkout-card d-none"
+            aria-labelledby="checkout-heading"
+            tabindex="-1"
+          >
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
+              <h2 id="checkout-heading" class="section-heading section-heading-sm mb-0">
+                SHIPPING &amp; PAYMENT
+              </h2>
+              <span class="step-pill">STEP 2 OF 2</span>
+            </div>
 
             <form id="checkout-form" class="d-flex flex-column gap-3" novalidate>
               <div>
@@ -242,7 +269,22 @@
               </div>
 
               <div>
-                <label for="street-address" class="form-label ud-label">Address</label>
+                <label for="email" class="form-label ud-label">Email Address</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="form-control ud-input"
+                  placeholder="maya.lin@example.com"
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                  required
+                />
+                <p id="email-error" class="field-error d-none" role="alert"></p>
+              </div>
+
+              <div>
+                <label for="street-address" class="form-label ud-label">Shipping Address</label>
                 <input
                   id="street-address"
                   name="address"
@@ -278,7 +320,6 @@
                     id="postal-code"
                     name="postalCode"
                     type="text"
-                    inputmode="numeric"
                     class="form-control ud-input"
                     placeholder="10013"
                     autocomplete="postal-code"
@@ -312,14 +353,110 @@
                 <p id="country-error" class="field-error d-none" role="alert"></p>
               </div>
 
+              <!-- Payment Method Selection -->
+              <fieldset class="payment-fieldset mt-2">
+                <legend class="form-label ud-label mb-2">Payment Method</legend>
+                <div class="payment-options-grid">
+                  <label class="payment-option-card is-selected" for="payment-card">
+                    <input
+                      id="payment-card"
+                      class="payment-radio"
+                      type="radio"
+                      name="paymentMethod"
+                      value="card"
+                      checked
+                    />
+                    <span class="payment-option-content">
+                      <span class="payment-option-title">Credit / Debit Card</span>
+                      <span class="payment-option-sub">Visa, Mastercard, Amex</span>
+                    </span>
+                  </label>
+
+                  <label class="payment-option-card" for="payment-cod">
+                    <input
+                      id="payment-cod"
+                      class="payment-radio"
+                      type="radio"
+                      name="paymentMethod"
+                      value="cod"
+                    />
+                    <span class="payment-option-content">
+                      <span class="payment-option-title">Cash on Delivery</span>
+                      <span class="payment-option-sub">Pay at your doorstep</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Card Details (Visible when Card is selected) -->
+              <div id="card-details-fields" class="d-flex flex-column gap-3">
+                <div>
+                  <label for="card-number" class="form-label ud-label">Card Number</label>
+                  <input
+                    id="card-number"
+                    name="cardNumber"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="19"
+                    class="form-control ud-input"
+                    placeholder="4242 4242 4242 4242"
+                    autocomplete="cc-number"
+                    aria-describedby="card-number-error"
+                    required
+                  />
+                  <p id="card-number-error" class="field-error d-none" role="alert"></p>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label for="card-expiry" class="form-label ud-label">Expiry (MM/YY)</label>
+                    <input
+                      id="card-expiry"
+                      name="cardExpiry"
+                      type="text"
+                      inputmode="numeric"
+                      maxlength="5"
+                      class="form-control ud-input"
+                      placeholder="08/28"
+                      autocomplete="cc-exp"
+                      aria-describedby="card-expiry-error"
+                      required
+                    />
+                    <p id="card-expiry-error" class="field-error d-none" role="alert"></p>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="card-cvv" class="form-label ud-label">CVV</label>
+                    <input
+                      id="card-cvv"
+                      name="cardCvv"
+                      type="password"
+                      inputmode="numeric"
+                      maxlength="4"
+                      class="form-control ud-input"
+                      placeholder="123"
+                      autocomplete="cc-csc"
+                      aria-describedby="card-cvv-error"
+                      required
+                    />
+                    <p id="card-cvv-error" class="field-error d-none" role="alert"></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cash on Delivery Notice (Visible when COD is selected) -->
+              <div id="cod-info-box" class="cod-info-box d-none">
+                Pay with cash when your URBANDROPS parcel is delivered. Exact change is appreciated.
+              </div>
+
               <p id="checkout-form-error" class="form-banner-error mb-0 d-none" role="alert"></p>
 
               <button
-                id="proceed-payment-btn"
+                id="place-order-btn"
                 type="submit"
                 class="btn btn-cta w-100 mt-2"
               >
-                PROCEED TO PAYMENT
+                PLACE ORDER
               </button>
             </form>
           </section>
@@ -357,7 +494,7 @@
             <span id="confirmed-order-id" class="confirmed-order-id">#UD-0000</span>
           </p>
 
-          <p class="confirmed-message mb-4">
+          <p id="confirmed-message" class="confirmed-message mb-4">
             Thank you for your purchase! A confirmation email has been sent.
           </p>
 
