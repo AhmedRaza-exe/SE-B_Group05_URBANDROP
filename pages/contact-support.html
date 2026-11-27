@@ -43,13 +43,10 @@
             <a class="nav-link" href="../index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="womens-catalog.html">Women's</a>
+            <a class="nav-link" href="shop.html">Drops</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="store-locator.html">Stores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="order-tracking.html">Track Order</a>
+            <a class="nav-link" href="store-locator.html">Store Locator</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="faq.html">FAQ</a>
@@ -70,7 +67,7 @@
             </button>
           </form>
 
-          <a href="cart-checkout.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
+          <a href="cart.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -108,18 +105,8 @@
       <div class="row g-4">
         <!-- Support Ticket Form Column -->
         <div class="col-lg-8">
-          <!-- Confirmation Alert (Hidden until valid submission) -->
-          <div id="supportConfirmationAlert" class="alert ud-alert-success alert-dismissible fade show d-none mb-4" role="alert">
-            <div class="d-flex flex-column gap-1">
-              <div class="ud-alert-title">
-                Support Ticket Received <span id="confirmedTicketId" class="ud-mono ms-1">#UD-00000</span>
-              </div>
-              <p id="confirmedTicketSummary" class="mb-0 small text-white">
-                Your support ticket has been logged. Our team will respond within 12–24 hours.
-              </p>
-            </div>
-            <button type="button" class="btn-close btn-close-white" aria-label="Close confirmation alert" onclick="document.getElementById('supportConfirmationAlert').classList.add('d-none')"></button>
-          </div>
+          <!-- Volt Lime Confirmation Card Container (Populated upon valid submission) -->
+          <div id="ticketConfirmationContainer" class="mb-4 d-none" aria-live="polite"></div>
 
           <section class="ud-card p-4 p-md-5" aria-labelledby="ticketFormHeading">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
@@ -145,6 +132,7 @@
                     class="form-control ud-form-control"
                     placeholder="e.g., Zainab Tariq"
                     autocomplete="name"
+                    aria-describedby="nameFeedback"
                     required
                   >
                   <div id="nameFeedback" class="ud-validation-msg" aria-live="polite"></div>
@@ -158,8 +146,9 @@
                     id="supportEmail"
                     name="email"
                     class="form-control ud-form-control"
-                    placeholder="you@example.com"
+                    placeholder="user@domain.com"
                     autocomplete="email"
+                    aria-describedby="emailFeedback"
                     required
                   >
                   <div id="emailFeedback" class="ud-validation-msg" aria-live="polite"></div>
@@ -168,7 +157,7 @@
                 <!-- Subject Dropdown -->
                 <div class="col-12">
                   <label for="supportSubject" class="form-label ud-form-label">Subject</label>
-                  <select id="supportSubject" name="subject" class="form-select ud-form-select" required>
+                  <select id="supportSubject" name="subject" class="form-select ud-form-select" aria-describedby="subjectFeedback" required>
                     <option value="" selected disabled>Select a support category...</option>
                     <option value="Order Status &amp; Tracking">Order Status &amp; Tracking</option>
                     <option value="Shipping &amp; Delivery Delay">Shipping &amp; Delivery Delay</option>
@@ -194,6 +183,7 @@
                     maxlength="1000"
                     class="form-control ud-form-control"
                     placeholder="Include your order ID (e.g., #UD-9021), item size, and details..."
+                    aria-describedby="messageFeedback"
                     required
                   ></textarea>
                   <div id="messageFeedback" class="ud-validation-msg" aria-live="polite"></div>

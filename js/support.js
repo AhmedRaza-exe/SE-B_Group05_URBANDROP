@@ -75,31 +75,16 @@
         return;
       }
 
-      // If on FAQ page, filter FAQ items directly
-      const faqItems = document.querySelectorAll('.ud-faq-item');
-      if (faqItems.length > 0) {
-        const lower = query.toLowerCase();
-        let matchCount = 0;
-        faqItems.forEach(function (item) {
-          const text = item.textContent.toLowerCase();
-          const matched = text.includes(lower);
-          item.style.display = matched ? '' : 'none';
-          if (matched) matchCount += 1;
-        });
-
-        // Reveal/hide section wrappers based on visible items
-        document.querySelectorAll('[data-faq-section]').forEach(function (section) {
-          const visibleInSection = Array.from(section.querySelectorAll('.ud-faq-item')).some(function (el) {
-            return el.style.display !== 'none';
-          });
-          section.style.display = visibleInSection ? '' : 'none';
-        });
-
-        const faqEmpty = document.getElementById('faqEmptyState');
-        if (faqEmpty) {
-          faqEmpty.classList.toggle('d-none', matchCount > 0);
-        }
-        showToast(matchCount + ' FAQ result(s) for "' + query + '".');
+      // If on FAQ page, sync with live FAQ search input
+      const faqSearchInput = document.getElementById('faqSearchInput');
+      if (faqSearchInput) {
+        faqSearchInput.value = query;
+        faqSearchInput.dispatchEvent(new Event('input', { bubbles: true }));
+        faqSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const visibleCount = Array.from(document.querySelectorAll('.ud-faq-item')).filter(function (el) {
+          return el.style.display !== 'none';
+        }).length;
+        showToast(visibleCount + ' FAQ result(s) for "' + query + '".');
         return;
       }
 
@@ -118,11 +103,6 @@
           showToast('Filtered stores for ' + properCity + '.');
           return;
         }
-      }
-
-      // On Women's Catalog page, js/commerce.js handles live filtering
-      if (document.getElementById('womensCatalogGrid')) {
-        return;
       }
 
       showToast('Searching catalog for "' + query + '"...');
@@ -260,6 +240,48 @@
       });
     }
 
+    function openDirectionsModal(storeId) {
+      const store = STORES.find(function (s) {
+        return s.id === storeId;
+      });
+      if (!store) return;
+
+      selectStore(storeId);
+
+      const badgeEl = document.getElementById('modalStoreBadge');
+      const nameEl = document.getElementById('modalStoreName');
+      const statusEl = document.getElementById('modalStoreStatus');
+      const coordsEl = document.getElementById('modalStoreCoords');
+      const addressEl = document.getElementById('modalStoreAddress');
+      const hoursEl = document.getElementById('modalStoreHours');
+      const phoneEl = document.getElementById('modalStorePhone');
+      const directionsLink = document.getElementById('modalDirectionsLink');
+      const pinLink = document.getElementById('modalMapsPinLink');
+      const modalEl = document.getElementById('storeDirectionsModal');
+
+      if (badgeEl) badgeEl.textContent = store.city + ' • ' + store.badge;
+      if (nameEl) nameEl.textContent = store.name;
+      if (statusEl) {
+        statusEl.innerHTML = '<span class="ud-status-dot" aria-hidden="true"></span>' + store.status;
+      }
+      if (coordsEl) coordsEl.textContent = store.coords;
+      if (addressEl) addressEl.textContent = store.address;
+      if (hoursEl) hoursEl.textContent = store.hours;
+      if (phoneEl) phoneEl.textContent = store.phone;
+
+      const encodedAddress = encodeURIComponent(store.address);
+      if (directionsLink) {
+        directionsLink.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodedAddress;
+      }
+      if (pinLink) {
+        pinLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+      }
+
+      if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+      }
+    }
+
     function renderStores() {
       const selectedCity = cityFilter.value;
       const filtered = selectedCity === 'all'
@@ -306,7 +328,8 @@
               '<div><span class="ud-mono text-secondary">PHONE:</span> <span class="text-white">' + store.phone + '</span></div>' +
             '</div>' +
             '<div class="d-flex flex-wrap gap-2">' +
-              '<button type="button" class="btn ud-btn-cta btn-sm" data-focus-store="' + store.id + '">Focus on Map</button>' +
+              '<button type="button" class="btn ud-btn-cta btn-sm" data-directions-store="' + store.id + '">Get Directions</button>' +
+              '<button type="button" class="btn ud-btn-outline btn-sm" data-focus-store="' + store.id + '">Focus on Map</button>' +
               '<a href="contact-support.html" class="btn ud-btn-outline btn-sm">Store Inquiry</a>' +
             '</div>' +
           '</article>';
@@ -332,7 +355,13 @@
         mapPinsContainer.appendChild(pin);
       });
 
-      // Bind focus buttons on cards
+      // Bind Get Directions modal triggers and map focus buttons on cards
+      storeCardsContainer.querySelectorAll('[data-directions-store]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openDirectionsModal(btn.getAttribute('data-directions-store'));
+        });
+      });
+
       storeCardsContainer.querySelectorAll('[data-focus-store]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           selectStore(btn.getAttribute('data-focus-store'));
@@ -383,48 +412,100 @@
       });
     });
 
-    // Category filter buttons (All / Shipping / Returns / Sizing)
+    // Live Keyword Search + Category filter buttons (All / Shipping / Returns / Sizing)
     const categoryButtons = document.querySelectorAll('[data-faq-filter]');
     const sections = document.querySelectorAll('[data-faq-section]');
+    const allFaqItems = Array.from(document.querySelectorAll('.ud-faq-item'));
+    const faqSearchInput = document.getElementById('faqSearchInput');
+    const faqSearchClear = document.getElementById('faqSearchClear');
+    const faqSearchCount = document.getElementById('faqSearchCount');
     const resetFaqSearchBtn = document.getElementById('resetFaqSearchBtn');
+    const faqEmpty = document.getElementById('faqEmptyState');
+
+    let activeCategory = 'all';
+
+    function applyFaqFilters() {
+      const query = faqSearchInput ? faqSearchInput.value.trim().toLowerCase() : '';
+      let visibleCount = 0;
+
+      sections.forEach(function (section) {
+        const sectionKey = section.getAttribute('data-faq-section');
+        const categoryMatch = activeCategory === 'all' || activeCategory === sectionKey;
+        const sectionItems = Array.from(section.querySelectorAll('.ud-faq-item'));
+        let sectionVisibleCount = 0;
+
+        sectionItems.forEach(function (item) {
+          const keywordMatch = query === '' || item.textContent.toLowerCase().includes(query);
+          const shouldShow = categoryMatch && keywordMatch;
+          item.style.display = shouldShow ? '' : 'none';
+          if (shouldShow) {
+            sectionVisibleCount += 1;
+            visibleCount += 1;
+          }
+        });
+
+        section.style.display = sectionVisibleCount > 0 ? '' : 'none';
+      });
+
+      if (faqEmpty) {
+        faqEmpty.classList.toggle('d-none', visibleCount > 0);
+      }
+
+      if (faqSearchClear) {
+        faqSearchClear.classList.toggle('d-none', query.length === 0);
+      }
+
+      if (faqSearchCount) {
+        faqSearchCount.textContent =
+          'Showing ' + visibleCount + ' of ' + allFaqItems.length + ' ' + (allFaqItems.length === 1 ? 'Question' : 'Questions');
+      }
+    }
+
+    if (faqSearchInput) {
+      faqSearchInput.addEventListener('input', applyFaqFilters);
+    }
+
+    if (faqSearchClear) {
+      faqSearchClear.addEventListener('click', function () {
+        if (faqSearchInput) {
+          faqSearchInput.value = '';
+          faqSearchInput.focus();
+        }
+        const navSearchInput = document.getElementById('udNavSearchInput');
+        if (navSearchInput) navSearchInput.value = '';
+        applyFaqFilters();
+      });
+    }
 
     categoryButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        const target = btn.getAttribute('data-faq-filter');
+        activeCategory = btn.getAttribute('data-faq-filter') || 'all';
 
         categoryButtons.forEach(function (b) {
           b.classList.toggle('active', b === btn);
         });
 
-        // Clear any search-filtered hidden items first
-        document.querySelectorAll('.ud-faq-item').forEach(function (item) {
-          item.style.display = '';
-        });
-
-        sections.forEach(function (section) {
-          const sectionKey = section.getAttribute('data-faq-section');
-          section.style.display = (target === 'all' || target === sectionKey) ? '' : 'none';
-        });
-
-        const faqEmpty = document.getElementById('faqEmptyState');
-        if (faqEmpty) faqEmpty.classList.add('d-none');
+        applyFaqFilters();
       });
     });
 
     if (resetFaqSearchBtn) {
       resetFaqSearchBtn.addEventListener('click', function () {
-        const searchInput = document.getElementById('udNavSearchInput');
-        if (searchInput) searchInput.value = '';
-        document.querySelectorAll('.ud-faq-item').forEach(function (item) {
-          item.style.display = '';
+        activeCategory = 'all';
+        categoryButtons.forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-faq-filter') === 'all');
         });
-        sections.forEach(function (section) {
-          section.style.display = '';
-        });
-        const faqEmpty = document.getElementById('faqEmptyState');
-        if (faqEmpty) faqEmpty.classList.add('d-none');
+        if (faqSearchInput) {
+          faqSearchInput.value = '';
+          faqSearchInput.focus();
+        }
+        const navSearchInput = document.getElementById('udNavSearchInput');
+        if (navSearchInput) navSearchInput.value = '';
+        applyFaqFilters();
       });
     }
+
+    applyFaqFilters();
   }
 
   /* ========================================================================
@@ -444,28 +525,22 @@
     const subjectFeedback = document.getElementById('subjectFeedback');
     const messageFeedback = document.getElementById('messageFeedback');
 
-    const alertContainer = document.getElementById('supportConfirmationAlert');
-    const ticketIdSpan = document.getElementById('confirmedTicketId');
-    const ticketSummarySpan = document.getElementById('confirmedTicketSummary');
+    const confirmationContainer = document.getElementById('ticketConfirmationContainer');
     const charCounter = document.getElementById('messageCharCount');
 
-    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     function setFieldFeedback(input, feedbackEl, isValid, message) {
       input.classList.remove('is-valid-ud', 'is-invalid-ud');
       feedbackEl.classList.remove('is-valid', 'is-invalid');
-
-      if (message === '') {
-        feedbackEl.textContent = '';
-        return;
-      }
+      input.setAttribute('aria-invalid', isValid ? 'false' : 'true');
 
       if (isValid) {
         input.classList.add('is-valid-ud');
-        feedbackEl.classList.add('is-valid');
+        if (message) feedbackEl.classList.add('is-valid');
       } else {
         input.classList.add('is-invalid-ud');
-        feedbackEl.classList.add('is-invalid');
+        if (message) feedbackEl.classList.add('is-invalid');
       }
       feedbackEl.textContent = message;
     }
@@ -473,11 +548,11 @@
     function validateEmailRealtime() {
       const val = emailInput.value.trim();
       if (val.length === 0) {
-        setFieldFeedback(emailInput, emailFeedback, false, 'Email address is required.');
+        setFieldFeedback(emailInput, emailFeedback, false, 'Email address is required (e.g., user@domain.com).');
         return false;
       }
       if (!EMAIL_REGEX.test(val)) {
-        setFieldFeedback(emailInput, emailFeedback, false, 'Enter a valid email format (e.g., alex@domain.com).');
+        setFieldFeedback(emailInput, emailFeedback, false, 'Invalid email format. Use user@domain.com.');
         return false;
       }
       setFieldFeedback(emailInput, emailFeedback, true, 'Valid email format.');
@@ -487,46 +562,111 @@
     function validateName() {
       const val = nameInput.value.trim();
       if (val.length < 2) {
-        setFieldFeedback(nameInput, nameFeedback, false, 'Please enter your full name (at least 2 characters).');
+        setFieldFeedback(nameInput, nameFeedback, false, 'Full name is required (at least 2 characters).');
         return false;
       }
-      setFieldFeedback(nameInput, nameFeedback, true, '');
+      setFieldFeedback(nameInput, nameFeedback, true, 'Looks good.');
       return true;
     }
 
     function validateSubject() {
       if (!subjectSelect.value) {
-        setFieldFeedback(subjectSelect, subjectFeedback, false, 'Please choose a support subject.');
+        setFieldFeedback(subjectSelect, subjectFeedback, false, 'Please select a support category.');
         return false;
       }
-      setFieldFeedback(subjectSelect, subjectFeedback, true, '');
+      setFieldFeedback(subjectSelect, subjectFeedback, true, 'Category selected.');
       return true;
     }
 
     function validateMessage() {
       const val = messageInput.value.trim();
       if (val.length < 15) {
-        setFieldFeedback(messageInput, messageFeedback, false, 'Message must be at least 15 characters.');
+        setFieldFeedback(messageInput, messageFeedback, false, 'Message must be at least 15 characters (' + val.length + '/15).');
         return false;
       }
-      setFieldFeedback(messageInput, messageFeedback, true, '');
+      setFieldFeedback(messageInput, messageFeedback, true, 'Message ready.');
       return true;
     }
 
-    // Real-time email validation as the user types
+    function renderTicketConfirmationCard(ticketCode, customerName, customerEmail, subjectText) {
+      if (!confirmationContainer) return;
+
+      confirmationContainer.innerHTML = '';
+
+      const card = document.createElement('div');
+      card.className = 'ud-ticket-confirmation-card';
+      card.setAttribute('role', 'alert');
+
+      const topRow = document.createElement('div');
+      topRow.className = 'd-flex justify-content-between align-items-start gap-3';
+
+      const headerContent = document.createElement('div');
+
+      const badge = document.createElement('span');
+      badge.className = 'ud-ticket-badge mb-2';
+      badge.textContent = 'CONFIRMED // SUPPORT LOGGED';
+
+      const heading = document.createElement('h2');
+      heading.className = 'h5 ud-ticket-title mb-1';
+      heading.textContent = 'Ticket #' + ticketCode + ' Created Successfully';
+
+      const lead = document.createElement('p');
+      lead.className = 'mb-0 small fw-medium';
+      lead.textContent = 'Confirmation routed to ' + customerEmail + '. Average concierge response is under 12 hours.';
+
+      headerContent.appendChild(badge);
+      headerContent.appendChild(heading);
+      headerContent.appendChild(lead);
+
+      const closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'btn-close';
+      closeBtn.setAttribute('aria-label', 'Dismiss ticket confirmation');
+      closeBtn.addEventListener('click', function () {
+        confirmationContainer.classList.add('d-none');
+        confirmationContainer.innerHTML = '';
+      });
+
+      topRow.appendChild(headerContent);
+      topRow.appendChild(closeBtn);
+
+      const meta = document.createElement('div');
+      meta.className = 'ud-ticket-meta ud-mono d-flex flex-wrap gap-3';
+
+      const nameMeta = document.createElement('span');
+      nameMeta.textContent = 'REQUESTER: ' + customerName;
+
+      const subjectMeta = document.createElement('span');
+      subjectMeta.textContent = 'CATEGORY: ' + subjectText;
+
+      meta.appendChild(nameMeta);
+      meta.appendChild(subjectMeta);
+
+      card.appendChild(topRow);
+      card.appendChild(meta);
+
+      confirmationContainer.appendChild(card);
+      confirmationContainer.classList.remove('d-none');
+      confirmationContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Live validation across all form fields as user types/selects
     emailInput.addEventListener('input', validateEmailRealtime);
     emailInput.addEventListener('blur', validateEmailRealtime);
 
+    nameInput.addEventListener('input', validateName);
     nameInput.addEventListener('blur', validateName);
+
     subjectSelect.addEventListener('change', validateSubject);
+    subjectSelect.addEventListener('blur', validateSubject);
+
     messageInput.addEventListener('input', function () {
       if (charCounter) {
         charCounter.textContent = messageInput.value.length + ' / 1000';
       }
-      if (messageInput.classList.contains('is-invalid-ud')) {
-        validateMessage();
-      }
+      validateMessage();
     });
+    messageInput.addEventListener('blur', validateMessage);
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -537,27 +677,28 @@
       const isMessageOk = validateMessage();
 
       if (!isNameOk || !isEmailOk || !isSubjectOk || !isMessageOk) {
-        if (alertContainer) alertContainer.classList.add('d-none');
+        if (confirmationContainer) {
+          confirmationContainer.classList.add('d-none');
+        }
+        const firstInvalid = form.querySelector('.is-invalid-ud');
+        if (firstInvalid) firstInvalid.focus();
         return;
       }
 
-      const ticketCode = 'UD-' + Math.floor(10000 + Math.random() * 90000);
-      if (ticketIdSpan) ticketIdSpan.textContent = '#' + ticketCode;
-      if (ticketSummarySpan) {
-        ticketSummarySpan.textContent =
-          'Ticket logged for "' + subjectSelect.value + '". A confirmation has been routed to ' + emailInput.value.trim() + '.';
-      }
-
-      if (alertContainer) {
-        alertContainer.classList.remove('d-none');
-        alertContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      const ticketCode = 'SUP-' + Math.floor(100 + Math.random() * 900);
+      renderTicketConfirmationCard(
+        ticketCode,
+        nameInput.value.trim(),
+        emailInput.value.trim(),
+        subjectSelect.value
+      );
 
       form.reset();
       if (charCounter) charCounter.textContent = '0 / 1000';
 
       [nameInput, emailInput, subjectSelect, messageInput].forEach(function (el) {
         el.classList.remove('is-valid-ud', 'is-invalid-ud');
+        el.removeAttribute('aria-invalid');
       });
       [nameFeedback, emailFeedback, subjectFeedback, messageFeedback].forEach(function (el) {
         el.textContent = '';
