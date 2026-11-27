@@ -56,6 +56,43 @@ main {
   flex: 1 0 auto;
 }
 
+/* Keyboard Skip Link & Global Focus Visibility */
+.ud-skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 2000;
+  background-color: var(--ud-lime);
+  color: #0D0D0D;
+  font-family: var(--ud-font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.65rem 1rem;
+  border: 2px solid #0D0D0D;
+  border-radius: 3px;
+  transition: top 0.15s ease;
+}
+
+.ud-skip-link:focus,
+.ud-skip-link:focus-visible {
+  top: 1rem;
+  outline: 2px solid var(--ud-orange);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ud-lime) !important;
+  outline-offset: 2px !important;
+}
+
 /* Typography utilities */
 .font-display {
   font-family: var(--ud-font-display);
@@ -201,8 +238,16 @@ main {
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.ud-toggler:hover,
-.ud-toggler:focus {
+.ud-toggler:hover {
+  border-color: var(--ud-lime);
+  color: var(--ud-lime);
+}
+
+.ud-toggler:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+.ud-toggler:focus-visible {
   border-color: var(--ud-lime);
   color: var(--ud-lime);
   box-shadow: none;
@@ -233,7 +278,7 @@ main {
 }
 
 .ud-search-input::placeholder {
-  color: #777777;
+  color: #9E9E9E;
 }
 
 .ud-search-input:focus {
@@ -320,7 +365,7 @@ main {
 
 .ud-cart-badge {
   background-color: var(--ud-orange);
-  color: var(--ud-text);
+  color: #0D0D0D;
   font-family: var(--ud-font-mono);
   font-size: 0.7rem;
   font-weight: 700;
@@ -344,7 +389,7 @@ main {
 .btn-ud-orange {
   background-color: var(--ud-orange);
   border: 1px solid var(--ud-orange);
-  color: var(--ud-text);
+  color: #0D0D0D;
   font-family: var(--ud-font-mono);
   font-weight: 700;
   font-size: 0.82rem;
@@ -359,7 +404,7 @@ main {
 .btn-ud-orange:focus {
   background-color: var(--ud-orange-hover);
   border-color: var(--ud-orange-hover);
-  color: var(--ud-text);
+  color: #0D0D0D;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(255, 77, 0, 0.35);
 }
@@ -401,7 +446,7 @@ main {
 .ud-tag-orange {
   display: inline-block;
   background-color: var(--ud-orange);
-  color: var(--ud-text);
+  color: #0D0D0D;
   font-family: var(--ud-font-mono);
   font-size: 0.66rem;
   font-weight: 700;
@@ -582,7 +627,7 @@ main {
 }
 
 .ud-input-dark::placeholder {
-  color: #6e6e6e;
+  color: #9E9E9E;
 }
 
 .ud-input-dark:focus {
@@ -752,6 +797,13 @@ main {
   color: #0D0D0D;
 }
 
+.ud-size-btn.active:focus-visible,
+.ud-size-mini.active:focus-visible,
+.ud-toast-close:focus-visible {
+  outline: 2px solid var(--ud-orange) !important;
+  outline-offset: 2px !important;
+}
+
 .ud-outfit-item-row {
   display: flex;
   justify-content: space-between;
@@ -782,6 +834,38 @@ main {
 
 .ud-footer-link:hover {
   color: var(--ud-lime);
+}
+
+.ud-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: var(--ud-surface);
+  border: 1px solid var(--ud-border-strong);
+  border-radius: 4px;
+  color: var(--ud-text);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.ud-social-link:hover {
+  border-color: var(--ud-lime);
+  color: var(--ud-lime);
+  transform: translateY(-2px);
+}
+
+.ud-ai-disclosure {
+  background-color: rgba(26, 26, 26, 0.75);
+  border: 1px solid var(--ud-border);
+  border-left: 3px solid var(--ud-lime);
+  border-radius: 3px;
+  padding: 0.75rem 1rem;
+  font-family: var(--ud-font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ud-muted);
 }
 
 /* Floating Volt Lime Toast Notification */
