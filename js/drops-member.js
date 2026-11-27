@@ -178,20 +178,27 @@
   /* ========================================================================
      3. SHARED TOAST & NAVBAR SEARCH BAR
      ======================================================================== */
-  function showToast(message) {
+  let toastTimeoutId = null;
+
+  function showToast(message, variant) {
     const existing = document.getElementById('udSharedToast');
     if (existing) existing.remove();
+    if (toastTimeoutId) {
+      window.clearTimeout(toastTimeoutId);
+      toastTimeoutId = null;
+    }
 
     const toast = document.createElement('div');
     toast.id = 'udSharedToast';
-    toast.className = 'ud-toast';
+    toast.className = 'ud-toast' + (variant === 'volt' ? ' ud-toast-volt' : '');
     toast.setAttribute('role', 'status');
     toast.setAttribute('aria-live', 'polite');
     toast.textContent = message;
     document.body.appendChild(toast);
 
-    window.setTimeout(function () {
+    toastTimeoutId = window.setTimeout(function () {
       if (toast.parentNode) toast.remove();
+      toastTimeoutId = null;
     }, 3200);
   }
 
@@ -322,12 +329,17 @@
 
       renderCountdown();
 
-      window.setInterval(function () {
+      const timerId = window.setInterval(function () {
         if (remainingSeconds > 0) {
           remainingSeconds -= 1;
           renderCountdown();
-        } else if (statusEl) {
-          statusEl.textContent = 'DROP LIVE NOW';
+          if (remainingSeconds === 0 && statusEl) {
+            statusEl.textContent = 'DROP LIVE NOW';
+            window.clearInterval(timerId);
+          }
+        } else {
+          if (statusEl) statusEl.textContent = 'DROP LIVE NOW';
+          window.clearInterval(timerId);
         }
       }, 1000);
     }
@@ -409,7 +421,7 @@
       });
     }
 
-    // 3. 'NOTIFY ME' Email Signup Form with Instant Confirmation Feedback
+    // 3. 'NOTIFY ME' Email Signup Form with Live Email Validation & Success Banner
     if (notifyForm) {
       const emailInput = document.getElementById('notifyEmailInput');
       const dropSelect = document.getElementById('notifyDropSelect');
@@ -417,6 +429,8 @@
       const confirmBanner = document.getElementById('notifyConfirmationBanner');
       const confirmSummary = document.getElementById('notifyConfirmedSummary');
       const subscriberCountEl = document.getElementById('notifySubscriberCount');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      let hasInteracted = false;
 
       function updateSubscriberCounter() {
         if (!subscriberCountEl) return;
@@ -429,26 +443,97 @@
         }
       }
 
+      function clearEmailValidationState() {
+        if (emailInput) {
+          emailInput.classList.remove('is-invalid-ud', 'is-valid-ud', 'border-danger');
+          emailInput.removeAttribute('aria-invalid');
+        }
+        if (feedbackEl) {
+          feedbackEl.textContent = '';
+          feedbackEl.classList.add('d-none');
+        }
+      }
+
+      function validateNotifyEmail(forceShowEmptyError) {
+        const email = emailInput ? emailInput.value.trim() : '';
+
+        if (!email) {
+          if (!forceShowEmptyError && !hasInteracted) {
+            clearEmailValidationState();
+            return false;
+          }
+          if (emailInput) {
+            emailInput.classList.remove('is-valid-ud');
+            emailInput.classList.add('is-invalid-ud');
+            emailInput.setAttribute('aria-invalid', 'true');
+          }
+          if (feedbackEl) {
+            feedbackEl.style.color = '#FF4D00';
+            feedbackEl.textContent = 'Email address is required to join the drop queue.';
+            feedbackEl.classList.remove('d-none');
+          }
+          return false;
+        }
+
+        if (!emailRegex.test(email)) {
+          if (emailInput) {
+            emailInput.classList.remove('is-valid-ud');
+            emailInput.classList.add('is-invalid-ud');
+            emailInput.setAttribute('aria-invalid', 'true');
+          }
+          if (feedbackEl) {
+            feedbackEl.style.color = '#FF4D00';
+            feedbackEl.textContent = 'Enter a valid email format (e.g. name@domain.com).';
+            feedbackEl.classList.remove('d-none');
+          }
+          return false;
+        }
+
+        if (emailInput) {
+          emailInput.classList.remove('is-invalid-ud', 'border-danger');
+          emailInput.classList.add('is-valid-ud');
+          emailInput.setAttribute('aria-invalid', 'false');
+        }
+        if (feedbackEl) {
+          feedbackEl.style.color = '#CCFF00';
+          feedbackEl.textContent = 'Valid email — ready for priority drop dispatch.';
+          feedbackEl.classList.remove('d-none');
+        }
+        return true;
+      }
+
       updateSubscriberCounter();
+
+      if (emailInput) {
+        emailInput.addEventListener('input', function () {
+          if (emailInput.value.trim().length > 0) {
+            hasInteracted = true;
+          }
+          if (confirmBanner && !confirmBanner.classList.contains('d-none')) {
+            confirmBanner.classList.add('d-none');
+          }
+          validateNotifyEmail(false);
+        });
+
+        emailInput.addEventListener('blur', function () {
+          if (emailInput.value.trim().length > 0 || hasInteracted) {
+            hasInteracted = true;
+            validateNotifyEmail(true);
+          }
+        });
+      }
 
       notifyForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        const email = emailInput ? emailInput.value.trim() : '';
-        const selectedDrop = dropSelect ? dropSelect.value : 'All Upcoming Drops';
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        hasInteracted = true;
 
-        if (!email || !emailRegex.test(email)) {
-          if (emailInput) emailInput.classList.add('border-danger');
-          if (feedbackEl) {
-            feedbackEl.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
-            feedbackEl.classList.remove('d-none');
-          }
+        if (!validateNotifyEmail(true)) {
           if (emailInput) emailInput.focus();
           return;
         }
 
-        if (emailInput) emailInput.classList.remove('border-danger');
-        if (feedbackEl) feedbackEl.classList.add('d-none');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const selectedDrop = dropSelect ? dropSelect.value : 'All Upcoming Drops';
 
         try {
           const existing = JSON.parse(readStorage(STORAGE_KEYS.DROP_NOTIFICATIONS) || '[]');
@@ -472,8 +557,11 @@
         if (confirmBanner) {
           confirmBanner.classList.remove('d-none');
         }
+
         notifyForm.reset();
-        showToast('Drop alert activated for ' + email);
+        hasInteracted = false;
+        clearEmailValidationState();
+        showToast('Drop alert activated for ' + email, 'volt');
       });
     }
   }
@@ -531,6 +619,8 @@
     const wishlistStatEl = document.getElementById('profileWishlistCount');
     const bonusBtn = document.getElementById('claimBonusPointsBtn');
     const resetBtn = document.getElementById('resetLoyaltyBtn');
+    const voucherRedeemBanner = document.getElementById('voucherRedeemBanner');
+    const voucherRedeemSummary = document.getElementById('voucherRedeemSummary');
 
     function getPoints() {
       const raw = readStorage(STORAGE_KEYS.LOYALTY_POINTS);
@@ -542,7 +632,7 @@
     }
 
     function setPoints(pts) {
-      const clamped = Math.max(0, Math.min(LOYALTY_GOAL, pts));
+      const clamped = Math.max(0, pts);
       writeStorage(STORAGE_KEYS.LOYALTY_POINTS, String(clamped));
       return clamped;
     }
@@ -657,10 +747,18 @@
           if (redeemedIds.indexOf(voucher.id) === -1) {
             redeemedIds.push(voucher.id);
             saveRedeemedIds(redeemedIds);
-            setPoints(currentPoints - voucher.cost);
+            const updatedPoints = setPoints(currentPoints - voucher.cost);
             renderLoyaltySection();
             renderVouchers();
-            showToast('Redeemed "' + voucher.title + '"! Code: ' + voucher.code);
+            if (voucherRedeemSummary) {
+              voucherRedeemSummary.textContent =
+                'Redeemed "' + voucher.title + '" (-' + voucher.cost.toLocaleString() + ' pts). Promo code ' +
+                voucher.code + ' unlocked! Remaining balance: ' + updatedPoints.toLocaleString() + ' pts.';
+            }
+            if (voucherRedeemBanner) {
+              voucherRedeemBanner.classList.remove('d-none');
+            }
+            showToast('Redeemed "' + voucher.title + '"! Code: ' + voucher.code, 'volt');
           }
           return;
         }
@@ -685,7 +783,7 @@
         const next = setPoints(getPoints() + 100);
         renderLoyaltySection();
         renderVouchers();
-        showToast('+100 Loyalty Points added! Balance: ' + next.toLocaleString() + ' pts.');
+        showToast('+100 Loyalty Points added! Balance: ' + next.toLocaleString() + ' pts.', 'volt');
       });
     }
 
@@ -693,6 +791,9 @@
       resetBtn.addEventListener('click', function () {
         writeStorage(STORAGE_KEYS.LOYALTY_POINTS, String(DEFAULT_LOYALTY_POINTS));
         saveRedeemedIds([]);
+        if (voucherRedeemBanner) {
+          voucherRedeemBanner.classList.add('d-none');
+        }
         renderLoyaltySection();
         renderVouchers();
         showToast('Loyalty progress reset to 1,250 / 2,000 pts.');
@@ -778,8 +879,10 @@
 
     if (!wishlistGrid) return;
 
+    let wishlistItems = getWishlistItems();
+
     function renderWishlist() {
-      const items = getWishlistItems();
+      const items = wishlistItems;
       const totalValue = items.reduce(function (sum, item) {
         return sum + (Number(item.price) || 0);
       }, 0);
@@ -851,11 +954,10 @@
       const sizeSelect = event.target.closest('[data-wish-size]');
       if (!sizeSelect) return;
       const itemId = sizeSelect.getAttribute('data-wish-size');
-      const items = getWishlistItems();
-      const target = items.find(function (i) { return i.id === itemId; });
+      const target = wishlistItems.find(function (i) { return i.id === itemId; });
       if (target) {
         target.size = sizeSelect.value;
-        saveWishlistItems(items);
+        saveWishlistItems(wishlistItems);
       }
     });
 
@@ -863,31 +965,33 @@
       const moveBtn = event.target.closest('[data-move-to-cart]');
       if (moveBtn) {
         const itemId = moveBtn.getAttribute('data-move-to-cart');
-        const items = getWishlistItems();
-        const index = items.findIndex(function (i) { return i.id === itemId; });
+        const index = wishlistItems.findIndex(function (i) { return i.id === itemId; });
         if (index === -1) return;
 
-        const item = items[index];
+        const item = Object.assign({}, wishlistItems[index]);
         const sizeSelect = wishlistGrid.querySelector('[data-wish-size="' + itemId + '"]');
         if (sizeSelect) {
           item.size = sizeSelect.value;
         }
 
+        // Remove from wishlist array & sync localStorage
+        wishlistItems.splice(index, 1);
+        saveWishlistItems(wishlistItems);
+
+        // Push into localStorage cart array & update header navbar cart badge in real-time
         addItemToCartStorage(item);
-        items.splice(index, 1);
-        saveWishlistItems(items);
+
         renderWishlist();
-        showToast('Moved "' + item.name + '" to Cart.');
+        showToast('Item Moved to Cart!', 'volt');
         return;
       }
 
       const removeBtn = event.target.closest('[data-remove-wish]');
       if (removeBtn) {
         const itemId = removeBtn.getAttribute('data-remove-wish');
-        const items = getWishlistItems();
-        const target = items.find(function (i) { return i.id === itemId; });
-        const filtered = items.filter(function (i) { return i.id !== itemId; });
-        saveWishlistItems(filtered);
+        const target = wishlistItems.find(function (i) { return i.id === itemId; });
+        wishlistItems = wishlistItems.filter(function (i) { return i.id !== itemId; });
+        saveWishlistItems(wishlistItems);
         renderWishlist();
         if (target) {
           showToast('Removed "' + target.name + '" from Wishlist.');
@@ -897,28 +1001,36 @@
 
     if (moveAllBtn) {
       moveAllBtn.addEventListener('click', function () {
-        const items = getWishlistItems();
-        if (!items.length) return;
+        if (!wishlistItems.length) return;
+        const movedCount = wishlistItems.length;
 
-        items.forEach(function (item) {
-          addItemToCartStorage(item);
+        wishlistItems.forEach(function (item) {
+          addItemToCartStorage(Object.assign({}, item));
         });
-        saveWishlistItems([]);
+        wishlistItems = [];
+        saveWishlistItems(wishlistItems);
         renderWishlist();
-        showToast('Moved all ' + items.length + ' items to Cart.');
+        showToast(movedCount === 1 ? 'Item Moved to Cart!' : 'All ' + movedCount + ' Items Moved to Cart!', 'volt');
       });
     }
 
     if (restoreBtn) {
       restoreBtn.addEventListener('click', function () {
-        const seed = DEFAULT_WISHLIST_ITEMS.map(function (item) {
+        wishlistItems = DEFAULT_WISHLIST_ITEMS.map(function (item) {
           return Object.assign({}, item);
         });
-        saveWishlistItems(seed);
+        saveWishlistItems(wishlistItems);
         renderWishlist();
         showToast('Sample wishlist items restored.');
       });
     }
+
+    window.addEventListener('storage', function (event) {
+      if (event.key === STORAGE_KEYS.WISHLIST) {
+        wishlistItems = getWishlistItems();
+        renderWishlist();
+      }
+    });
 
     renderWishlist();
   }
