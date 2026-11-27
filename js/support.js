@@ -120,6 +120,11 @@
         }
       }
 
+      // On Women's Catalog page, js/commerce.js handles live filtering
+      if (document.getElementById('womensCatalogGrid')) {
+        return;
+      }
+
       showToast('Searching catalog for "' + query + '"...');
     });
   }
