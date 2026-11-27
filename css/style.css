@@ -248,6 +248,8 @@ textarea:focus-visible,
 }
 
 .ud-toggler:focus-visible {
+  outline: 2px solid var(--ud-lime) !important;
+  outline-offset: 2px !important;
   border-color: var(--ud-lime);
   color: var(--ud-lime);
   box-shadow: none;
@@ -675,7 +677,9 @@ textarea:focus-visible,
 }
 
 .ud-fabric-card:hover {
+  /* Keep lime top-accent, only brighten the side/bottom border on hover */
   border-color: var(--ud-orange);
+  border-top-color: var(--ud-lime);
   transform: translateY(-3px);
 }
 

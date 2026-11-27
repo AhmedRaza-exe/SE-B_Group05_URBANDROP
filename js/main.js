@@ -286,7 +286,7 @@
         subtotal += lineTotal;
         return `
           <div class="d-flex gap-3 align-items-center py-3 border-bottom border-secondary border-opacity-25">
-            <img src="${escapeHtml(item.image || assetBase + 'Logo.png')}" alt="${escapeHtml(item.name)}" width="58" height="58" class="rounded object-fit-cover border border-secondary border-opacity-25">
+            <img src="${escapeHtml(item.image || assetBase + 'Logo.png')}" alt="${escapeHtml(item.name)}" width="58" height="58" class="rounded object-fit-cover border border-secondary border-opacity-25" onerror="this.onerror=null;this.style.background='#1A1A1A'">
             <div class="flex-grow-1 min-w-0">
               <div class="fw-bold small text-truncate">${escapeHtml(item.name)}</div>
               <div class="font-mono-tech text-ud-muted" style="font-size:0.7rem;">SIZE: ${escapeHtml(item.size)} // QTY: ${item.qty}</div>
@@ -378,7 +378,7 @@
               <div class="ud-card-img-wrap">
                 <span class="ud-tag-orange ud-card-badge-corner">${escapeHtml(product.badge)}</span>
                 <span class="ud-card-stock-corner">${escapeHtml(product.stock)}</span>
-                <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
+                <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" onerror="this.onerror=null;this.style.background='#1A1A1A'">
               </div>
               <div class="p-3 d-flex flex-column flex-grow-1">
                 <span class="font-mono-tech text-lime" style="font-size:0.68rem;">${escapeHtml(product.category)}</span>
@@ -507,7 +507,7 @@
           <div class="col-12 col-md-6 d-flex" id="${look.id}">
             <article class="ud-look-card">
               <div class="ud-look-media">
-                <img src="${escapeHtml(look.image)}" alt="${escapeHtml(look.lookNumber)} - ${escapeHtml(look.title)}" loading="lazy">
+                <img src="${escapeHtml(look.image)}" alt="${escapeHtml(look.lookNumber)} - ${escapeHtml(look.title)}" loading="lazy" onerror="this.onerror=null;this.style.background='#1A1A1A'">
                 <div class="ud-look-overlay">
                   <div class="d-flex justify-content-between align-items-center mb-2 gap-2">
                     <span class="ud-tag-lime">${escapeHtml(look.lookNumber)}</span>
@@ -682,7 +682,7 @@
           .map(
             (m) => `
               <a href="${escapeHtml(m.url)}" class="ud-search-result-item">
-                <img src="${escapeHtml(m.image)}" alt="${escapeHtml(m.title)}">
+                <img src="${escapeHtml(m.image)}" alt="${escapeHtml(m.title)}" onerror="this.onerror=null;this.style.background='#1A1A1A'">
                 <div class="min-w-0">
                   <div class="small fw-bold text-truncate">${escapeHtml(m.title)}</div>
                   <div class="font-mono-tech text-ud-muted text-truncate" style="font-size:0.68rem;">${escapeHtml(m.subtitle)}</div>
