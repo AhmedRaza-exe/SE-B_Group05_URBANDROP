@@ -404,13 +404,21 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ud-text);
 }
 
-.ud-form-control.is-valid-ud {
+.ud-form-control.is-valid-ud,
+.ud-form-select.is-valid-ud {
   border-color: var(--ud-accent);
 }
 
 .ud-form-control.is-invalid-ud,
 .ud-form-select.is-invalid-ud {
-  border-color: var(--ud-cta);
+  border-color: var(--ud-danger);
+  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.18);
+}
+
+.ud-form-control.is-invalid-ud:focus,
+.ud-form-select.is-invalid-ud:focus {
+  border-color: var(--ud-danger);
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.26);
 }
 
 .ud-validation-msg {
@@ -425,7 +433,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .ud-validation-msg.is-invalid {
-  color: var(--ud-cta);
+  color: var(--ud-danger);
 }
 
 /* ---------- Store Locator Specific ---------- */
@@ -622,7 +630,60 @@ h1, h2, h3, h4, h5, h6,
   padding-top: 0.95rem;
 }
 
-/* ---------- Confirmation Alert ---------- */
+.ud-faq-search-wrap {
+  position: relative;
+}
+
+.ud-faq-search-icon {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ud-text-muted);
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ud-faq-search-input {
+  padding-left: 2.65rem;
+  padding-right: 4.5rem;
+}
+
+.ud-faq-search-clear {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--ud-font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+}
+
+/* ---------- Store Directions Modal ---------- */
+.ud-modal .modal-content {
+  background-color: var(--ud-surface);
+  border: 1px solid var(--ud-border-hover);
+  color: var(--ud-text);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+}
+
+.ud-modal .modal-header,
+.ud-modal .modal-footer {
+  border-color: var(--ud-border);
+}
+
+.ud-modal-hours-box {
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-left: 3px solid var(--ud-accent);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+
+/* ---------- Confirmation Alert & Volt Lime Ticket Card ---------- */
 .ud-alert-success {
   background-color: rgba(204, 255, 0, 0.1);
   border: 1px solid var(--ud-accent);
@@ -637,6 +698,44 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.ud-ticket-confirmation-card {
+  background-color: #CCFF00;
+  color: #0D0D0D;
+  border: 1px solid #CCFF00;
+  border-radius: 10px;
+  padding: 1.35rem 1.5rem;
+  box-shadow: 0 14px 32px rgba(204, 255, 0, 0.18);
+}
+
+.ud-ticket-confirmation-card .ud-ticket-badge {
+  display: inline-block;
+  background-color: #0D0D0D;
+  color: #CCFF00;
+  font-family: var(--ud-font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+}
+
+.ud-ticket-confirmation-card .ud-ticket-title {
+  color: #0D0D0D;
+  font-family: var(--ud-font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.ud-ticket-confirmation-card .ud-ticket-meta {
+  border-top: 1px solid rgba(13, 13, 13, 0.18);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: rgba(13, 13, 13, 0.88);
 }
 
 /* ---------- Shared Footer ---------- */

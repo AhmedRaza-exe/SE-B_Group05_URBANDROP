@@ -43,13 +43,10 @@
             <a class="nav-link" href="../index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="womens-catalog.html">Women's</a>
+            <a class="nav-link" href="shop.html">Drops</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="store-locator.html">Stores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="order-tracking.html">Track Order</a>
+            <a class="nav-link" href="store-locator.html">Store Locator</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="faq.html">FAQ</a>
@@ -70,7 +67,7 @@
             </button>
           </form>
 
-          <a href="cart-checkout.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
+          <a href="cart.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -105,6 +102,35 @@
   <!-- Main Content -->
   <main class="py-5">
     <div class="container">
+      <!-- Live Keyword Search Toolbar -->
+      <div class="ud-card p-3 p-md-4 mb-4">
+        <div class="row align-items-end g-3">
+          <div class="col-lg-8">
+            <label for="faqSearchInput" class="ud-form-label d-block">Live Keyword Search</label>
+            <div class="ud-faq-search-wrap">
+              <span class="ud-faq-search-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input
+                type="search"
+                id="faqSearchInput"
+                class="form-control ud-form-control ud-faq-search-input"
+                placeholder="Type keywords (e.g., delivery, 14 days, pickup, oversized, GSM)..."
+                autocomplete="off"
+                aria-label="Filter FAQ questions by keyword"
+              >
+              <button type="button" id="faqSearchClear" class="btn ud-btn-outline ud-faq-search-clear d-none">Clear</button>
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-lg-end align-items-center">
+            <span id="faqSearchCount" class="ud-mono small text-secondary">Showing 9 of 9 Questions</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Category Filter Pills -->
       <div class="d-flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter FAQ sections">
         <button type="button" class="btn ud-btn-outline active" data-faq-filter="all">All Topics</button>
