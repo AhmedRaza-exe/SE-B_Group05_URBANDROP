@@ -447,6 +447,16 @@ h1, h2, h3, h4, h5, h6,
   box-shadow: 0 0 0 3px rgba(204, 255, 0, 0.14);
 }
 
+.ud-form-control.is-invalid-ud {
+  border-color: var(--ud-cta);
+  box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.18);
+}
+
+.ud-form-control.is-valid-ud {
+  border-color: var(--ud-accent);
+  box-shadow: 0 0 0 3px rgba(204, 255, 0, 0.18);
+}
+
 .ud-form-select option {
   background-color: var(--ud-surface);
   color: var(--ud-text);
@@ -710,12 +720,34 @@ h1, h2, h3, h4, h5, h6,
   background-color: var(--ud-surface-elevated);
   border: 1px solid var(--ud-accent);
   color: var(--ud-text);
-  padding: 0.85rem 1.2rem;
+  padding: 0.85rem 1.25rem;
   border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 500;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
   max-width: 340px;
+  animation: udToastSlideIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ud-toast.ud-toast-volt {
+  background-color: #CCFF00;
+  border-color: #CCFF00;
+  color: #0D0D0D;
+  font-family: var(--ud-font-display);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: 0 14px 36px rgba(204, 255, 0, 0.35);
+}
+
+@keyframes udToastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ---------- Shared Footer ---------- */

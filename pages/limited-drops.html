@@ -161,8 +161,11 @@
 
           <div class="col-lg-7">
             <!-- Instant Confirmation Feedback Banner -->
-            <div id="notifyConfirmationBanner" class="alert ud-alert-success d-none mb-3" role="alert">
-              <div class="ud-alert-title mb-1">Drop Notification Locked In</div>
+            <div id="notifyConfirmationBanner" class="alert ud-alert-success d-none mb-3" role="alert" aria-live="polite">
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="ud-badge-pill ud-badge-volt">CONFIRMED</span>
+                <div class="ud-alert-title mb-0">Drop Notification Locked In</div>
+              </div>
               <p id="notifyConfirmedSummary" class="mb-0 small text-white"></p>
             </div>
 
@@ -175,9 +178,11 @@
                     type="email"
                     class="form-control ud-form-control"
                     placeholder="you@urbandrops.pk"
+                    autocomplete="email"
+                    aria-describedby="notifyEmailFeedback"
                     required
                   >
-                  <div id="notifyEmailFeedback" class="ud-mono small mt-1 d-none" style="color: #FF4D00;" role="alert"></div>
+                  <div id="notifyEmailFeedback" class="ud-mono small mt-1 d-none" style="color: #FF4D00;" role="status" aria-live="polite"></div>
                 </div>
                 <div class="col-md-6">
                   <label for="notifyDropSelect" class="form-label ud-form-label">Target Drop</label>

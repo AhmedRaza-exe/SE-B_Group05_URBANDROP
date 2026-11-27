@@ -245,8 +245,64 @@
               <span class="ud-mono small text-secondary">INSTANT CODE UNLOCK</span>
             </div>
 
+            <div id="voucherRedeemBanner" class="alert ud-alert-success d-none mb-3" role="status" aria-live="polite">
+              <div class="ud-alert-title mb-1">Voucher Redeemed</div>
+              <p id="voucherRedeemSummary" class="mb-0 small text-white"></p>
+            </div>
+
             <div id="voucherCardsGrid" class="row g-4">
-              <!-- Populated dynamically by drops-member.js -->
+              <div class="col-12 col-md-6" data-searchable-card>
+                <article class="ud-card ud-voucher-card p-4 h-100 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                    <span class="ud-badge-pill ud-badge-cta">500 PTS</span>
+                    <span class="ud-mono small text-secondary">EXPIRES 30 DAYS AFTER REDEEM</span>
+                  </div>
+                  <h3 class="h5 fw-bold text-white mb-2">15% OFF NEXT DROP</h3>
+                  <p class="small text-secondary mb-4 flex-grow-1">Valid on any capsule outerwear or tops order</p>
+                  <button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="v-15off">
+                    REDEEM (500 PTS)
+                  </button>
+                </article>
+              </div>
+              <div class="col-12 col-md-6" data-searchable-card>
+                <article class="ud-card ud-voucher-card p-4 h-100 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                    <span class="ud-badge-pill ud-badge-cta">300 PTS</span>
+                    <span class="ud-mono small text-secondary">VALID ON ALL ORDERS</span>
+                  </div>
+                  <h3 class="h5 fw-bold text-white mb-2">FREE EXPRESS SHIPPING</h3>
+                  <p class="small text-secondary mb-4 flex-grow-1">Zero shipping fees on overnight urban courier</p>
+                  <button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="v-ship">
+                    REDEEM (300 PTS)
+                  </button>
+                </article>
+              </div>
+              <div class="col-12 col-md-6" data-searchable-card>
+                <article class="ud-card ud-voucher-card p-4 h-100 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                    <span class="ud-badge-pill ud-badge-cta">800 PTS</span>
+                    <span class="ud-mono small text-secondary">SINGLE USE // VIP EXCLUSIVE</span>
+                  </div>
+                  <h3 class="h5 fw-bold text-white mb-2">$25 VAULT CREDIT</h3>
+                  <p class="small text-secondary mb-4 flex-grow-1">Instant $25 deduction at checkout ($100 min)</p>
+                  <button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="v-vault25">
+                    REDEEM (800 PTS)
+                  </button>
+                </article>
+              </div>
+              <div class="col-12 col-md-6" data-searchable-card>
+                <article class="ud-card ud-voucher-card p-4 h-100 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                    <span class="ud-badge-pill ud-badge-cta">1,500 PTS</span>
+                    <span class="ud-mono small text-secondary">NEXT BATCH #047–#050</span>
+                  </div>
+                  <h3 class="h5 fw-bold text-white mb-2">24H EARLY ACCESS PASS</h3>
+                  <p class="small text-secondary mb-4 flex-grow-1">Unlock private checkout 24 hours before public drop</p>
+                  <button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="v-early24">
+                    REDEEM (1,500 PTS)
+                  </button>
+                </article>
+              </div>
             </div>
           </section>
         </div>
