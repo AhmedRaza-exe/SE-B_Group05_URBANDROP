@@ -1,0 +1,309 @@
+/* ==========================================================================
+   URBANDROPS — Commerce & Order Tracking Styles
+   Builds on css/support.css design tokens:
+     --ud-bg: #0D0D0D | --ud-surface: #1A1A1A | --ud-cta: #FF4D00 | --ud-accent: #CCFF00
+   ========================================================================== */
+
+/* ---------- Women's Catalog ---------- */
+.ud-product-card {
+  background-color: var(--ud-surface);
+  border: 1px solid var(--ud-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ud-product-card:hover {
+  border-color: var(--ud-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+}
+
+.ud-product-visual {
+  position: relative;
+  height: 220px;
+  background:
+    radial-gradient(circle at 75% 25%, rgba(255, 77, 0, 0.16), transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(204, 255, 0, 0.1), transparent 50%),
+    #121212;
+  border-bottom: 1px solid var(--ud-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.ud-product-tag {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  background-color: rgba(13, 13, 13, 0.9);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-accent);
+  font-family: var(--ud-font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+}
+
+.ud-product-badge-drop {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background-color: var(--ud-cta);
+  color: var(--ud-text);
+  font-family: var(--ud-font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+}
+
+.ud-product-silhouette {
+  width: 112px;
+  height: 112px;
+  color: #E5E5E5;
+  opacity: 0.92;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.ud-product-card:hover .ud-product-silhouette {
+  transform: scale(1.06);
+  color: #FFFFFF;
+}
+
+.ud-size-chip {
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text-muted);
+  font-family: var(--ud-font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.ud-size-chip:hover {
+  border-color: var(--ud-text-muted);
+  color: var(--ud-text);
+}
+
+.ud-size-chip.is-active {
+  background-color: var(--ud-accent);
+  border-color: var(--ud-accent);
+  color: var(--ud-bg);
+}
+
+.ud-price-tag {
+  font-family: var(--ud-font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ud-text);
+}
+
+/* ---------- Cart & Checkout ---------- */
+.ud-cart-item {
+  background-color: var(--ud-surface);
+  border: 1px solid var(--ud-border);
+  border-radius: 10px;
+  padding: 1.15rem;
+  transition: border-color 0.2s ease;
+}
+
+.ud-cart-item:hover {
+  border-color: var(--ud-border-hover);
+}
+
+.ud-cart-thumb {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid var(--ud-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ud-accent);
+}
+
+.ud-qty-group {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ud-qty-btn {
+  background: transparent;
+  border: none;
+  color: var(--ud-text);
+  font-family: var(--ud-font-mono);
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ud-qty-btn:hover {
+  background-color: var(--ud-surface-elevated);
+  color: var(--ud-accent);
+}
+
+.ud-qty-value {
+  min-width: 32px;
+  text-align: center;
+  font-family: var(--ud-font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ud-text);
+}
+
+.ud-remove-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ud-text-muted);
+  font-family: var(--ud-font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  padding: 0.3rem 0.55rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ud-remove-btn:hover {
+  color: var(--ud-cta);
+  border-color: rgba(255, 77, 0, 0.45);
+}
+
+.ud-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.94rem;
+  padding: 0.45rem 0;
+}
+
+.ud-summary-total {
+  border-top: 1px solid var(--ud-border);
+  margin-top: 0.5rem;
+  padding-top: 0.9rem;
+  font-family: var(--ud-font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* ---------- Order Tracking 4-Step Progress Bar ---------- */
+.ud-track-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ud-track-progress-track {
+  position: relative;
+  height: 6px;
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.ud-track-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ud-cta), var(--ud-accent));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.ud-track-step-node {
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.ud-track-step-node.is-completed {
+  border-color: rgba(204, 255, 0, 0.55);
+  background-color: rgba(204, 255, 0, 0.05);
+}
+
+.ud-track-step-node.is-current {
+  border-color: var(--ud-cta);
+  background-color: rgba(255, 77, 0, 0.09);
+  box-shadow: 0 0 0 1px rgba(255, 77, 0, 0.25);
+}
+
+.ud-track-step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  font-family: var(--ud-font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  background-color: var(--ud-surface);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.ud-track-step-node.is-completed .ud-track-step-index {
+  background-color: var(--ud-accent);
+  border-color: var(--ud-accent);
+  color: var(--ud-bg);
+}
+
+.ud-track-step-node.is-current .ud-track-step-index {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+}
+
+.ud-timestamp-card {
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-left: 3px solid var(--ud-border);
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  height: 100%;
+}
+
+.ud-timestamp-card.is-completed {
+  border-left-color: var(--ud-accent);
+}
+
+.ud-timestamp-card.is-current {
+  border-left-color: var(--ud-cta);
+}
+
+@media (max-width: 767.98px) {
+  .ud-track-steps {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
