@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200">
+  <defs>
+    <linearGradient id="skyDusk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D0D0D"/>
+      <stop offset="45%" stop-color="#17191A"/>
+      <stop offset="100%" stop-color="#0D0D0D"/>
+    </linearGradient>
+    <linearGradient id="limeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CCFF00" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#CCFF00" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#252528"/>
+      <stop offset="100%" stop-color="#111113"/>
+    </linearGradient>
+    <pattern id="concreteGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Brutalist Rooftop Concrete Background -->
+  <rect width="900" height="1200" fill="url(#skyDusk)"/>
+  <rect width="900" height="1200" fill="url(#concreteGrid)"/>
+
+  <!-- Atmospheric Volt Lime Light Beam -->
+  <polygon points="0,0 560,0 900,820 0,640" fill="url(#limeGlow)"/>
+
+  <!-- Architectural Brutalist Pillars -->
+  <rect x="45" y="90" width="120" height="1020" fill="#131315" stroke="rgba(255,255,255,0.06)"/>
+  <rect x="735" y="90" width="120" height="1020" fill="#131315" stroke="rgba(255,255,255,0.06)"/>
+  <line x1="0" y1="880" x2="900" y2="880" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+
+  <!-- Technical HUD Frame -->
+  <g stroke="rgba(204,255,0,0.4)" stroke-width="1.5" fill="none">
+    <path d="M40 90 L40 40 L110 40"/>
+    <path d="M790 40 L860 40 L860 90"/>
+    <line x1="65" y1="160" x2="210" y2="160" stroke="#FF4D00" stroke-width="3"/>
+  </g>
+  <text x="65" y="145" fill="#CCFF00" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="4">GRID // SECTOR 04 // CYBER UTILITY</text>
+
+  <!-- Editorial Model Silhouette in Cyber Utility Gear -->
+  <g>
+    <!-- Head & Cap / Visor -->
+    <circle cx="450" cy="210" r="48" fill="#1F1F22" stroke="#3A3A40" stroke-width="2"/>
+    <path d="M402 195 Q450 155 498 195 L520 205 L402 205 Z" fill="#121214" stroke="#CCFF00" stroke-width="1.5"/>
+
+    <!-- Oversized Acid-Wash Sleeves -->
+    <path d="M315 280 L210 445 L285 485 L345 365 Z" fill="#232327" stroke="#36363C" stroke-width="2"/>
+    <path d="M585 280 L690 445 L615 485 L555 365 Z" fill="#232327" stroke="#36363C" stroke-width="2"/>
+
+    <!-- Torso Tee Base -->
+    <path d="M320 272 L580 272 L565 620 L335 620 Z" fill="#2A2A2E" stroke="#3C3C42" stroke-width="2"/>
+
+    <!-- Tactical Ballistic Utility Vest -->
+    <path d="M336 270 L405 270 L415 355 L485 355 L495 270 L564 270 L570 545 L330 545 Z" fill="url(#vestGrad)" stroke="#484850" stroke-width="2.5"/>
+
+    <!-- Chest Rig Pouches & Buckles -->
+    <rect x="352" y="382" width="84" height="106" rx="3" fill="#161618" stroke="#3E3E44" stroke-width="1.5"/>
+    <rect x="464" y="382" width="84" height="106" rx="3" fill="#161618" stroke="#3E3E44" stroke-width="1.5"/>
+    <rect x="382" y="405" width="24" height="10" fill="#CCFF00"/>
+    <rect x="494" y="405" width="24" height="10" fill="#CCFF00"/>
+
+    <!-- Crossbody Utility Sling Strap -->
+    <path d="M540 270 L338 565 L368 585 L570 290 Z" fill="#101012" stroke="#FF4D00" stroke-width="2"/>
+    <rect x="430" y="405" width="42" height="24" rx="2" fill="#FF4D00"/>
+
+    <!-- Wide Ripstop Cargo Trousers -->
+    <path d="M335 615 L446 615 L435 1030 L300 1030 Z" fill="#17171A" stroke="#323238" stroke-width="2"/>
+    <path d="M454 615 L565 615 L600 1030 L465 1030 Z" fill="#17171A" stroke="#323238" stroke-width="2"/>
+
+    <!-- Cargo Pockets + Neon Volt-Lime Shock Cords -->
+    <rect x="306" y="705" width="88" height="130" rx="3" fill="#202024" stroke="#3E3E45" stroke-width="1.5"/>
+    <rect x="506" y="705" width="88" height="130" rx="3" fill="#202024" stroke="#3E3E45" stroke-width="1.5"/>
+    <path d="M314 720 Q350 760 386 720" fill="none" stroke="#CCFF00" stroke-width="2.5"/>
+    <path d="M514 720 Q550 760 586 720" fill="none" stroke="#CCFF00" stroke-width="2.5"/>
+
+    <!-- Chunky Boots Silhouette -->
+    <path d="M295 1030 L435 1030 L445 1095 L280 1095 Z" fill="#0B0B0C" stroke="#2D2D33" stroke-width="2"/>
+    <path d="M465 1030 L605 1030 L620 1095 L455 1095 Z" fill="#0B0B0C" stroke="#2D2D33" stroke-width="2"/>
+  </g>
+
+  <!-- Callout Specs -->
+  <g font-family="monospace" font-size="14">
+    <line x1="564" y1="360" x2="700" y2="360" stroke="#CCFF00" stroke-width="1.5"/>
+    <circle cx="564" cy="360" r="4" fill="#CCFF00"/>
+    <text x="615" y="348" fill="#FFFFFF">01 // BALLISTIC VEST</text>
+
+    <line x1="250" y1="450" x2="120" y2="450" stroke="#FF4D00" stroke-width="1.5"/>
+    <circle cx="250" cy="450" r="4" fill="#FF4D00"/>
+    <text x="72" y="438" fill="#FFFFFF">02 // 310 GSM TEE</text>
+
+    <line x1="594" y1="770" x2="720" y2="770" stroke="#CCFF00" stroke-width="1.5"/>
+    <circle cx="594" cy="770" r="4" fill="#CCFF00"/>
+    <text x="615" y="758" fill="#FFFFFF">03 // STRAP CARGO</text>
+  </g>
+</svg>
