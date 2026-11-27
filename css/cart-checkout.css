@@ -557,6 +557,107 @@ select:focus-visible,
   color: #0D0D0D;
 }
 
+/* ---------- Step 2: Shipping & Payment Details ---------- */
+.step-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0D0D0D;
+  background-color: var(--ud-accent);
+  padding: 0.25rem 0.55rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.checkout-card.is-revealed {
+  animation: checkoutReveal 0.25s ease-out;
+}
+
+@keyframes checkoutReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.payment-option-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background-color: var(--ud-bg);
+  border: 1px solid var(--ud-border);
+  border-radius: 2px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.payment-option-card:hover {
+  border-color: var(--ud-text-muted);
+}
+
+.payment-option-card.is-selected {
+  border-color: var(--ud-accent);
+  background-color: rgba(204, 255, 0, 0.06);
+}
+
+.payment-radio {
+  margin-top: 0.2rem;
+  accent-color: var(--ud-accent);
+  cursor: pointer;
+}
+
+.payment-option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.payment-option-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ud-text);
+}
+
+.payment-option-sub {
+  font-size: 0.72rem;
+  color: var(--ud-text-muted);
+}
+
+.cod-info-box {
+  background-color: var(--ud-surface-alt);
+  border: 1px solid var(--ud-border);
+  border-left: 3px solid var(--ud-accent);
+  border-radius: 2px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--ud-text-muted);
+}
+
+@media (max-width: 575.98px) {
+  .payment-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Order Summary ---------- */
 .summary-list {
   display: flex;
