@@ -82,6 +82,43 @@
     }
   }
 
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function initImageFallbacks() {
+    const brandLogos = document.querySelectorAll('img.ud-brand-logo');
+    brandLogos.forEach(function (img) {
+      function markMissing() {
+        img.classList.add('is-missing');
+      }
+
+      img.addEventListener('error', markMissing);
+      if (img.complete && img.naturalWidth === 0) {
+        markMissing();
+      }
+    });
+
+    document.addEventListener('error', function (event) {
+      const target = event.target;
+      if (!target || target.tagName !== 'IMG') return;
+      if (target.classList.contains('ud-brand-logo')) {
+        target.classList.add('is-missing');
+        return;
+      }
+      if (target.closest('.ud-product-visual') && !target.dataset.fallbackApplied) {
+        target.dataset.fallbackApplied = 'true';
+        const label = (target.getAttribute('alt') || 'URBANDROPS').toUpperCase().slice(0, 22);
+        target.src = createStreetwearArtUri(label, '#CCFF00', 'jacket');
+      }
+    }, true);
+  }
+
   function getStoredCart() {
     try {
       const raw = readStorage(STORAGE_KEYS.CART);
@@ -346,26 +383,31 @@
 
     // 2. Render Next Drop Teaser Cards
     if (teaserGrid) {
+      const savedWishlistIds = new Set(
+        getWishlistItems().map(function (item) { return item.id; })
+      );
+
       teaserGrid.innerHTML = UPCOMING_DROPS.map(function (drop) {
+        const isSaved = savedWishlistIds.has(drop.id);
         return (
           '<div class="col-12 col-md-6 col-xl-3" data-searchable-card>' +
           '  <article class="ud-card ud-card-interactive h-100 d-flex flex-column">' +
           '    <div class="ud-product-visual">' +
-          '      <span class="ud-badge-pill ud-badge-volt ud-visual-tag-tl">' + drop.edition + '</span>' +
-          '      <span class="ud-badge-pill ud-badge-muted ud-visual-tag-tr">' + drop.category + '</span>' +
-          '      <img src="' + drop.image + '" alt="' + drop.name + '">' +
+          '      <span class="ud-badge-pill ud-badge-volt ud-visual-tag-tl">' + escapeHtml(drop.edition) + '</span>' +
+          '      <span class="ud-badge-pill ud-badge-muted ud-visual-tag-tr">' + escapeHtml(drop.category) + '</span>' +
+          '      <img src="' + escapeHtml(drop.image) + '" alt="' + escapeHtml(drop.name) + '">' +
           '    </div>' +
           '    <div class="p-3 p-lg-4 d-flex flex-column flex-grow-1">' +
-          '      <div class="ud-mono small text-secondary mb-1">' + drop.batch + '</div>' +
-          '      <h3 class="h5 fw-bold text-white mb-2">' + drop.name + '</h3>' +
-          '      <p class="small text-secondary mb-3 flex-grow-1">' + drop.description + '</p>' +
+          '      <div class="ud-mono small text-secondary mb-1">' + escapeHtml(drop.batch) + '</div>' +
+          '      <h3 class="h5 fw-bold text-white mb-2">' + escapeHtml(drop.name) + '</h3>' +
+          '      <p class="small text-secondary mb-3 flex-grow-1">' + escapeHtml(drop.description) + '</p>' +
           '      <div class="d-flex justify-content-between align-items-center border-top border-secondary border-opacity-25 pt-3 mb-3">' +
-          '        <span class="ud-mono small text-secondary">' + drop.release + '</span>' +
-          '        <span class="ud-mono fw-bold fs-5 text-white">$' + drop.price + '</span>' +
+          '        <span class="ud-mono small text-secondary">' + escapeHtml(drop.release) + '</span>' +
+          '        <span class="ud-mono fw-bold fs-5 text-white">$' + escapeHtml(drop.price) + '</span>' +
           '      </div>' +
           '      <div class="d-grid gap-2">' +
-          '        <button type="button" class="btn ud-btn-cta btn-sm" data-notify-drop="' + drop.name + '">NOTIFY FOR THIS DROP</button>' +
-          '        <button type="button" class="btn ud-btn-outline btn-sm" data-save-wishlist="' + drop.id + '">SAVE TO WISHLIST</button>' +
+          '        <button type="button" class="btn ud-btn-cta btn-sm" data-notify-drop="' + escapeHtml(drop.name) + '" aria-label="Notify me for ' + escapeHtml(drop.name) + '">NOTIFY FOR THIS DROP</button>' +
+          '        <button type="button" class="btn ud-btn-outline btn-sm' + (isSaved ? ' active' : '') + '" data-save-wishlist="' + escapeHtml(drop.id) + '" aria-pressed="' + (isSaved ? 'true' : 'false') + '" aria-label="Save ' + escapeHtml(drop.name) + ' to wishlist">' + (isSaved ? 'SAVED IN WISHLIST' : 'SAVE TO WISHLIST') + '</button>' +
           '      </div>' +
           '    </div>' +
           '  </article>' +
@@ -401,6 +443,9 @@
           const currentWishlist = getWishlistItems();
           const alreadySaved = currentWishlist.some(function (w) { return w.id === drop.id; });
           if (alreadySaved) {
+            wishBtn.textContent = 'SAVED IN WISHLIST';
+            wishBtn.classList.add('active');
+            wishBtn.setAttribute('aria-pressed', 'true');
             showToast(drop.name + ' is already in your Wishlist.');
           } else {
             currentWishlist.push({
@@ -415,6 +460,7 @@
             saveWishlistItems(currentWishlist);
             wishBtn.textContent = 'SAVED IN WISHLIST';
             wishBtn.classList.add('active');
+            wishBtn.setAttribute('aria-pressed', 'true');
             showToast('Saved "' + drop.name + '" to Wishlist.');
           }
         }
@@ -695,18 +741,18 @@
         if (isRedeemed) {
           actionHtml =
             '<div class="ud-voucher-code-box d-flex align-items-center justify-content-between gap-2">' +
-            '  <span>' + voucher.code + '</span>' +
-            '  <button type="button" class="btn ud-btn-outline btn-sm py-1 px-2" data-copy-code="' + voucher.code + '">COPY</button>' +
+            '  <span>' + escapeHtml(voucher.code) + '</span>' +
+            '  <button type="button" class="btn ud-btn-outline btn-sm py-1 px-2" data-copy-code="' + escapeHtml(voucher.code) + '" aria-label="Copy promo code ' + escapeHtml(voucher.code) + '">COPY</button>' +
             '</div>';
         } else if (canAfford) {
           actionHtml =
-            '<button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="' + voucher.id + '">' +
+            '<button type="button" class="btn ud-btn-cta w-100" data-redeem-voucher="' + escapeHtml(voucher.id) + '" aria-label="Redeem ' + escapeHtml(voucher.title) + ' for ' + voucher.cost.toLocaleString() + ' points">' +
             '  REDEEM (' + voucher.cost.toLocaleString() + ' PTS)' +
             '</button>';
         } else {
           const shortfall = voucher.cost - points;
           actionHtml =
-            '<button type="button" class="btn ud-btn-cta w-100" disabled>' +
+            '<button type="button" class="btn ud-btn-cta w-100" disabled aria-label="' + escapeHtml(voucher.title) + ' requires ' + shortfall.toLocaleString() + ' more points">' +
             '  NEED ' + shortfall.toLocaleString() + ' MORE PTS' +
             '</button>';
         }
@@ -718,10 +764,10 @@
           '      <span class="ud-badge-pill ' + (isRedeemed ? 'ud-badge-volt' : 'ud-badge-cta') + '">' +
           (isRedeemed ? 'UNLOCKED' : voucher.cost.toLocaleString() + ' PTS') +
           '      </span>' +
-          '      <span class="ud-mono small text-secondary">' + voucher.expiry + '</span>' +
+          '      <span class="ud-mono small text-secondary">' + escapeHtml(voucher.expiry) + '</span>' +
           '    </div>' +
-          '    <h3 class="h5 fw-bold text-white mb-2">' + voucher.title + '</h3>' +
-          '    <p class="small text-secondary mb-4 flex-grow-1">' + voucher.subtitle + '</p>' +
+          '    <h3 class="h5 fw-bold text-white mb-2">' + escapeHtml(voucher.title) + '</h3>' +
+          '    <p class="small text-secondary mb-4 flex-grow-1">' + escapeHtml(voucher.subtitle) + '</p>' +
           actionHtml +
           '  </article>' +
           '</div>'
@@ -750,6 +796,10 @@
             const updatedPoints = setPoints(currentPoints - voucher.cost);
             renderLoyaltySection();
             renderVouchers();
+            const copyButton = voucherGrid.querySelector('[data-copy-code="' + voucher.code + '"]');
+            if (copyButton) {
+              copyButton.focus();
+            }
             if (voucherRedeemSummary) {
               voucherRedeemSummary.textContent =
                 'Redeemed "' + voucher.title + '" (-' + voucher.cost.toLocaleString() + ' pts). Promo code ' +
@@ -907,6 +957,11 @@
 
       wishlistGrid.innerHTML = items.map(function (item) {
         const isLow = (item.stockStatus || '').indexOf('LOW') !== -1;
+        const safeId = escapeHtml(item.id);
+        const safeName = escapeHtml(item.name);
+        const safeCategory = escapeHtml(item.category || 'STREETWEAR');
+        const safeStatus = escapeHtml(item.stockStatus || 'IN STOCK');
+        const safeImage = escapeHtml(item.image || createStreetwearArtUri(item.name || 'URBANDROPS', '#CCFF00', 'jacket'));
         const sizeOptions = item.size === 'ONE SIZE'
           ? '<option value="ONE SIZE" selected>ONE SIZE</option>'
           : ['S', 'M', 'L', 'XL'].map(function (sz) {
@@ -918,29 +973,29 @@
           '  <article class="ud-card ud-card-interactive h-100 d-flex flex-column">' +
           '    <div class="ud-product-visual">' +
           '      <span class="ud-badge-pill ' + (isLow ? 'ud-badge-cta' : 'ud-badge-volt') + ' ud-visual-tag-tl">' +
-          (item.stockStatus || 'IN STOCK') +
+          safeStatus +
           '      </span>' +
-          '      <button type="button" class="ud-remove-icon-btn ud-visual-tag-tr" data-remove-wish="' + item.id + '" aria-label="Remove ' + item.name + ' from wishlist">' +
+          '      <button type="button" class="ud-remove-icon-btn ud-visual-tag-tr" data-remove-wish="' + safeId + '" aria-label="Remove ' + safeName + ' from wishlist">' +
           '        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">' +
           '          <line x1="18" y1="6" x2="6" y2="18"></line>' +
           '          <line x1="6" y1="6" x2="18" y2="18"></line>' +
           '        </svg>' +
           '      </button>' +
-          '      <img src="' + item.image + '" alt="' + item.name + '">' +
+          '      <img src="' + safeImage + '" alt="' + safeName + '">' +
           '    </div>' +
           '    <div class="p-3 p-lg-4 d-flex flex-column flex-grow-1">' +
-          '      <div class="ud-mono small text-secondary mb-1">' + (item.category || 'STREETWEAR') + '</div>' +
-          '      <h3 class="h5 fw-bold text-white mb-2">' + item.name + '</h3>' +
+          '      <div class="ud-mono small text-secondary mb-1">' + safeCategory + '</div>' +
+          '      <h3 class="h5 fw-bold text-white mb-2">' + safeName + '</h3>' +
           '      <div class="d-flex align-items-center justify-content-between gap-2 mt-auto pt-2 mb-3">' +
-          '        <span class="ud-mono fw-bold fs-4 text-white">$' + item.price + '</span>' +
+          '        <span class="ud-mono fw-bold fs-4 text-white">$' + escapeHtml(item.price) + '</span>' +
           '        <div class="d-flex align-items-center gap-2">' +
-          '          <label for="size-' + item.id + '" class="ud-mono small text-secondary mb-0">SIZE</label>' +
-          '          <select id="size-' + item.id + '" class="form-select form-select-sm ud-form-select py-1 px-2" data-wish-size="' + item.id + '">' +
+          '          <label for="size-' + safeId + '" class="ud-mono small text-secondary mb-0">SIZE</label>' +
+          '          <select id="size-' + safeId + '" class="form-select form-select-sm ud-form-select py-1 px-2" data-wish-size="' + safeId + '">' +
           sizeOptions +
           '          </select>' +
           '        </div>' +
           '      </div>' +
-          '      <button type="button" class="btn ud-btn-cta w-100" data-move-to-cart="' + item.id + '">' +
+          '      <button type="button" class="btn ud-btn-cta w-100" data-move-to-cart="' + safeId + '" aria-label="Move ' + safeName + ' to cart">' +
           '        MOVE TO CART' +
           '      </button>' +
           '    </div>' +
@@ -948,6 +1003,22 @@
           '</div>'
         );
       }).join('');
+    }
+
+    function restoreWishlistFocus(removedIndex, actionSelector) {
+      if (wishlistItems.length === 0) {
+        if (restoreBtn) restoreBtn.focus();
+        return;
+      }
+      const nextIndex = Math.min(removedIndex, wishlistItems.length - 1);
+      const nextItem = wishlistItems[nextIndex];
+      if (!nextItem) return;
+      const targetBtn =
+        wishlistGrid.querySelector('[' + actionSelector + '="' + nextItem.id + '"]') ||
+        wishlistGrid.querySelector('[data-move-to-cart="' + nextItem.id + '"]');
+      if (targetBtn) {
+        targetBtn.focus();
+      }
     }
 
     wishlistGrid.addEventListener('change', function (event) {
@@ -982,6 +1053,7 @@
         addItemToCartStorage(item);
 
         renderWishlist();
+        restoreWishlistFocus(index, 'data-move-to-cart');
         showToast('Item Moved to Cart!', 'volt');
         return;
       }
@@ -989,10 +1061,12 @@
       const removeBtn = event.target.closest('[data-remove-wish]');
       if (removeBtn) {
         const itemId = removeBtn.getAttribute('data-remove-wish');
-        const target = wishlistItems.find(function (i) { return i.id === itemId; });
+        const index = wishlistItems.findIndex(function (i) { return i.id === itemId; });
+        const target = index !== -1 ? wishlistItems[index] : null;
         wishlistItems = wishlistItems.filter(function (i) { return i.id !== itemId; });
         saveWishlistItems(wishlistItems);
         renderWishlist();
+        restoreWishlistFocus(Math.max(0, index), 'data-remove-wish');
         if (target) {
           showToast('Removed "' + target.name + '" from Wishlist.');
         }
@@ -1010,6 +1084,7 @@
         wishlistItems = [];
         saveWishlistItems(wishlistItems);
         renderWishlist();
+        if (restoreBtn) restoreBtn.focus();
         showToast(movedCount === 1 ? 'Item Moved to Cart!' : 'All ' + movedCount + ' Items Moved to Cart!', 'volt');
       });
     }
@@ -1021,6 +1096,8 @@
         });
         saveWishlistItems(wishlistItems);
         renderWishlist();
+        const firstMoveBtn = wishlistGrid.querySelector('[data-move-to-cart]');
+        if (firstMoveBtn) firstMoveBtn.focus();
         showToast('Sample wishlist items restored.');
       });
     }
@@ -1039,6 +1116,7 @@
      7. BOOTSTRAP INITIALIZATION
      ======================================================================== */
   document.addEventListener('DOMContentLoaded', function () {
+    initImageFallbacks();
     initCartBadge();
     initNavbarSearch();
     initLimitedDropsPage();

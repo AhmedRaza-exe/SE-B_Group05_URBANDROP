@@ -122,6 +122,10 @@ h1, h2, h3, h4, h5, h6,
   display: block;
 }
 
+.ud-brand-logo.is-missing {
+  display: none;
+}
+
 .ud-brand-fallback {
   display: none;
   align-items: center;
@@ -789,10 +793,81 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ud-text-muted);
 }
 
+.ud-footer-disclosure {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(44, 44, 44, 0.7);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ud-text-muted);
+}
+
+.ud-footer-disclosure strong {
+  color: var(--ud-text);
+  font-family: var(--ud-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ud-inline-link {
+  color: var(--ud-accent);
+  text-decoration: none;
+}
+
+.ud-inline-link:hover,
+.ud-inline-link:focus-visible {
+  color: var(--ud-text);
+  text-decoration: underline;
+}
+
+/* ---------- Keyboard Focus Visibility ---------- */
+.ud-brand:focus-visible,
+.ud-navbar .nav-link:focus-visible,
+.ud-search-btn:focus-visible,
+.ud-cart-btn:focus-visible,
+.ud-btn-cta:focus-visible,
+.ud-btn-accent:focus-visible,
+.ud-btn-outline:focus-visible,
+.ud-remove-icon-btn:focus-visible,
+.ud-footer-link:focus-visible,
+.ud-inline-link:focus-visible,
+main a:focus-visible {
+  outline: 2px solid var(--ud-accent);
+  outline-offset: 2px;
+}
+
+.ud-tier-scale {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 991.98px) {
+  .ud-search-form {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
 @media (max-width: 575.98px) {
+  .ud-countdown-panel {
+    padding: 1.25rem;
+  }
+
+  .ud-countdown-clock {
+    font-size: clamp(2rem, 8vw, 4.1rem);
+  }
+
   .ud-countdown-units {
     gap: 1.35rem;
     font-size: 0.66rem;
+  }
+
+  .ud-stat-box {
+    padding: 0.75rem 0.45rem;
   }
 
   .ud-toast {
