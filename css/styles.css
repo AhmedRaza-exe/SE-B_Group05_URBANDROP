@@ -301,3 +301,64 @@ main {
 .ud-footer a:hover {
   color: var(--ud-cta);
 }
+
+/* Keyboard Focus Accessibility */
+.ud-size-btn:focus-visible,
+.ud-thumb-btn:focus-visible,
+.btn-ud-cta:focus-visible,
+.btn-ud-outline:focus-visible,
+.size-filter-btn:focus-visible,
+.form-check-input:focus-visible,
+.form-range:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible,
+.quick-add-btn:focus-visible {
+  outline: 2px solid var(--ud-cta);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 77, 0, 0.3);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ud-cta);
+  outline-offset: 2px;
+}
+
+/* Skip to Main Content (screen reader / keyboard) */
+.ud-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+  background: var(--ud-cta);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0;
+}
+
+.ud-skip-link:focus {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+}
+
+/* Mobile Grid Responsiveness */
+@media (max-width: 575.98px) {
+  .ud-product-img-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ud-footer .row {
+    text-align: center;
+  }
+
+  .ud-footer .col-md-4 {
+    text-align: center !important;
+  }
+}
