@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
+  <a href="#mainProductImage" class="ud-skip-link">Skip to product details</a>
   <!-- Shared Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
     <div class="container">
@@ -22,6 +23,7 @@
             src="../images/Logo.png"
             alt="URBANDROPS Logo"
             class="ud-logo-img"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 44 44%22%3E%3Crect width=%2244%22 height=%2244%22 fill=%22%230B0B0D%22/%3E%3Ctext x=%2222%22 y=%2228%22 text-anchor=%22middle%22 fill=%22%23FF4D00%22 font-family=%22Arial%22 font-size=%2218%22 font-weight=%22bold%22%3EUD%3C/text%3E%3C/svg%3E'"
           />
         </span>
         <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
@@ -216,19 +218,29 @@
   </main>
 
   <!-- Shared Footer -->
-  <footer class="ud-footer py-4 mt-auto">
+  <footer class="ud-footer py-5 mt-auto">
     <div class="container">
-      <div class="row align-items-center gy-3">
-        <div class="col-md-6 text-center text-md-start">
-          <span class="fw-bold text-white">URBAN<span class="ud-brand-accent">DROPS</span></span>
-          <span class="ms-2 small">&copy; 2026 URBANDROPS Streetwear. All rights reserved.</span>
+      <div class="row gy-4">
+        <div class="col-12 col-md-4 text-center text-md-start">
+          <span class="fw-bold text-white d-block mb-2">URBAN<span class="ud-brand-accent">DROPS</span></span>
+          <span class="small d-block">&copy; 2026 URBANDROPS Streetwear. All rights reserved.</span>
+          <span class="small d-block mt-1" style="color: #777;">URBANDROPS &copy; 2026</span>
         </div>
-        <div class="col-md-6">
-          <ul class="nav justify-content-center justify-content-md-end gap-3 small">
-            <li class="nav-item"><a href="mens-catalog.html">Men's Catalog</a></li>
-            <li class="nav-item"><a href="product-detail.html">Product Detail</a></li>
-            <li class="nav-item"><a href="size-guide.html">Size Guide</a></li>
+        <div class="col-12 col-md-4 text-center">
+          <h3 class="h6 fw-bold text-uppercase mb-3" style="color: var(--ud-accent);">Quick Links</h3>
+          <ul class="nav flex-column gap-1 small align-items-center">
+            <li class="nav-item"><a href="../index.html" class="nav-link p-0">Home</a></li>
+            <li class="nav-item"><a href="mens-catalog.html" class="nav-link p-0">Men's Catalog</a></li>
+            <li class="nav-item"><a href="product-detail.html" class="nav-link p-0">Product Detail</a></li>
+            <li class="nav-item"><a href="size-guide.html" class="nav-link p-0">Size Guide</a></li>
           </ul>
+        </div>
+        <div class="col-12 col-md-4 text-center text-md-end">
+          <h3 class="h6 fw-bold text-uppercase mb-3" style="color: var(--ud-accent);">Disclosure</h3>
+          <p class="small mb-0" style="color: #777;">
+            <strong class="text-secondary">AI Image Disclosure:</strong> Some product visuals on this site are AI-generated
+            or AI-enhanced for illustrative purposes and may not represent the exact final product.
+          </p>
         </div>
       </div>
     </div>
@@ -285,7 +297,7 @@
       const qtyIncrementBtn = document.getElementById('qtyIncrementBtn');
       const quantityDisplay = document.getElementById('quantityDisplay');
       const addToCartBtn = document.getElementById('addToCartBtn');
-            const addSuccessToast = new bootstrap.Toast(document.getElementById('addSuccessToast'));
+      const addSuccessToastEl = document.getElementById('addSuccessToast');
       const addSuccessToastBody = document.getElementById('addSuccessToastBody');
 
       let selectedSize = 'L';
@@ -375,7 +387,7 @@
 
       addToCartBtn.addEventListener('click', () => {
         const updatedTotal = URBANDROPS.addToCart(quantity);
-        addSuccessAlert.innerHTML =
+        addSuccessToastBody.innerHTML =
           '<span style="color: var(--ud-accent);" class="fw-bold">LOCKED IN:</span> Added <strong>' +
           quantity +
           ' &times; Heavyweight Oversized Hoodie (Size ' +
@@ -383,7 +395,9 @@
           ')</strong>. Total cart items: <strong>' +
           updatedTotal +
           '</strong>.';
-        addSuccessAlert.classList.remove('d-none');
+        addSuccessToastEl.classList.remove('d-none');
+        addSuccessToastEl.style.zIndex = '1080';
+        setTimeout(() => { addSuccessToastEl.classList.add('d-none'); }, 3500);
       });
 
       renderThumbnails();
