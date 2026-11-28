@@ -60,6 +60,39 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--ud-font-mono);
 }
 
+/* ---------- Keyboard Focus & Skip Link Accessibility ---------- */
+.ud-skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 1100;
+  background-color: var(--ud-accent);
+  color: var(--ud-bg);
+  font-family: var(--ud-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.ud-skip-link:focus {
+  top: 0.75rem;
+  outline: 2px solid var(--ud-text);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ud-accent);
+  outline-offset: 2px;
+}
+
 /* ---------- Selection & Scrollbar ---------- */
 ::selection {
   background-color: var(--ud-accent);
@@ -598,6 +631,13 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ud-accent);
 }
 
+.ud-faq-trigger:focus-visible {
+  color: var(--ud-accent);
+  outline: 2px solid var(--ud-accent);
+  outline-offset: -2px;
+  background-color: rgba(204, 255, 0, 0.05);
+}
+
 .ud-faq-toggle-icon {
   font-family: var(--ud-font-mono);
   font-size: 0.95rem;
@@ -610,11 +650,13 @@ h1, h2, h3, h4, h5, h6,
 .ud-faq-panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.28s ease;
+  visibility: hidden;
+  transition: grid-template-rows 0.28s ease, visibility 0.28s ease;
 }
 
 .ud-faq-item.is-open .ud-faq-panel {
   grid-template-rows: 1fr;
+  visibility: visible;
 }
 
 .ud-faq-panel-inner {
@@ -738,6 +780,12 @@ h1, h2, h3, h4, h5, h6,
   color: rgba(13, 13, 13, 0.88);
 }
 
+.ud-ticket-confirmation-card .btn-close:focus-visible {
+  outline: 2px solid #0D0D0D;
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
 /* ---------- Shared Footer ---------- */
 .ud-footer {
   background-color: #080808;
@@ -765,13 +813,34 @@ h1, h2, h3, h4, h5, h6,
   transition: color 0.2s ease;
 }
 
-.ud-footer-link:hover {
+.ud-footer-link:hover,
+.ud-footer-link:focus-visible {
   color: var(--ud-accent);
+}
+
+.ud-footer-disclosure {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--ud-border);
+  border-radius: 6px;
+  padding: 0.7rem 0.95rem;
+  margin-top: 2rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ud-text-muted);
+}
+
+.ud-footer-disclosure-tag {
+  font-family: var(--ud-font-mono);
+  font-weight: 700;
+  color: var(--ud-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 0.4rem;
 }
 
 .ud-footer-bottom {
   border-top: 1px solid var(--ud-border);
-  margin-top: 2.25rem;
+  margin-top: 1.25rem;
   padding-top: 1.25rem;
   font-size: 0.82rem;
   color: var(--ud-text-muted);
@@ -800,7 +869,49 @@ h1, h2, h3, h4, h5, h6,
 
   .ud-search-form {
     width: 100%;
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ud-ticker {
+    font-size: 0.68rem;
+    line-height: 1.4;
+    padding: 0.45rem 0.5rem;
+  }
+
+  .ud-brand-logo {
+    height: 30px;
+    max-width: 108px;
+  }
+
+  .ud-brand-text {
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+  }
+
+  .ud-page-hero {
+    padding: 2.25rem 0 2rem;
+  }
+
+  .ud-map-canvas {
+    height: 290px;
+  }
+
+  .ud-map-grid-label {
+    font-size: 0.62rem;
+    max-width: calc(100% - 1.5rem);
+  }
+
+  .ud-faq-trigger {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .ud-toast {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
   }
 }

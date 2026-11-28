@@ -1,15 +1,37 @@
 /**
  * URBANDROPS — Shared Support Pages Vanilla JS
  * Handles:
+ *  - Brand logo fallback verification (../images/Logo.png)
  *  - Dynamic Cart Badge synced with localStorage ('cartCount')
  *  - Shared Navbar Search bar behavior
- *  - Store Locator filtering & dark map pin selection (pages/store-locator.html)
- *  - FAQ Accordion [+] / [-] toggles & category filtering (pages/faq.html)
- *  - Contact Support real-time email validation & ticket confirmation (pages/contact-support.html)
+ *  - Store Locator filtering, keyboard-accessible pin/card sync & Directions modal (pages/store-locator.html)
+ *  - FAQ Accordion [+] / [-] toggles, keyboard navigation & live search filtering (pages/faq.html)
+ *  - Contact Support real-time email validation & Volt Lime ticket confirmation (pages/contact-support.html)
  */
 
 (function () {
   'use strict';
+
+  /* ========================================================================
+     0. BRAND LOGO IMAGE FALLBACK VERIFICATION
+     ======================================================================== */
+  function activateLogoFallback(img) {
+    if (!img) return;
+    img.classList.add('is-missing');
+    img.style.display = 'none';
+  }
+
+  function initLogoFallbacks() {
+    const logos = document.querySelectorAll('.ud-brand-logo');
+    logos.forEach(function (img) {
+      if (img.complete && img.naturalWidth === 0) {
+        activateLogoFallback(img);
+      }
+      img.addEventListener('error', function () {
+        activateLogoFallback(img);
+      });
+    });
+  }
 
   /* ========================================================================
      1. SHARED CART BADGE (localStorage 'cartCount')
@@ -101,6 +123,17 @@
           cityFilter.value = properCity;
           cityFilter.dispatchEvent(new Event('change'));
           showToast('Filtered stores for ' + properCity + '.');
+          return;
+        }
+        const matchedStore = STORES.find(function (s) {
+          return s.name.toLowerCase().includes(lower) || s.address.toLowerCase().includes(lower);
+        });
+        if (matchedStore) {
+          cityFilter.value = matchedStore.city;
+          cityFilter.dispatchEvent(new Event('change'));
+          const focusBtn = document.querySelector('[data-focus-store="' + matchedStore.id + '"]');
+          if (focusBtn) focusBtn.click();
+          showToast('Located ' + matchedStore.name + '.');
           return;
         }
       }
@@ -235,8 +268,14 @@
         card.classList.toggle('is-selected', card.getAttribute('data-store-id') === storeId);
       });
 
+      storeCardsContainer.querySelectorAll('[data-focus-store]').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', btn.getAttribute('data-focus-store') === storeId ? 'true' : 'false');
+      });
+
       mapPinsContainer.querySelectorAll('[data-pin-id]').forEach(function (pin) {
-        pin.classList.toggle('is-active', pin.getAttribute('data-pin-id') === storeId);
+        const isCurrent = pin.getAttribute('data-pin-id') === storeId;
+        pin.classList.toggle('is-active', isCurrent);
+        pin.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
       });
     }
 
@@ -262,7 +301,12 @@
       if (badgeEl) badgeEl.textContent = store.city + ' • ' + store.badge;
       if (nameEl) nameEl.textContent = store.name;
       if (statusEl) {
-        statusEl.innerHTML = '<span class="ud-status-dot" aria-hidden="true"></span>' + store.status;
+        statusEl.textContent = '';
+        const dot = document.createElement('span');
+        dot.className = 'ud-status-dot';
+        dot.setAttribute('aria-hidden', 'true');
+        statusEl.appendChild(dot);
+        statusEl.appendChild(document.createTextNode(store.status));
       }
       if (coordsEl) coordsEl.textContent = store.coords;
       if (addressEl) addressEl.textContent = store.address;
@@ -279,6 +323,8 @@
 
       if (modalEl && window.bootstrap && window.bootstrap.Modal) {
         window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+      } else {
+        showToast(store.name + ' — ' + store.hours);
       }
     }
 
@@ -329,7 +375,7 @@
             '</div>' +
             '<div class="d-flex flex-wrap gap-2">' +
               '<button type="button" class="btn ud-btn-cta btn-sm" data-directions-store="' + store.id + '">Get Directions</button>' +
-              '<button type="button" class="btn ud-btn-outline btn-sm" data-focus-store="' + store.id + '">Focus on Map</button>' +
+              '<button type="button" class="btn ud-btn-outline btn-sm" data-focus-store="' + store.id + '" aria-pressed="' + (isSelected ? 'true' : 'false') + '">Focus on Map</button>' +
               '<a href="contact-support.html" class="btn ud-btn-outline btn-sm">Store Inquiry</a>' +
             '</div>' +
           '</article>';
@@ -342,10 +388,12 @@
       filtered.forEach(function (store) {
         const pin = document.createElement('button');
         pin.type = 'button';
-        pin.className = 'ud-map-pin' + (store.id === selectedStoreId ? ' is-active' : '');
+        const isPinActive = store.id === selectedStoreId;
+        pin.className = 'ud-map-pin' + (isPinActive ? ' is-active' : '');
         pin.style.left = store.pinX + '%';
         pin.style.top = store.pinY + '%';
         pin.setAttribute('data-pin-id', store.id);
+        pin.setAttribute('aria-pressed', isPinActive ? 'true' : 'false');
         pin.setAttribute('aria-label', 'Select ' + store.name + ' in ' + store.city);
         pin.innerHTML = '<span class="ud-map-pin-dot" aria-hidden="true"></span><span>' + store.city.slice(0, 3).toUpperCase() + '</span>';
 
@@ -409,6 +457,30 @@
         if (!item) return;
         const currentlyOpen = item.classList.contains('is-open');
         setFaqState(item, !currentlyOpen);
+      });
+
+      trigger.addEventListener('keydown', function (event) {
+        const visibleTriggers = Array.from(triggers).filter(function (el) {
+          const item = el.closest('.ud-faq-item');
+          const section = el.closest('[data-faq-section]');
+          return item && item.style.display !== 'none' && (!section || section.style.display !== 'none');
+        });
+        const idx = visibleTriggers.indexOf(trigger);
+        if (idx === -1 || visibleTriggers.length === 0) return;
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          visibleTriggers[(idx + 1) % visibleTriggers.length].focus();
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          visibleTriggers[(idx - 1 + visibleTriggers.length) % visibleTriggers.length].focus();
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          visibleTriggers[0].focus();
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          visibleTriggers[visibleTriggers.length - 1].focus();
+        }
       });
     });
 
@@ -482,7 +554,9 @@
         activeCategory = btn.getAttribute('data-faq-filter') || 'all';
 
         categoryButtons.forEach(function (b) {
-          b.classList.toggle('active', b === btn);
+          const isCurrent = b === btn;
+          b.classList.toggle('active', isCurrent);
+          b.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
         });
 
         applyFaqFilters();
@@ -493,7 +567,9 @@
       resetFaqSearchBtn.addEventListener('click', function () {
         activeCategory = 'all';
         categoryButtons.forEach(function (b) {
-          b.classList.toggle('active', b.getAttribute('data-faq-filter') === 'all');
+          const isAll = b.getAttribute('data-faq-filter') === 'all';
+          b.classList.toggle('active', isAll);
+          b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
         });
         if (faqSearchInput) {
           faqSearchInput.value = '';
@@ -531,6 +607,7 @@
     const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     function setFieldFeedback(input, feedbackEl, isValid, message) {
+      if (!input || !feedbackEl) return;
       input.classList.remove('is-valid-ud', 'is-invalid-ud');
       feedbackEl.classList.remove('is-valid', 'is-invalid');
       input.setAttribute('aria-invalid', isValid ? 'false' : 'true');
@@ -625,6 +702,7 @@
       closeBtn.addEventListener('click', function () {
         confirmationContainer.classList.add('d-none');
         confirmationContainer.innerHTML = '';
+        if (nameInput) nameInput.focus();
       });
 
       topRow.appendChild(headerContent);
@@ -711,6 +789,7 @@
      BOOTSTRAP INIT
      ======================================================================== */
   document.addEventListener('DOMContentLoaded', function () {
+    initLogoFallbacks();
     initCartBadge();
     initNavbarSearch();
     initStoreLocator();

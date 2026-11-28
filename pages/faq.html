@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/support.css">
 </head>
 <body>
+  <a class="ud-skip-link" href="#mainContent">Skip to main content</a>
   <!-- Top Drop Ticker -->
   <div class="ud-ticker text-center">
     <div class="container">
@@ -100,7 +101,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="py-5">
+  <main id="mainContent" class="py-5">
     <div class="container">
       <!-- Live Keyword Search Toolbar -->
       <div class="ud-card p-3 p-md-4 mb-4">
@@ -133,10 +134,10 @@
 
       <!-- Category Filter Pills -->
       <div class="d-flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter FAQ sections">
-        <button type="button" class="btn ud-btn-outline active" data-faq-filter="all">All Topics</button>
-        <button type="button" class="btn ud-btn-outline" data-faq-filter="shipping">Shipping</button>
-        <button type="button" class="btn ud-btn-outline" data-faq-filter="returns">Returns</button>
-        <button type="button" class="btn ud-btn-outline" data-faq-filter="sizing">Sizing</button>
+        <button type="button" class="btn ud-btn-outline active" data-faq-filter="all" aria-pressed="true">All Topics</button>
+        <button type="button" class="btn ud-btn-outline" data-faq-filter="shipping" aria-pressed="false">Shipping</button>
+        <button type="button" class="btn ud-btn-outline" data-faq-filter="returns" aria-pressed="false">Returns</button>
+        <button type="button" class="btn ud-btn-outline" data-faq-filter="sizing" aria-pressed="false">Sizing</button>
       </div>
 
       <!-- Empty Search State -->
@@ -155,11 +156,11 @@
             </div>
 
             <div class="ud-faq-item is-open">
-              <button type="button" class="ud-faq-trigger" aria-expanded="true" aria-controls="faq-ship-1">
+              <button type="button" id="faq-btn-ship-1" class="ud-faq-trigger" aria-expanded="true" aria-controls="faq-ship-1">
                 <span>How long does order processing and nationwide delivery take?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[-]</span>
               </button>
-              <div id="faq-ship-1" class="ud-faq-panel">
+              <div id="faq-ship-1" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ship-1">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     All standard orders placed before 3:00 PM PKT are packed and dispatched the same business day. Delivery takes <strong>1–2 business days</strong> within Islamabad, Lahore, and Karachi, and <strong>3–5 business days</strong> for all other cities nationwide. During major seasonal drops, please allow an extra 24 hours for quality control and serial numbering.
@@ -169,11 +170,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ship-2">
+              <button type="button" id="faq-btn-ship-2" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ship-2">
                 <span>What are the shipping charges and free delivery threshold?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-ship-2" class="ud-faq-panel">
+              <div id="faq-ship-2" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ship-2">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     Standard tracked courier shipping is a flat rate of <strong>PKR 250</strong> across Pakistan. Orders above <strong>PKR 10,000</strong> automatically qualify for free express shipping. Cash on Delivery (COD) and prepaid card/wallet orders carry no hidden handling fees.
@@ -183,11 +184,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ship-3">
+              <button type="button" id="faq-btn-ship-3" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ship-3">
                 <span>Can I pick up an online drop order at a physical URBANDROPS store?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-ship-3" class="ud-faq-panel">
+              <div id="faq-ship-3" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ship-3">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     Yes. Same-day In-Store Pickup is available at our Islamabad (F-7 &amp; Centaurus), Lahore (Gulberg &amp; DHA Phase 5), and Karachi (Clifton &amp; DHA Phase 6) flagships. Bring your digital order confirmation and valid photo ID within 5 days of receiving the ready-for-pickup SMS.
@@ -205,11 +206,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-1">
+              <button type="button" id="faq-btn-ret-1" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-1">
                 <span>What is your 14-day return and size exchange policy?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-ret-1" class="ud-faq-panel">
+              <div id="faq-ret-1" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ret-1">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     You may request a return or size exchange within <strong>14 days</strong> of delivery. Items must be unworn, unwashed, free of cologne or marks, and returned with all original URBANDROPS hangtags, zip-locks, and dust bags intact. Size exchanges can also be completed immediately at any flagship store.
@@ -219,11 +220,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-2">
+              <button type="button" id="faq-btn-ret-2" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-2">
                 <span>Are limited-edition capsule drops eligible for refunds?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-ret-2" class="ud-faq-panel">
+              <div id="faq-ret-2" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ret-2">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     Numbered archive drops and collaboration capsules are eligible for <strong>size exchanges or store credit</strong> only (while replacement stock lasts), unless the garment arrived defective or damaged. Standard core collection pieces qualify for full refunds back to your original payment method or bank transfer for COD orders.
@@ -233,11 +234,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-3">
+              <button type="button" id="faq-btn-ret-3" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-ret-3">
                 <span>How quickly are refunds processed after inspection?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-ret-3" class="ud-faq-panel">
+              <div id="faq-ret-3" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-ret-3">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     Once your return parcel arrives at our fulfillment hub, quality inspection takes up to <strong>48 hours</strong>. Approved refunds are issued within <strong>3–5 business days</strong> to your bank account, JazzCash/Easypaisa wallet, or original card, and you will receive an email confirmation receipt.
@@ -255,11 +256,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-1">
+              <button type="button" id="faq-btn-size-1" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-1">
                 <span>Do URBANDROPS hoodies and tees run true to size or oversized?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-size-1" class="ud-faq-panel">
+              <div id="faq-size-1" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-size-1">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     Most URBANDROPS heavyweight tees (280 GSM) and French terry hoodies (480 GSM) are cut in a <strong>boxy, dropped-shoulder streetwear silhouette</strong>. Take your usual size for the intended relaxed drape, or size down one step if you prefer a closer standard fit.
@@ -269,11 +270,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-2">
+              <button type="button" id="faq-btn-size-2" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-2">
                 <span>What are the exact chest and length measurements for tops?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-size-2" class="ud-faq-panel">
+              <div id="faq-size-2" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-size-2">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     <p class="mb-2">Reference flat-lay garment measurements (in inches, ±0.5" tolerance):</p>
@@ -321,11 +322,11 @@
             </div>
 
             <div class="ud-faq-item">
-              <button type="button" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-3">
+              <button type="button" id="faq-btn-size-3" class="ud-faq-trigger" aria-expanded="false" aria-controls="faq-size-3">
                 <span>Will heavyweight cotton pieces shrink after washing?</span>
                 <span class="ud-faq-toggle-icon" aria-hidden="true">[+]</span>
               </button>
-              <div id="faq-size-3" class="ud-faq-panel">
+              <div id="faq-size-3" class="ud-faq-panel" role="region" aria-labelledby="faq-btn-size-3">
                 <div class="ud-faq-panel-inner">
                   <div class="ud-faq-answer">
                     All URBANDROPS 100% combed cotton jerseys and fleeces are <strong>enzyme pre-shrunk</strong> during production. To preserve garment dimensions and puff-print graphics, wash inside out on a cold gentle cycle (30°C max) and hang dry flat—never tumble dry on high heat.
@@ -371,7 +372,7 @@
   <footer class="ud-footer">
     <div class="container">
       <div class="row g-4">
-        <div class="col-lg-4">
+        <div class="col-12 col-lg-4">
           <a class="ud-brand mb-3" href="../index.html">
             <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.classList.add('is-missing'); this.style.display='none';">
             <span class="ud-brand-fallback" aria-hidden="true">UD</span>
@@ -387,24 +388,33 @@
             <li><a class="ud-footer-link" href="../index.html">Home</a></li>
             <li><a class="ud-footer-link" href="shop.html">Latest Drops</a></li>
             <li><a class="ud-footer-link" href="store-locator.html">Store Locator</a></li>
+            <li><a class="ud-footer-link" href="cart.html">Shopping Cart</a></li>
           </ul>
         </div>
         <div class="col-6 col-md-4 col-lg-2">
-          <h3 class="ud-footer-heading">Customer Care</h3>
+          <h3 class="ud-footer-heading">Customer Service</h3>
           <ul class="list-unstyled mb-0">
+            <li><a class="ud-footer-link" href="faq.html">FAQ &amp; Policies</a></li>
             <li><a class="ud-footer-link" href="faq.html#shipping">Shipping Info</a></li>
             <li><a class="ud-footer-link" href="faq.html#returns">Returns &amp; Exchanges</a></li>
             <li><a class="ud-footer-link" href="faq.html#sizing">Sizing Guide</a></li>
+            <li><a class="ud-footer-link" href="contact-support.html">Contact Support</a></li>
           </ul>
         </div>
-        <div class="col-md-4 col-lg-3">
+        <div class="col-12 col-md-4 col-lg-3">
           <h3 class="ud-footer-heading">Direct Support</h3>
-          <p class="text-secondary small mb-2">Need order tracking or sizing advice?</p>
+          <p class="text-secondary small mb-2">Need order tracking or sizing advice? Reach our concierge team daily, 10 AM – 10 PM PKT.</p>
           <a href="contact-support.html" class="btn ud-btn-cta btn-sm">Open Support Ticket</a>
         </div>
       </div>
-      <div class="ud-footer-bottom d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
-        <span class="ud-mono">&copy; 2026 URBANDROPS. ALL RIGHTS RESERVED.</span>
+
+      <div class="ud-footer-disclosure">
+        <span class="ud-footer-disclosure-tag">AI Image Disclosure</span>
+        Brand visuals, campaign artwork, and product imagery displayed across URBANDROPS are AI-generated or digitally composed for academic and prototype demonstration purposes.
+      </div>
+
+      <div class="ud-footer-bottom d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 text-center text-sm-start">
+        <span class="ud-mono">URBANDROPS &copy; 2026. ALL RIGHTS RESERVED.</span>
         <span class="ud-mono">ISB // LHR // KHI</span>
       </div>
     </div>
