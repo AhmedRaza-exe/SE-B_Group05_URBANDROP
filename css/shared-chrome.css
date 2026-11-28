@@ -1,0 +1,567 @@
+/* ==========================================================================
+   URBANDROPS — Shared Header, Navbar, Footer & Light/Dark Theme Toggle
+   Loaded across index.html and all 14 pages/*.html without altering
+   page-specific :root CSS variables.
+   ========================================================================== */
+
+/* Top announcement ticker */
+.ud-ticker {
+  background-color: var(--ud-lime, #CCFF00);
+  color: #0D0D0D;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid #0D0D0D;
+}
+
+/* Sticky Header & Navbar */
+.ud-header.sticky-top {
+  z-index: 1030;
+}
+
+.ud-navbar {
+  background-color: rgba(13, 13, 13, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ud-border, rgba(255, 255, 255, 0.11));
+  padding: 0.75rem 0;
+}
+
+.ud-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.ud-brand-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24));
+  background-color: var(--ud-bg, #0D0D0D);
+}
+
+.ud-brand-name {
+  font-family: var(--ud-font-display, 'Syne', 'Space Grotesk', system-ui, sans-serif);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--ud-text, #FFFFFF);
+  line-height: 1;
+}
+
+.ud-brand-sub {
+  display: block;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.62rem;
+  color: var(--ud-lime, #CCFF00);
+  letter-spacing: 0.18em;
+  margin-top: 2px;
+}
+
+.ud-nav-link {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.65rem !important;
+  position: relative;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.ud-nav-link:hover,
+.ud-nav-link.active {
+  color: var(--ud-lime, #CCFF00) !important;
+}
+
+.ud-nav-link.active {
+  font-weight: 700;
+}
+
+.ud-nav-link.active:not(.dropdown-toggle)::after {
+  content: '';
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 0.12rem;
+  height: 2px;
+  background-color: var(--ud-orange, #FF4D00);
+}
+
+.ud-dropdown-menu {
+  background-color: var(--ud-surface, #1A1A1A) !important;
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24)) !important;
+  border-radius: 4px !important;
+  padding: 0.4rem 0 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
+}
+
+.ud-dropdown-menu .dropdown-item {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ud-dropdown-menu .dropdown-item:hover,
+.ud-dropdown-menu .dropdown-item:focus,
+.ud-dropdown-menu .dropdown-item.active {
+  background-color: var(--ud-surface-alt, #232323);
+  color: var(--ud-lime, #CCFF00);
+}
+
+/* Search Input */
+.ud-search-wrap {
+  position: relative;
+  min-width: 195px;
+}
+
+.ud-search-input {
+  background-color: var(--ud-surface, #1A1A1A) !important;
+  border: 1px solid var(--ud-border, rgba(255, 255, 255, 0.11)) !important;
+  color: var(--ud-text, #FFFFFF) !important;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.76rem;
+  padding: 0.48rem 0.85rem 0.48rem 2.15rem !important;
+  border-radius: 4px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ud-search-input::placeholder {
+  color: #9E9E9E;
+}
+
+.ud-search-input:focus {
+  border-color: var(--ud-lime, #CCFF00) !important;
+  box-shadow: 0 0 0 2px rgba(204, 255, 0, 0.15) !important;
+}
+
+.ud-search-icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ud-muted, #A3A3A3);
+  pointer-events: none;
+  display: flex;
+}
+
+.ud-search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 300px;
+  max-width: 90vw;
+  background-color: var(--ud-surface, #1A1A1A);
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24));
+  border-radius: 4px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+}
+
+.ud-search-results.show {
+  display: block;
+}
+
+.ud-search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  text-decoration: none;
+  color: var(--ud-text, #FFFFFF);
+  border-bottom: 1px solid var(--ud-border, rgba(255, 255, 255, 0.11));
+  transition: background-color 0.15s ease;
+}
+
+.ud-search-result-item:last-child {
+  border-bottom: none;
+}
+
+.ud-search-result-item:hover {
+  background-color: var(--ud-surface-alt, #232323);
+  color: var(--ud-lime, #CCFF00);
+}
+
+.ud-search-result-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+/* Light / Dark Theme Toggle Button */
+.ud-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background-color: var(--ud-surface, #1A1A1A);
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24));
+  color: var(--ud-text, #FFFFFF);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.ud-theme-toggle:hover {
+  border-color: var(--ud-lime, #CCFF00);
+  transform: translateY(-1px);
+}
+
+/* Cart Button & Badge */
+.ud-cart-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background-color: var(--ud-surface, #1A1A1A);
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24));
+  color: var(--ud-text, #FFFFFF);
+  padding: 0.46rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.ud-cart-btn:hover {
+  border-color: var(--ud-orange, #FF4D00);
+  color: var(--ud-text, #FFFFFF);
+}
+
+.ud-cart-badge {
+  background-color: var(--ud-orange, #FF4D00);
+  color: #0D0D0D;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Mobile Hamburger Menu */
+.ud-toggler {
+  border: 1px solid var(--ud-border-strong, rgba(255, 255, 255, 0.24));
+  background-color: var(--ud-surface, #1A1A1A);
+  color: var(--ud-text, #FFFFFF);
+  padding: 0.38rem 0.72rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.ud-toggler:hover {
+  border-color: var(--ud-lime, #CCFF00);
+  color: var(--ud-lime, #CCFF00);
+}
+
+.ud-hamburger-icon {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Shared Dark Footer */
+.ud-footer {
+  background-color: #090909;
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+}
+
+.ud-footer .font-mono-tech {
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  letter-spacing: 0.08em;
+}
+
+.ud-footer .text-lime {
+  color: var(--ud-lime, #CCFF00) !important;
+}
+
+.ud-footer .text-ud-muted {
+  color: #A3A3A3 !important;
+}
+
+.ud-footer .ud-tag-lime {
+  display: inline-block;
+  background-color: rgba(204, 255, 0, 0.12);
+  border: 1px solid rgba(204, 255, 0, 0.45);
+  color: #CCFF00;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.28rem 0.65rem;
+  border-radius: 3px;
+}
+
+.ud-footer-link {
+  color: #A3A3A3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+}
+
+.ud-footer-link:hover {
+  color: var(--ud-lime, #CCFF00);
+}
+
+.ud-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #1A1A1A;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 4px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.ud-social-link:hover {
+  border-color: var(--ud-lime, #CCFF00);
+  color: var(--ud-lime, #CCFF00);
+  transform: translateY(-2px);
+}
+
+.ud-ai-disclosure {
+  background-color: rgba(26, 26, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-left: 3px solid var(--ud-lime, #CCFF00);
+  border-radius: 3px;
+  padding: 0.75rem 1rem;
+  font-family: var(--ud-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: #A3A3A3;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .ud-nav-link {
+    font-size: 0.72rem;
+    padding: 0.5rem 0.44rem !important;
+  }
+  .ud-search-wrap {
+    min-width: 155px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .ud-search-wrap {
+    width: 100%;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .ud-search-results {
+    width: 100%;
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Light Mode Theme Overrides (when toggled via ☀️/🌙) */
+html[data-theme="light"] {
+  --ud-bg: #F4F4F5;
+  --ud-surface: #FFFFFF;
+  --ud-surface-alt: #E4E4E7;
+  --ud-surface-elevated: #F4F4F5;
+  --ud-card: #FFFFFF;
+  --ud-card-hover: #FAFAFA;
+  --ud-text: #111111;
+  --ud-muted: #52525B;
+  --ud-text-muted: #52525B;
+  --ud-border: rgba(0, 0, 0, 0.14);
+  --ud-border-strong: rgba(0, 0, 0, 0.28);
+  --ud-border-hover: rgba(0, 0, 0, 0.35);
+  background-color: #F4F4F5;
+  color: #111111;
+}
+
+html[data-theme="light"] body {
+  background-color: #F4F4F5;
+  color: #111111;
+}
+
+html[data-theme="light"] .ud-navbar {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="light"] .ud-brand-name {
+  color: #111111;
+}
+
+html[data-theme="light"] .ud-brand-sub {
+  color: #D9480F;
+}
+
+html[data-theme="light"] .ud-nav-link {
+  color: rgba(17, 17, 17, 0.88) !important;
+}
+
+html[data-theme="light"] .ud-nav-link:hover,
+html[data-theme="light"] .ud-nav-link.active {
+  color: #D9480F !important;
+}
+
+html[data-theme="light"] .ud-search-input,
+html[data-theme="light"] .ud-theme-toggle,
+html[data-theme="light"] .ud-cart-btn,
+html[data-theme="light"] .ud-toggler {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme="light"] .ud-search-input::placeholder {
+  color: #71717A;
+}
+
+html[data-theme="light"] .ud-search-results {
+  background-color: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+html[data-theme="light"] .ud-search-result-item {
+  color: #111111;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .ud-search-result-item:hover {
+  background-color: #F4F4F5;
+  color: #D9480F;
+}
+
+html[data-theme="light"] .ud-dropdown-menu {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+}
+
+html[data-theme="light"] .ud-dropdown-menu .dropdown-item {
+  color: #111111;
+}
+
+html[data-theme="light"] .ud-dropdown-menu .dropdown-item:hover,
+html[data-theme="light"] .ud-dropdown-menu .dropdown-item:focus,
+html[data-theme="light"] .ud-dropdown-menu .dropdown-item.active {
+  background-color: #F4F4F5;
+  color: #D9480F;
+}
+
+/* Light mode typography & surface contrast inside <main> */
+html[data-theme="light"] main .text-white,
+html[data-theme="light"] main .text-light {
+  color: #111111 !important;
+}
+
+html[data-theme="light"] main .text-white-50 {
+  color: #52525B !important;
+}
+
+/* Preserve white text over dark hero/lookbook photo overlays */
+html[data-theme="light"] main .ud-hero .text-white,
+html[data-theme="light"] main .ud-hero .ud-hero-title,
+html[data-theme="light"] main .ud-hero .btn-outline-light,
+html[data-theme="light"] main .ud-look-overlay,
+html[data-theme="light"] main .ud-look-overlay .text-white {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] main .ud-hero .text-white-50,
+html[data-theme="light"] main .ud-look-overlay .text-white-50 {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html[data-theme="light"] main .text-lime {
+  color: #3F6212 !important;
+}
+
+html[data-theme="light"] main .ud-hero .text-lime,
+html[data-theme="light"] main .ud-look-overlay .text-lime {
+  color: #CCFF00 !important;
+}
+
+html[data-theme="light"] main .ud-tag-lime {
+  background-color: rgba(63, 98, 18, 0.1);
+  border-color: rgba(63, 98, 18, 0.35);
+  color: #3F6212;
+}
+
+html[data-theme="light"] main .ud-hero .ud-tag-lime,
+html[data-theme="light"] main .ud-look-overlay .ud-tag-lime {
+  background-color: rgba(204, 255, 0, 0.14);
+  border-color: rgba(204, 255, 0, 0.45);
+  color: #CCFF00;
+}
+
+html[data-theme="light"] main .btn-ud-outline-lime {
+  color: #3F6212;
+  border-color: #3F6212;
+}
+
+html[data-theme="light"] main .ud-hero .btn-ud-outline-lime {
+  color: #CCFF00;
+  border-color: #CCFF00;
+}
+
+html[data-theme="light"] main .bg-charcoal,
+html[data-theme="light"] main .bg-obsidian,
+html[data-theme="light"] main .bg-dark {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+}
+
+html[data-theme="light"] main .ud-newsletter-box,
+html[data-theme="light"] main .ud-drop-counter-box,
+html[data-theme="light"] main .ud-promo-banner,
+html[data-theme="light"] main .ud-hero-section,
+html[data-theme="light"] main .ud-page-hero {
+  background: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html[data-theme="light"] main .ud-input,
+html[data-theme="light"] main .ud-select,
+html[data-theme="light"] main .ud-input-dark,
+html[data-theme="light"] main .form-control,
+html[data-theme="light"] main .form-select {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+html[data-theme="light"] main .ud-input::placeholder,
+html[data-theme="light"] main .ud-input-dark::placeholder,
+html[data-theme="light"] main .form-control::placeholder {
+  color: #71717A !important;
+}
