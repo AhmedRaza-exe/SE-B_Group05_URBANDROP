@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#262626"/>
+      <stop offset="70%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </radialGradient>
+    <linearGradient id="fabricDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A2A2D"/>
+      <stop offset="50%" stop-color="#161618"/>
+      <stop offset="100%" stop-color="#0D0D0E"/>
+    </linearGradient>
+    <linearGradient id="pocketGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#222225"/>
+      <stop offset="100%" stop-color="#121214"/>
+    </linearGradient>
+    <pattern id="ripstopGrid" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M 12 0 L 0 0 0 12" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.8"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+  <rect width="800" height="800" fill="url(#ripstopGrid)"/>
+
+  <!-- Subtle technical corner markers -->
+  <g stroke="rgba(204,255,0,0.28)" stroke-width="1.5" fill="none">
+    <path d="M40 70 L40 40 L70 40"/>
+    <path d="M730 40 L760 40 L760 70"/>
+    <path d="M40 730 L40 760 L70 760"/>
+    <path d="M730 760 L760 760 L760 730"/>
+  </g>
+
+  <!-- Cargo Pants Silhouette -->
+  <g filter="url(#softShadow)">
+    <!-- Waistband & Belt Loops -->
+    <path d="M275 110 L525 110 L535 162 L265 162 Z" fill="#1F1F22" stroke="#333338" stroke-width="2"/>
+    <!-- Left Leg -->
+    <path d="M265 162 L396 162 L384 360 L358 690 L226 690 L242 390 Z" fill="url(#fabricDark)" stroke="#303035" stroke-width="2"/>
+    <!-- Right Leg -->
+    <path d="M404 162 L535 162 L558 390 L574 690 L442 690 L416 360 Z" fill="url(#fabricDark)" stroke="#303035" stroke-width="2"/>
+    <!-- Center Fly Seam -->
+    <path d="M400 162 L400 325" stroke="#0B0B0C" stroke-width="3"/>
+    <path d="M396 165 L396 310" stroke="#CCFF00" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.75"/>
+
+    <!-- Tactical Fidlock Belt Buckle -->
+    <rect x="372" y="120" width="56" height="30" rx="3" fill="#0D0D0D" stroke="#44444A" stroke-width="1.5"/>
+    <rect x="385" y="128" width="30" height="14" rx="1" fill="#FF4D00"/>
+    <!-- Belt Strap -->
+    <rect x="278" y="127" width="90" height="16" fill="#141416" stroke="#2D2D32"/>
+    <rect x="432" y="127" width="90" height="16" fill="#141416" stroke="#2D2D32"/>
+
+    <!-- Side Cargo Pockets (Left & Right) -->
+    <path d="M235 330 L328 330 L322 475 L228 475 Z" fill="url(#pocketGrad)" stroke="#36363C" stroke-width="1.8"/>
+    <path d="M235 330 L328 330 L326 362 L233 362 Z" fill="#26262A" stroke="#3D3D44" stroke-width="1.5"/>
+    <path d="M472 330 L565 330 L572 475 L478 475 Z" fill="url(#pocketGrad)" stroke="#36363C" stroke-width="1.8"/>
+    <path d="M472 330 L565 330 L567 362 L474 362 Z" fill="#26262A" stroke="#3D3D44" stroke-width="1.5"/>
+
+    <!-- Volt Lime Tactical Pull Tabs & Stitch Accents -->
+    <rect x="272" y="352" width="16" height="22" rx="2" fill="#CCFF00"/>
+    <rect x="512" y="352" width="16" height="22" rx="2" fill="#CCFF00"/>
+    <path d="M238 468 L318 468" stroke="#CCFF00" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8"/>
+    <path d="M482 468 L562 468" stroke="#CCFF00" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.8"/>
+
+    <!-- Articulated Knee Pleats -->
+    <path d="M242 505 Q295 520 355 505" fill="none" stroke="#38383E" stroke-width="2.5"/>
+    <path d="M240 530 Q295 545 356 530" fill="none" stroke="#0A0A0B" stroke-width="2"/>
+    <path d="M445 505 Q505 520 558 505" fill="none" stroke="#38383E" stroke-width="2.5"/>
+    <path d="M444 530 Q505 545 560 530" fill="none" stroke="#0A0A0B" stroke-width="2"/>
+
+    <!-- Signal Orange Ankle Cinch Straps -->
+    <rect x="226" y="662" width="132" height="12" fill="#18181B" stroke="#333339"/>
+    <rect x="226" y="665" width="24" height="6" fill="#FF4D00"/>
+    <rect x="442" y="662" width="132" height="12" fill="#18181B" stroke="#333339"/>
+    <rect x="550" y="665" width="24" height="6" fill="#FF4D00"/>
+  </g>
+
+  <!-- Minimalist Spec Metadata -->
+  <text x="55" y="750" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="14" letter-spacing="3">UD-CARGO // RIPSTOP MATRIX</text>
+</svg>
