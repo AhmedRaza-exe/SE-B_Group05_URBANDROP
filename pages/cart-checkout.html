@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Review your URBANDROPS shopping cart, apply a promo code, and enter your shipping details for checkout."
+  />
+  <title>Cart &amp; Checkout | URBANDROPS</title>
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- Page-specific Stylesheet -->
+  <link rel="stylesheet" href="../css/cart-checkout.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ========== SHARED HEADER START (Swap with shared header later) ========== -->
+  <header class="site-header sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Primary navigation">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS logo"
+            class="brand-logo"
+            width="36"
+            height="36"
+            onerror="this.onerror=null;this.classList.add('is-hidden');"
+          />
+          <span class="brand-wordmark">URBANDROPS</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <a
+            href="cart-checkout.html"
+            class="cart-link position-relative"
+            aria-label="Shopping cart"
+            aria-current="page"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="cart-badge" class="cart-badge" aria-live="polite">0</span>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNavbar">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="womens-catalog.html">WOMEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mens-catalog.html">MEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="womens-catalog.html#new-arrivals">NEW DROPS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">ABOUT</a>
+            </li>
+          </ul>
+
+          <form
+            id="header-search-form"
+            class="header-search d-flex me-lg-3 mt-2 mt-lg-0"
+            role="search"
+            action="womens-catalog.html"
+            method="get"
+          >
+            <label for="header-search-input" class="visually-hidden">
+              Search URBANDROPS catalog
+            </label>
+            <input
+              id="header-search-input"
+              class="form-control search-input"
+              type="search"
+              name="q"
+              placeholder="Search drops..."
+              autocomplete="off"
+            />
+            <button class="btn search-btn" type="submit" aria-label="Search products">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== SHARED HEADER END ========== -->
+
+  <main id="main-content" class="checkout-main py-4 py-md-5">
+    <div class="container">
+      <!-- Active Cart & Checkout View -->
+      <div id="checkout-view" class="row g-4 align-items-start">
+        <!-- Left Column: Cart Items & Promo Code -->
+        <div class="col-12 col-lg-7 d-flex flex-column gap-4">
+          <section class="cart-section" aria-labelledby="your-cart-heading">
+            <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
+              <h1 id="your-cart-heading" class="section-heading">YOUR CART</h1>
+              <span id="cart-item-count-label" class="cart-count-label" aria-live="polite">
+                0 ITEMS
+              </span>
+            </div>
+
+            <!-- Cart Rows Container (Populated by JS) -->
+            <div id="cart-items-list" class="d-flex flex-column gap-3" aria-live="polite"></div>
+
+            <!-- Empty Cart State -->
+            <div id="empty-cart-state" class="empty-cart-card text-center py-5 px-3 d-none" role="status">
+              <p class="empty-cart-title mb-2">Your cart is empty</p>
+              <p class="empty-cart-copy mb-4">
+                Looks like you have not added any streetwear drops yet.
+              </p>
+              <a href="womens-catalog.html" class="btn btn-cta">
+                Continue Shopping
+              </a>
+            </div>
+          </section>
+
+          <!-- Promo Code -->
+          <section class="panel-card" aria-labelledby="promo-code-heading">
+            <h2 id="promo-code-heading" class="panel-title mb-3">PROMO CODE</h2>
+            <form id="promo-form" class="promo-form-group d-flex flex-column flex-sm-row gap-2" novalidate>
+              <label for="promo-code-input" class="visually-hidden">Promo code</label>
+              <input
+                id="promo-code-input"
+                type="text"
+                class="form-control ud-input"
+                placeholder="Enter promo code (e.g. URBAN10)"
+                autocomplete="off"
+                aria-describedby="promo-feedback"
+              />
+              <button
+                id="apply-promo-btn"
+                type="submit"
+                class="btn btn-apply-promo flex-shrink-0"
+              >
+                APPLY
+              </button>
+            </form>
+            <p
+              id="promo-feedback"
+              class="promo-feedback mt-2 mb-0 d-none"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </section>
+        </div>
+
+        <!-- Right Column: Order Summary & Revealed Shipping/Payment Step -->
+        <div class="col-12 col-lg-5 d-flex flex-column gap-4">
+          <!-- Order Summary & Proceed to Payment Gate -->
+          <section class="panel-card" aria-labelledby="order-summary-heading">
+            <h2 id="order-summary-heading" class="panel-title mb-3">ORDER SUMMARY</h2>
+            <dl class="summary-list mb-0">
+              <div class="summary-row">
+                <dt>Subtotal</dt>
+                <dd id="summary-subtotal">$0</dd>
+              </div>
+              <div class="summary-row">
+                <dt>Shipping</dt>
+                <dd id="summary-shipping" class="summary-accent">Free</dd>
+              </div>
+              <div class="summary-row">
+                <dt>Discount</dt>
+                <dd id="summary-discount">$0</dd>
+              </div>
+              <div class="summary-row summary-total-row">
+                <dt>Total</dt>
+                <dd id="summary-total">$0</dd>
+              </div>
+            </dl>
+
+            <p
+              id="proceed-cart-alert"
+              class="form-banner-error mt-3 mb-0 d-none"
+              role="alert"
+              aria-live="assertive"
+            ></p>
+
+            <button
+              id="proceed-payment-btn"
+              type="button"
+              class="btn btn-cta w-100 mt-3"
+              aria-expanded="false"
+              aria-controls="shipping-payment-section"
+            >
+              PROCEED TO PAYMENT
+            </button>
+          </section>
+
+          <!-- Step 2: Shipping & Payment Details (Revealed on Proceed to Payment) -->
+          <section
+            id="shipping-payment-section"
+            class="panel-card checkout-card d-none"
+            aria-labelledby="checkout-heading"
+            tabindex="-1"
+          >
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
+              <h2 id="checkout-heading" class="section-heading section-heading-sm mb-0">
+                SHIPPING &amp; PAYMENT
+              </h2>
+              <span class="step-pill">STEP 2 OF 2</span>
+            </div>
+
+            <form id="checkout-form" class="d-flex flex-column gap-3" novalidate>
+              <div>
+                <label for="full-name" class="form-label ud-label">Full Name</label>
+                <input
+                  id="full-name"
+                  name="fullName"
+                  type="text"
+                  class="form-control ud-input"
+                  placeholder="Maya Lin"
+                  autocomplete="name"
+                  aria-describedby="full-name-error"
+                  required
+                />
+                <p id="full-name-error" class="field-error d-none" role="alert"></p>
+              </div>
+
+              <div>
+                <label for="email" class="form-label ud-label">Email Address</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="form-control ud-input"
+                  placeholder="maya.lin@example.com"
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                  required
+                />
+                <p id="email-error" class="field-error d-none" role="alert"></p>
+              </div>
+
+              <div>
+                <label for="street-address" class="form-label ud-label">Shipping Address</label>
+                <input
+                  id="street-address"
+                  name="address"
+                  type="text"
+                  class="form-control ud-input"
+                  placeholder="412 Mercer St, Apt 4B"
+                  autocomplete="street-address"
+                  aria-describedby="street-address-error"
+                  required
+                />
+                <p id="street-address-error" class="field-error d-none" role="alert"></p>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-12 col-sm-6">
+                  <label for="city" class="form-label ud-label">City</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    class="form-control ud-input"
+                    placeholder="New York"
+                    autocomplete="address-level2"
+                    aria-describedby="city-error"
+                    required
+                  />
+                  <p id="city-error" class="field-error d-none" role="alert"></p>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label for="postal-code" class="form-label ud-label">Postal Code</label>
+                  <input
+                    id="postal-code"
+                    name="postalCode"
+                    type="text"
+                    class="form-control ud-input"
+                    placeholder="10013"
+                    autocomplete="postal-code"
+                    aria-describedby="postal-code-error"
+                    required
+                  />
+                  <p id="postal-code-error" class="field-error d-none" role="alert"></p>
+                </div>
+              </div>
+
+              <div>
+                <label for="country" class="form-label ud-label">Country</label>
+                <select
+                  id="country"
+                  name="country"
+                  class="form-select ud-select"
+                  autocomplete="country-name"
+                  aria-describedby="country-error"
+                  required
+                >
+                  <option value="" selected disabled>Select your country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="JP">Japan</option>
+                  <option value="PK">Pakistan</option>
+                </select>
+                <p id="country-error" class="field-error d-none" role="alert"></p>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <fieldset class="payment-fieldset mt-2">
+                <legend class="form-label ud-label mb-2">Payment Method</legend>
+                <div class="payment-options-grid">
+                  <label class="payment-option-card is-selected" for="payment-card">
+                    <input
+                      id="payment-card"
+                      class="payment-radio"
+                      type="radio"
+                      name="paymentMethod"
+                      value="card"
+                      checked
+                    />
+                    <span class="payment-option-content">
+                      <span class="payment-option-title">Credit / Debit Card</span>
+                      <span class="payment-option-sub">Visa, Mastercard, Amex</span>
+                    </span>
+                  </label>
+
+                  <label class="payment-option-card" for="payment-cod">
+                    <input
+                      id="payment-cod"
+                      class="payment-radio"
+                      type="radio"
+                      name="paymentMethod"
+                      value="cod"
+                    />
+                    <span class="payment-option-content">
+                      <span class="payment-option-title">Cash on Delivery</span>
+                      <span class="payment-option-sub">Pay at your doorstep</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Card Details (Visible when Card is selected) -->
+              <div id="card-details-fields" class="d-flex flex-column gap-3">
+                <div>
+                  <label for="card-number" class="form-label ud-label">Card Number</label>
+                  <input
+                    id="card-number"
+                    name="cardNumber"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="19"
+                    class="form-control ud-input"
+                    placeholder="4242 4242 4242 4242"
+                    autocomplete="cc-number"
+                    aria-describedby="card-number-error"
+                    required
+                  />
+                  <p id="card-number-error" class="field-error d-none" role="alert"></p>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label for="card-expiry" class="form-label ud-label">Expiry (MM/YY)</label>
+                    <input
+                      id="card-expiry"
+                      name="cardExpiry"
+                      type="text"
+                      inputmode="numeric"
+                      maxlength="5"
+                      class="form-control ud-input"
+                      placeholder="08/28"
+                      autocomplete="cc-exp"
+                      aria-describedby="card-expiry-error"
+                      required
+                    />
+                    <p id="card-expiry-error" class="field-error d-none" role="alert"></p>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="card-cvv" class="form-label ud-label">CVV</label>
+                    <input
+                      id="card-cvv"
+                      name="cardCvv"
+                      type="password"
+                      inputmode="numeric"
+                      maxlength="4"
+                      class="form-control ud-input"
+                      placeholder="123"
+                      autocomplete="cc-csc"
+                      aria-describedby="card-cvv-error"
+                      required
+                    />
+                    <p id="card-cvv-error" class="field-error d-none" role="alert"></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cash on Delivery Notice (Visible when COD is selected) -->
+              <div id="cod-info-box" class="cod-info-box d-none">
+                Pay with cash when your URBANDROPS parcel is delivered. Exact change is appreciated.
+              </div>
+
+              <p id="checkout-form-error" class="form-banner-error mb-0 d-none" role="alert"></p>
+
+              <button
+                id="place-order-btn"
+                type="submit"
+                class="btn btn-cta w-100 mt-2"
+              >
+                PLACE ORDER
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <!-- Order Confirmed Screen -->
+      <section
+        id="order-confirmed-section"
+        class="order-confirmed-wrapper mx-auto d-none"
+        aria-labelledby="order-confirmed-heading"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <div class="panel-card order-confirmed-card text-center p-4 p-md-5">
+          <div class="confirmed-check-circle mx-auto mb-4" aria-hidden="true">
+            <svg
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+
+          <h1 id="order-confirmed-heading" class="confirmed-heading mb-2" tabindex="-1">
+            Order Confirmed!
+          </h1>
+
+          <p class="confirmed-order-id-line mb-3">
+            Order ID:
+            <span id="confirmed-order-id" class="confirmed-order-id">#UD-0000</span>
+          </p>
+
+          <p id="confirmed-message" class="confirmed-message mb-4">
+            Thank you for your purchase! A confirmation email has been sent.
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+            <a href="womens-catalog.html" class="btn btn-apply-promo">
+              Continue Shopping
+            </a>
+            <a id="track-order-link" href="order-tracking.html" class="btn btn-cta">
+              Track Order
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Remove Item Confirmation Modal -->
+  <div
+    class="modal fade"
+    id="removeConfirmModal"
+    tabindex="-1"
+    aria-labelledby="removeConfirmModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content ud-modal-content">
+        <div class="modal-header ud-modal-header">
+          <h2 id="removeConfirmModalLabel" class="modal-title ud-modal-title">
+            REMOVE ITEM
+          </h2>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close remove confirmation modal"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mb-0 ud-modal-copy">
+            Remove <strong id="remove-modal-item-name">this item</strong> from your cart?
+          </p>
+        </div>
+
+        <div class="modal-footer ud-modal-footer">
+          <button
+            type="button"
+            class="btn btn-modal-cancel"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            id="confirm-remove-btn"
+            type="button"
+            class="btn btn-cta"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SHARED FOOTER START (Swap with shared footer later) ========== -->
+  <footer class="site-footer py-4 mt-auto">
+    <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+      <p class="footer-copy mb-0">URBANDROPS &copy; 2026</p>
+      <p class="footer-tagline mb-0">WOMEN'S STREETWEAR COLLECTION</p>
+    </div>
+  </footer>
+  <!-- ========== SHARED FOOTER END ========== -->
+
+  <!-- Bootstrap 5 JS Bundle (CDN) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Page-specific JavaScript -->
+  <script src="../js/cart-checkout.js"></script>
+</body>
+</html>

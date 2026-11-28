@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Size &amp; Fit Guide | URBANDROPS</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+        <span class="ud-logo-wrap">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS Logo"
+            class="ud-logo-img"
+          />
+        </span>
+        <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2 order-lg-3">
+        <a
+          href="product-detail.html"
+          class="btn ud-cart-btn d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+          aria-label="Shopping Cart"
+        >
+          <span>CART</span>
+          <span id="cartBadge" class="badge rounded-pill ud-cart-badge">0</span>
+        </a>
+        <button
+          class="navbar-toggler border-secondary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#udMainNav"
+          aria-controls="udMainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse order-lg-2" id="udMainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="mens-catalog.html">Men's Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="product-detail.html">Product Detail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link active" aria-current="page" href="size-guide.html">Size Guide</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="border-bottom" style="border-color: var(--ud-border) !important;">
+    <div class="container py-4 py-md-5">
+      <p class="ud-section-kicker mb-2">FIT ENGINE // PRECISION SIZING</p>
+      <h1 class="display-6 fw-bold text-uppercase mb-2">Interactive Size &amp; Fit Guide</h1>
+      <p class="text-secondary mb-0">
+        Dial in your ideal URBANDROPS cut based on your height, weight, and preferred silhouette drape.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-4 py-md-5">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <!-- Size & Fit Calculator Form -->
+        <div class="col-12 col-lg-6">
+          <div class="ud-card p-4 p-md-5">
+            <h2 class="h4 fw-bold text-uppercase mb-2">Size &amp; Fit Calculator</h2>
+            <p class="small text-secondary mb-4">
+              Enter your measurements below for an instant sizing recommendation.
+            </p>
+
+            <form id="sizeCalculatorForm" novalidate>
+              <div class="mb-3">
+                <label for="heightInput" class="form-label fw-semibold">Height (cm)</label>
+                <input
+                  type="number"
+                  class="form-control ud-input"
+                  id="heightInput"
+                  placeholder="e.g. 178"
+                  min="140"
+                  max="220"
+                  step="1"
+                  required
+                />
+                <div id="heightError" class="invalid-feedback">
+                  Please enter a valid height between 140 cm and 220 cm.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="weightInput" class="form-label fw-semibold">Weight (kg)</label>
+                <input
+                  type="number"
+                  class="form-control ud-input"
+                  id="weightInput"
+                  placeholder="e.g. 74"
+                  min="40"
+                  max="160"
+                  step="0.5"
+                  required
+                />
+                <div id="weightError" class="invalid-feedback">
+                  Please enter a valid weight between 40 kg and 160 kg.
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="fitPreference" class="form-label fw-semibold">Fit Preference</label>
+                <select class="form-select ud-select" id="fitPreference" required>
+                  <option value="" selected disabled>Choose your preferred fit...</option>
+                  <option value="Slim">Slim (Close, tailored line)</option>
+                  <option value="Regular">Regular (Standard streetwear cut)</option>
+                  <option value="Oversized">Oversized (Boxy, dropped-shoulder drape)</option>
+                </select>
+                <div id="fitError" class="invalid-feedback">
+                  Please select a fit preference (Slim, Regular, or Oversized).
+                </div>
+              </div>
+
+              <div class="d-grid gap-2 d-sm-flex">
+                <button type="submit" class="btn btn-ud-cta flex-grow-1 py-2 px-4">
+                  Calculate My Size
+                </button>
+                <button type="button" id="resetCalcBtn" class="btn btn-ud-outline py-2 px-3">
+                  Clear
+                </button>
+              </div>
+            </form>
+
+            <!-- Volt Lime Recommendation Box -->
+            <div id="recommendationBox" class="ud-volt-box p-4 mt-4 d-none" role="region" aria-live="polite">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="small fw-bold text-uppercase" style="letter-spacing: 0.1em;">URBANDROPS FIT RESULT</span>
+                <span id="fitBadgeLabel" class="badge bg-dark text-white text-uppercase">REGULAR FIT</span>
+              </div>
+              <h3 id="recommendedSizeHeading" class="h3 fw-bold text-uppercase mb-2">
+                Recommended Size: LARGE
+              </h3>
+              <p id="recommendationDetail" class="mb-3 small fw-medium"></p>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="product-detail.html" class="btn btn-dark btn-sm fw-bold text-uppercase px-3">
+                  Shop Spotlight Hoodie
+                </a>
+                <a href="mens-catalog.html" class="btn btn-outline-dark btn-sm fw-bold text-uppercase px-3">
+                  Browse Men's Catalog
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Garment Measurement Chart -->
+        <div class="col-12 col-lg-6">
+          <div class="ud-card p-4 p-md-5 mb-4">
+            <p class="ud-section-kicker mb-1">GARMENT SPECS (CM)</p>
+            <h2 class="h4 fw-bold text-uppercase mb-3">Heavyweight Hoodie &amp; Tee Chart</h2>
+            <p class="small text-secondary mb-4">
+              Measurements are taken flat across the garment. Expect a relaxed chest and dropped shoulder on all Drop 05 tops.
+            </p>
+
+            <div class="table-responsive">
+              <table class="table table-dark table-bordered align-middle mb-0" style="border-color: var(--ud-border);">
+                <thead>
+                  <tr style="color: var(--ud-accent);">
+                    <th scope="col">Size</th>
+                    <th scope="col">Chest (cm)</th>
+                    <th scope="col">Length (cm)</th>
+                    <th scope="col">Shoulder (cm)</th>
+                    <th scope="col">Height Range</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-bold">S (Small)</td>
+                    <td>114</td>
+                    <td>67</td>
+                    <td>56</td>
+                    <td class="text-secondary">160 - 172 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">M (Medium)</td>
+                    <td>120</td>
+                    <td>70</td>
+                    <td>59</td>
+                    <td class="text-secondary">170 - 178 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">L (Large)</td>
+                    <td>126</td>
+                    <td>73</td>
+                    <td>62</td>
+                    <td class="text-secondary">176 - 186 cm</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-bold">XL (X-Large)</td>
+                    <td>132</td>
+                    <td>76</td>
+                    <td>65</td>
+                    <td class="text-secondary">184 - 200+ cm</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="ud-card p-4">
+            <h3 class="h6 fw-bold text-uppercase mb-2" style="color: var(--ud-accent);">How Fit Preference Adjusts Your Cut</h3>
+            <ul class="small text-secondary mb-0 ps-3">
+              <li class="mb-2"><strong class="text-white">Slim:</strong> Steps down one size when borderline for a cleaner torso line.</li>
+              <li class="mb-2"><strong class="text-white">Regular:</strong> Matches our intended boxy streetwear proportion.</li>
+              <li><strong class="text-white">Oversized:</strong> Steps up one size for maximum sleeve stack and dropped-shoulder volume.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="ud-footer py-4 mt-auto">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="fw-bold text-white">URBAN<span class="ud-brand-accent">DROPS</span></span>
+          <span class="ms-2 small">&copy; 2026 URBANDROPS Streetwear. All rights reserved.</span>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav justify-content-center justify-content-md-end gap-3 small">
+            <li class="nav-item"><a href="mens-catalog.html">Men's Catalog</a></li>
+            <li class="nav-item"><a href="product-detail.html">Product Detail</a></li>
+            <li class="nav-item"><a href="size-guide.html">Size Guide</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (() => {
+      const form = document.getElementById('sizeCalculatorForm');
+      const heightInput = document.getElementById('heightInput');
+      const weightInput = document.getElementById('weightInput');
+      const fitPreference = document.getElementById('fitPreference');
+      const resetCalcBtn = document.getElementById('resetCalcBtn');
+      const recommendationBox = document.getElementById('recommendationBox');
+      const recommendedSizeHeading = document.getElementById('recommendedSizeHeading');
+      const recommendationDetail = document.getElementById('recommendationDetail');
+      const fitBadgeLabel = document.getElementById('fitBadgeLabel');
+
+      const SIZE_NAMES = ['SMALL', 'MEDIUM', 'LARGE', 'X-LARGE'];
+
+      function validateField(input, validatorFn) {
+        const isValid = validatorFn(input.value);
+        input.classList.toggle('is-invalid', !isValid);
+        input.classList.toggle('is-valid', isValid);
+        return isValid;
+      }
+
+      function validateForm() {
+        const heightOk = validateField(heightInput, (val) => {
+          const num = parseFloat(val);
+          return !Number.isNaN(num) && num >= 140 && num <= 220;
+        });
+
+        const weightOk = validateField(weightInput, (val) => {
+          const num = parseFloat(val);
+          return !Number.isNaN(num) && num >= 40 && num <= 160;
+        });
+
+        const fitOk = validateField(fitPreference, (val) =>
+          ['Slim', 'Regular', 'Oversized'].includes(val)
+        );
+
+        return heightOk && weightOk && fitOk;
+      }
+
+      function computeSizeIndex(heightCm, weightKg, fit) {
+        // Compute base index from height & weight composite score
+        let baseScore = 0;
+        if (heightCm < 170 && weightKg < 65) {
+          baseScore = 0; // SMALL
+        } else if (heightCm < 179 && weightKg < 78) {
+          baseScore = 1; // MEDIUM
+        } else if (heightCm < 187 && weightKg < 94) {
+          baseScore = 2; // LARGE
+        } else {
+          baseScore = 3; // X-LARGE
+        }
+
+        // Factor in high weight or tall frame independently
+        if (weightKg >= 94 || heightCm >= 188) {
+          baseScore = Math.max(baseScore, 3);
+        } else if (weightKg >= 79 || heightCm >= 180) {
+          baseScore = Math.max(baseScore, 2);
+        } else if (weightKg >= 66 || heightCm >= 171) {
+          baseScore = Math.max(baseScore, 1);
+        }
+
+        if (fit === 'Slim') {
+          baseScore -= 1;
+        } else if (fit === 'Oversized') {
+          baseScore += 1;
+        }
+
+        return Math.min(SIZE_NAMES.length - 1, Math.max(0, baseScore));
+      }
+
+      [heightInput, weightInput, fitPreference].forEach((field) => {
+        field.addEventListener('input', () => {
+          if (field.classList.contains('is-invalid') || field.classList.contains('is-valid')) {
+            validateForm();
+          }
+        });
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!validateForm()) {
+          recommendationBox.classList.add('d-none');
+          return;
+        }
+
+        const heightCm = parseFloat(heightInput.value);
+        const weightKg = parseFloat(weightInput.value);
+        const fit = fitPreference.value;
+
+        const sizeIndex = computeSizeIndex(heightCm, weightKg, fit);
+        const recommendedSize = SIZE_NAMES[sizeIndex];
+
+        fitBadgeLabel.textContent = fit.toUpperCase() + ' FIT';
+        const fitDescriptor = fit.toUpperCase() + ' STREETWEAR FIT';
+        recommendedSizeHeading.textContent = `Recommended Size: ${recommendedSize} (${fitDescriptor})`;
+        recommendationDetail.textContent =
+          'Based on ' +
+          heightCm +
+          ' cm height, ' +
+          weightKg +
+          ' kg weight, and a ' +
+          fit +
+          ' preference, ' +
+          recommendedSize +
+          ' will deliver the sharpest URBANDROPS drape.';
+
+        recommendationBox.classList.remove('d-none');
+      });
+
+      resetCalcBtn.addEventListener('click', () => {
+        form.reset();
+        [heightInput, weightInput, fitPreference].forEach((field) => {
+          field.classList.remove('is-invalid', 'is-valid');
+        });
+        recommendationBox.classList.add('d-none');
+      });
+    })();
+  </script>
+</body>
+</html>

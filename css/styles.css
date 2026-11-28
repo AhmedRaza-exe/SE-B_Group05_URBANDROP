@@ -1,0 +1,303 @@
+/* URBANDROPS Shared Streetwear Theme */
+:root {
+  --ud-bg: #0D0D0D;
+  --ud-surface: #141416;
+  --ud-card: #1A1A1A;
+  --ud-card-hover: #202024;
+  --ud-border: #2A2A2F;
+  --ud-text: #FFFFFF;
+  --ud-muted: #B0B0B8;
+  --ud-cta: #FF4D00;
+  --ud-cta-hover: #E04300;
+  --ud-accent: #FF4D00;
+  --ud-volt: #CCFF00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--ud-bg);
+  color: var(--ud-text);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.text-secondary {
+  color: var(--ud-muted) !important;
+}
+
+/* Navbar */
+.ud-navbar {
+  background-color: rgba(13, 13, 13, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ud-border);
+}
+
+.ud-logo-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--ud-border);
+  background-color: #0B0B0D;
+  flex-shrink: 0;
+}
+
+.ud-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.65);
+  display: block;
+}
+
+.ud-brand-text {
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-size: 1.1rem;
+  color: var(--ud-text);
+}
+
+.ud-brand-accent {
+  color: var(--ud-cta);
+}
+
+.ud-nav-link {
+  color: var(--ud-muted) !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.ud-nav-link:hover,
+.ud-nav-link.active {
+  color: var(--ud-text) !important;
+  position: relative;
+}
+
+.ud-nav-link.active {
+  color: var(--ud-cta) !important;
+}
+
+.ud-cart-btn {
+  background-color: var(--ud-card);
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.ud-cart-btn:hover {
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+}
+
+.ud-cart-badge {
+  background-color: var(--ud-cta);
+  color: var(--ud-text);
+  font-weight: 700;
+}
+
+/* Hero & Surfaces */
+.ud-hero-section {
+  background: radial-gradient(circle at 78% 25%, rgba(255, 77, 0, 0.14), transparent 55%),
+              linear-gradient(180deg, #111114 0%, #0D0D0D 100%);
+  border-bottom: 1px solid var(--ud-border);
+}
+
+.ud-card {
+  background-color: var(--ud-card);
+  border: 1px solid var(--ud-border);
+  border-radius: 0.85rem;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.ud-card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: var(--ud-cta);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+
+.ud-section-kicker {
+  color: var(--ud-cta);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ud-badge-accent {
+  background-color: rgba(255, 77, 0, 0.14);
+  border: 1px solid rgba(255, 77, 0, 0.45);
+  color: #FF7840;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Buttons & Controls */
+.btn-ud-cta {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, transform 0.15s ease;
+}
+
+.btn-ud-cta:hover,
+.btn-ud-cta:focus {
+  background-color: var(--ud-cta-hover);
+  border-color: var(--ud-cta-hover);
+  color: var(--ud-text);
+}
+
+.btn-ud-outline {
+  background-color: transparent;
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+.btn-ud-outline:hover,
+.btn-ud-outline.active {
+  border-color: var(--ud-cta);
+  background-color: rgba(255, 77, 0, 0.1);
+  color: var(--ud-text);
+}
+
+.ud-size-btn {
+  background-color: #121214;
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+  font-weight: 700;
+  min-width: 48px;
+  transition: all 0.15s ease;
+}
+
+.ud-size-btn:hover {
+  border-color: var(--ud-cta);
+  color: #FF7840;
+}
+
+.ud-size-btn.active {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+  color: #FFFFFF;
+}
+
+/* Form Controls */
+.ud-input,
+.ud-select {
+  background-color: #121214;
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+}
+
+.ud-input:focus,
+.ud-select:focus {
+  background-color: #121214;
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+  box-shadow: 0 0 0 0.2rem rgba(255, 77, 0, 0.2);
+}
+
+.ud-input::placeholder {
+  color: #70707A;
+}
+
+.ud-range {
+  accent-color: var(--ud-cta);
+}
+
+.form-check-input {
+  background-color: #121214;
+  border-color: var(--ud-border);
+}
+
+.form-check-input:checked {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+}
+
+/* Product Media & Thumbnails */
+.ud-product-img-wrap {
+  background-color: #121214;
+  border-bottom: 1px solid var(--ud-border);
+  overflow: hidden;
+  border-top-left-radius: 0.85rem;
+  border-top-right-radius: 0.85rem;
+  aspect-ratio: 1 / 1;
+}
+
+.ud-product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.ud-card-interactive:hover .ud-product-img-wrap img {
+  transform: scale(1.03);
+}
+
+.ud-thumb-btn {
+  background-color: #121214;
+  border: 2px solid var(--ud-border);
+  border-radius: 0.6rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.ud-thumb-btn.active,
+.ud-thumb-btn:hover {
+  border-color: var(--ud-cta);
+}
+
+/* Editorial Fit Promo Banner (Home) */
+.ud-promo-banner {
+  background: linear-gradient(135deg, #1A1A1D 0%, #121214 100%);
+  border: 1px solid rgba(255, 77, 0, 0.45);
+  border-radius: 0.85rem;
+}
+
+/* Volt Lime Recommendation Box (Size Guide Calculator Output) */
+.ud-volt-box {
+  background-color: var(--ud-volt);
+  color: #0D0D0D;
+  border-radius: 0.85rem;
+}
+
+/* Footer */
+.ud-footer {
+  background-color: #0A0A0C;
+  border-top: 1px solid var(--ud-border);
+  color: var(--ud-muted);
+}
+
+.ud-footer a {
+  color: var(--ud-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.ud-footer a:hover {
+  color: var(--ud-cta);
+}
