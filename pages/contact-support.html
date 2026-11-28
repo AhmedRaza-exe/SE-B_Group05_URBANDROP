@@ -9,100 +9,107 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/support.css">
+  <link rel="stylesheet" href="../css/shared-chrome.css">
 </head>
 <body>
   <a class="ud-skip-link" href="#mainContent">Skip to main content</a>
-  <!-- Top Drop Ticker -->
+    <!-- Top Drop Ticker -->
   <div class="ud-ticker text-center">
     <div class="container">
-      URBANDROPS CONCIERGE // AVERAGE TICKET RESPONSE UNDER 12 HOURS // MON–SUN 10 AM – 10 PM PKT
+      DROP 04 LIVE NOW // STRICTLY 100 PIECES PER SKU // ZERO RESTOCKS
     </div>
   </div>
 
-  <!-- Shared URBANDROPS Top Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top ud-navbar" aria-label="Primary Navigation">
-    <div class="container">
-      <a class="ud-brand" href="../index.html">
-        <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.classList.add('is-missing'); this.style.display='none';">
-        <span class="ud-brand-fallback" aria-hidden="true">UD</span>
-        <span class="ud-brand-text">URBANDROPS</span>
-      </a>
+  <!-- Shared Sticky Header & Navbar -->
+  <header class="ud-header sticky-top">
+    <nav class="navbar navbar-expand-lg ud-navbar" aria-label="Primary Navigation">
+      <div class="container">
+        <a class="ud-brand" href="../index.html">
+          <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.onerror=null;this.style.opacity='0.4'">
+          <div>
+            <span class="ud-brand-name">URBANDROPS</span>
+            <span class="ud-brand-sub">NOT FOR EVERYONE</span>
+          </div>
+        </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#udMainNavbar" aria-controls="udMainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="ud-navbar-toggler-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </span>
-      </button>
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <!-- Light / Dark Mode Toggle -->
+          <button type="button" class="ud-theme-toggle" id="udThemeToggle" aria-label="Switch to light mode" title="Switch to Light Mode">
+            <span class="ud-theme-icon" aria-hidden="true">☀️</span>
+          </button>
 
-      <div class="collapse navbar-collapse" id="udMainNavbar">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
-          <li class="nav-item">
-            <a class="nav-link " href="../index.html">HOME</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SHOP</a>
-            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
-              <li><a class="dropdown-item" href="../pages/mens-catalog.html">Men's Catalog</a></li>
-              <li><a class="dropdown-item" href="../pages/womens-catalog.html">Women's Catalog</a></li>
-              <li><a class="dropdown-item" href="../pages/product-detail.html">Product Detail</a></li>
-              <li><a class="dropdown-item" href="../pages/size-guide.html">Size &amp; Fit Guide</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">DROPS</a>
-            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
-              <li><a class="dropdown-item" href="../pages/limited-drops.html">Limited Drops</a></li>
-              <li><a class="dropdown-item" href="../pages/lookbook.html">Drop 04 Lookbook</a></li>
-              <li><a class="dropdown-item" href="../pages/about.html">About Us</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
-            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
-              <li><a class="dropdown-item" href="../pages/user-profile.html">Member Profile</a></li>
-              <li><a class="dropdown-item" href="../pages/wishlist.html">Saved Wishlist</a></li>
-              <li><a class="dropdown-item" href="../pages/cart-checkout.html">Cart &amp; Checkout</a></li>
-              <li><a class="dropdown-item" href="../pages/order-tracking.html">Order Tracking</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link  dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SUPPORT</a>
-            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
-              <li><a class="dropdown-item" href="../pages/store-locator.html">Store Locator</a></li>
-              <li><a class="dropdown-item" href="../pages/faq.html">FAQ &amp; Policies</a></li>
-              <li><a class="dropdown-item active" aria-current="page" href="../pages/contact-support.html">Contact Support</a></li>
-            </ul>
-          </li>
-        </ul>
-
-        <div class="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2">
-          <form id="udNavSearchForm" class="ud-search-form" role="search">
-            <input id="udNavSearchInput" class="form-control ud-search-input" type="search" placeholder="Search support topics..." aria-label="Search URBANDROPS">
-            <button class="ud-search-btn" type="submit" aria-label="Submit search">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </button>
-          </form>
-
-          <a href="cart-checkout.html" class="ud-cart-btn justify-content-center" aria-label="Shopping Cart">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <!-- Cart Icon + Dynamic Badge -->
+          <button type="button" class="ud-cart-btn" data-open-cart aria-label="Open shopping bag">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
-            <span>Cart</span>
-            <span class="ud-cart-badge" data-cart-badge>0</span>
-          </a>
+            <span class="ud-cart-badge" id="cart-badge" data-cart-badge>0</span>
+          </button>
+
+          <!-- Mobile Hamburger Menu (☰) -->
+          <button class="navbar-toggler ud-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#udNavbarCollapse" aria-controls="udNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ud-hamburger-icon" aria-hidden="true">☰</span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="udNavbarCollapse">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+            <li class="nav-item">
+              <a class="nav-link ud-nav-link" href="../index.html">HOME</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SHOP</a>
+              <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+                <li><a class="dropdown-item" href="mens-catalog.html">Men's Catalog</a></li>
+                <li><a class="dropdown-item" href="womens-catalog.html">Women's Catalog</a></li>
+                <li><a class="dropdown-item" href="product-detail.html">Product Detail</a></li>
+                <li><a class="dropdown-item" href="size-guide.html">Size &amp; Fit Guide</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">DROPS</a>
+              <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+                <li><a class="dropdown-item" href="limited-drops.html">Limited Drops</a></li>
+                <li><a class="dropdown-item" href="lookbook.html">Drop 04 Lookbook</a></li>
+                <li><a class="dropdown-item" href="about.html">About Us</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
+              <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+                <li><a class="dropdown-item" href="user-profile.html">Member Profile</a></li>
+                <li><a class="dropdown-item" href="wishlist.html">Saved Wishlist</a></li>
+                <li><a class="dropdown-item" href="cart-checkout.html">Cart &amp; Checkout</a></li>
+                <li><a class="dropdown-item" href="order-tracking.html">Order Tracking</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SUPPORT</a>
+              <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+                <li><a class="dropdown-item" href="store-locator.html">Store Locator</a></li>
+                <li><a class="dropdown-item" href="faq.html">FAQ &amp; Policies</a></li>
+                <li><a class="dropdown-item" href="contact-support.html">Contact Support</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Search Input -->
+          <form class="ud-search-wrap me-lg-3" id="navbarSearchForm" role="search">
+            <span class="ud-search-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input class="form-control ud-search-input" type="search" id="navbarSearchInput" placeholder="Search drops..." aria-label="Search drops" autocomplete="off">
+            <div class="ud-search-results" id="navbarSearchResults"></div>
+          </form>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <!-- Hero Header -->
   <header class="ud-page-hero">
@@ -264,59 +271,74 @@
     </div>
   </main>
 
-  <!-- Shared URBANDROPS Footer -->
-  <footer class="ud-footer">
+    <!-- Shared Dark Footer -->
+  <footer class="ud-footer" id="footer-support">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-12 col-lg-4">
+      <div class="row g-4 pb-4 border-bottom border-secondary border-opacity-25">
+        <div class="col-lg-4">
           <a class="ud-brand mb-3" href="../index.html">
-            <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.classList.add('is-missing'); this.style.display='none';">
-            <span class="ud-brand-fallback" aria-hidden="true">UD</span>
-            <span class="ud-brand-text">URBANDROPS</span>
+            <img src="../images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.onerror=null;this.style.opacity='0.4'">
+            <div>
+              <span class="ud-brand-name">URBANDROPS</span>
+              <span class="ud-brand-sub">NOT FOR EVERYONE</span>
+            </div>
           </a>
-          <p class="text-secondary small mb-0">
-            Heavyweight silhouettes, limited-batch technical outerwear, and urban utility gear engineered for street culture.
+          <p class="text-ud-muted small mt-2" style="max-width: 320px;">
+            Independent dark streetwear house crafting heavyweight, limited-run silhouettes. Numbered 001 to 100.
           </p>
         </div>
-        <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
-          <h3 class="ud-footer-heading">Navigation</h3>
-          <ul class="list-unstyled mb-0">
-            <li><a class="ud-footer-link" href="../index.html">Home</a></li>
-            <li><a class="ud-footer-link" href="limited-drops.html">Latest Drops</a></li>
-            <li><a class="ud-footer-link" href="store-locator.html">Store Locator</a></li>
-            <li><a class="ud-footer-link" href="cart-checkout.html">Shopping Cart</a></li>
+
+        <div class="col-6 col-lg-2">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">NAVIGATION</h3>
+          <ul class="list-unstyled d-grid gap-2 mb-0">
+            <li><a href="../index.html" class="ud-footer-link">HOME</a></li>
+            <li><a href="../index.html#trending-section" class="ud-footer-link">SHOP</a></li>
+            <li><a href="about.html" class="ud-footer-link">ABOUT US</a></li>
+            <li><a href="lookbook.html" class="ud-footer-link">LOOKBOOK</a></li>
           </ul>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <h3 class="ud-footer-heading">Customer Service</h3>
-          <ul class="list-unstyled mb-0">
-            <li><a class="ud-footer-link" href="faq.html">FAQ &amp; Policies</a></li>
-            <li><a class="ud-footer-link" href="faq.html#shipping">Shipping Info</a></li>
-            <li><a class="ud-footer-link" href="faq.html#returns">Returns &amp; Exchanges</a></li>
-            <li><a class="ud-footer-link" href="faq.html#sizing">Sizing Guide</a></li>
-            <li><a class="ud-footer-link" href="contact-support.html">Contact Support</a></li>
+
+        <div class="col-6 col-lg-3">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">FLAGSHIP STORES</h3>
+          <ul class="list-unstyled d-grid gap-2 mb-0 small text-ud-muted">
+            <li><strong class="text-white">TOKYO:</strong> Shibuya-ku, Jinnan 1-14</li>
+            <li><strong class="text-white">LONDON:</strong> Brewer St, Soho W1F</li>
+            <li><strong class="text-white">BERLIN:</strong> Torstraße 112, Mitte</li>
           </ul>
         </div>
-        <div class="col-12 col-md-4 col-lg-3">
-          <h3 class="ud-footer-heading">Direct Support</h3>
-          <p class="text-secondary small mb-2">Need order tracking or sizing advice? Reach our concierge team daily, 10 AM – 10 PM PKT.</p>
-          <a href="contact-support.html" class="btn ud-btn-cta btn-sm">Open Support Ticket</a>
+
+        <div class="col-lg-3">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">SUPPORT &amp; DISPATCH</h3>
+          <p class="text-ud-muted small mb-2">Orders &amp; sizing inquiries:<br><span class="text-white font-mono-tech">support@urbandrops.io</span></p>
+          <span class="ud-tag-lime">MON–SAT // 11:00–20:00 UTC</span>
         </div>
       </div>
 
-      <div class="ud-footer-disclosure">
-        <span class="ud-footer-disclosure-tag">AI Image Disclosure</span>
-        Brand visuals, campaign artwork, and product imagery displayed across URBANDROPS are AI-generated or digitally composed for academic and prototype demonstration purposes.
+      <!-- Footer Social Links & AI Disclosure -->
+      <div class="d-flex flex-wrap gap-3 mb-3 mt-4">
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on Instagram">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on X / Twitter">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.733-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25z"/></svg>
+        </a>
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on TikTok">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.03a8.16 8.16 0 0 0 4.77 1.52V7.1a4.85 4.85 0 0 1-1-.41z"/></svg>
+        </a>
+      </div>
+      <div class="ud-ai-disclosure mb-4">
+        <strong>AI IMAGE DISCLOSURE:</strong> Some editorial and lookbook images on this site may be AI-assisted or AI-generated for creative direction purposes. All garment specifications, materials, and product details are real.
       </div>
 
-      <div class="ud-footer-bottom d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 text-center text-sm-start">
-        <span class="ud-mono">URBANDROPS &copy; 2026. ALL RIGHTS RESERVED.</span>
-        <span class="ud-mono">ISB // LHR // KHI</span>
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 gap-2">
+        <p class="font-mono-tech small text-ud-muted mb-0">URBANDROPS © 2026 — ALL RIGHTS RESERVED.</p>
+        <p class="font-mono-tech small text-ud-muted mb-0">OBSIDIAN • ORANGE • VOLT LIME</p>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/support.js"></script>
+  <script src="../js/shared-chrome.js"></script>
 </body>
 </html>
