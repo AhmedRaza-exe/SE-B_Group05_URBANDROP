@@ -42,12 +42,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Visible Focus States */
+/* Visible Focus States — WCAG 2.1 §2.4.11 (Focus Appearance) */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--ud-accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .skip-link {
@@ -525,8 +529,19 @@ input:focus-visible {
   margin-bottom: 0;
 }
 
-/* Stack steps vertically on small screens */
+/* ---------- Responsive overflow guard ---------- */
+body,
+.tracking-main {
+  overflow-x: hidden;
+}
+
+/* Tablet (768px) */
 @media (max-width: 767.98px) {
+  .header-search {
+    min-width: 0;
+    width: 100%;
+  }
+
   .panel-card {
     padding: 1.1rem;
   }
@@ -571,7 +586,47 @@ input:focus-visible {
   }
 }
 
-/* ---------- CSS-Only Map Placeholder Card ---------- */
+/* Mobile (≤575px) — 375px target */
+@media (max-width: 575.98px) {
+  /* Section heading won't overflow */
+  .section-heading {
+    font-size: 1.45rem;
+    word-break: break-word;
+  }
+
+  /* Map card and tracking content stack cleanly */
+  .map-card {
+    min-height: auto;
+  }
+
+  .css-map-canvas {
+    min-height: 180px;
+  }
+
+  /* ETA badge wraps on narrow screens */
+  .eta-badge {
+    font-size: 0.65rem;
+    white-space: normal;
+    text-align: right;
+  }
+
+  /* Tracking result header wraps cleanly */
+  .result-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tracking-progress-fill,
+  .tracking-step::after,
+  .step-chevron {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
 .live-pill {
   font-size: 0.68rem;
   font-weight: 900;
@@ -714,10 +769,3 @@ input:focus-visible {
   color: var(--ud-text-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tracking-progress-fill,
-  .tracking-step::after,
-  .step-chevron {
-    transition: none;
-  }
-}

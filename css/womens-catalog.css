@@ -40,13 +40,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Visible Focus States */
+/* Visible Focus States — WCAG 2.1 §2.4.11 (Focus Appearance) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--ud-accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .skip-link {
@@ -589,6 +592,25 @@ select:focus-visible {
   color: var(--ud-text-muted);
 }
 
+/* ---------- Responsive overflow guard ---------- */
+body,
+.catalog-main {
+  overflow-x: hidden;
+}
+
+/* Tablet (768px) */
+@media (max-width: 767.98px) {
+  .header-search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .category-bar {
+    gap: 0.75rem;
+  }
+}
+
+/* Mobile (≤575px) — 375px target */
 @media (max-width: 575.98px) {
   .category-tab {
     padding: 0.45rem 0.75rem;
@@ -615,5 +637,32 @@ select:focus-visible {
   .btn-add-cart {
     font-size: 0.74rem;
     padding: 0.55rem 0.5rem;
+  }
+
+  /* Ensure product grid cards don't overflow on 375px */
+  .product-card {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Hero text responsive */
+  .hero-title {
+    font-size: 1.35rem;
+  }
+
+  /* Section heading won't overflow */
+  .section-heading {
+    font-size: 1.5rem;
+    word-break: break-word;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .product-card {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

@@ -326,6 +326,10 @@
     toggleBtn.setAttribute("data-bs-target", `#${collapseId}`);
     toggleBtn.setAttribute("aria-expanded", isCurrent ? "true" : "false");
     toggleBtn.setAttribute("aria-controls", collapseId);
+    toggleBtn.setAttribute(
+      "aria-label",
+      `${step.label} — ${isCompleted ? "Completed" : isCurrent ? "Current step" : "Pending"}. Toggle details`
+    );
     if (isCurrent) {
       toggleBtn.setAttribute("aria-current", "step");
     }
@@ -369,6 +373,8 @@
 
     const detailCard = document.createElement("div");
     detailCard.className = "step-detail-card";
+    detailCard.setAttribute("role", "region");
+    detailCard.setAttribute("aria-label", `${step.label} details`);
 
     const detailMsg = document.createElement("p");
     detailMsg.className = "step-detail-msg";
