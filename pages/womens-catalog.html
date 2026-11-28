@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Shop URBANDROPS Women's Streetwear Catalog — new arrivals across tops, bottoms, outerwear, and accessories."
+  />
+  <title>Women's Catalog | URBANDROPS</title>
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- Page-specific Stylesheet -->
+  <link rel="stylesheet" href="../css/womens-catalog.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ========== SHARED HEADER START (Swap with shared header later) ========== -->
+  <header class="site-header sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Primary navigation">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS logo"
+            class="brand-logo"
+            width="36"
+            height="36"
+            onerror="this.onerror=null;this.classList.add('is-hidden');"
+          />
+          <span class="brand-wordmark">URBANDROPS</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+          <a
+            href="cart-checkout.html"
+            class="cart-link position-relative"
+            aria-label="Shopping cart"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span id="cart-badge" class="cart-badge" aria-live="polite">0</span>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNavbar">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="womens-catalog.html" aria-current="page">WOMEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="mens-catalog.html">MEN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#new-arrivals">NEW DROPS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">ABOUT</a>
+            </li>
+          </ul>
+
+          <form
+            id="catalog-search-form"
+            class="header-search d-flex me-lg-3 mt-2 mt-lg-0"
+            role="search"
+          >
+            <label for="catalog-search-input" class="visually-hidden">
+              Search women's streetwear by name
+            </label>
+            <input
+              id="catalog-search-input"
+              class="form-control search-input"
+              type="search"
+              placeholder="Search drops..."
+              autocomplete="off"
+            />
+            <button class="btn search-btn" type="submit" aria-label="Search products">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== SHARED HEADER END ========== -->
+
+  <main id="main-content" class="catalog-main">
+    <!-- Mobile Hero Banner -->
+    <section class="mobile-hero d-md-none" aria-label="Women's Streetwear Drop Highlight">
+      <div class="container">
+        <div class="mobile-hero-card">
+          <span class="hero-kicker">DROP 04 // WOMEN</span>
+          <p class="hero-title">BUILT FOR THE STREETS</p>
+          <p class="hero-subtitle">
+            Heavyweight hoodies, utility cargos, and cropped outerwear engineered for everyday rotation.
+          </p>
+          <a href="#new-arrivals" class="btn btn-cta hero-cta">SHOP NOW</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="new-arrivals" class="catalog-section py-4 py-md-5" aria-labelledby="new-arrivals-heading">
+      <div class="container">
+        <div class="section-header text-center text-md-start mb-4">
+          <h1 id="new-arrivals-heading" class="section-heading">NEW ARRIVALS</h1>
+        </div>
+
+        <!-- Category Tabs, Sort & Meta Controls -->
+        <div class="category-bar d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center justify-content-between gap-3 mb-4">
+          <div
+            id="category-tabs-group"
+            class="category-tabs d-flex flex-wrap gap-2"
+            role="group"
+            aria-label="Filter products by category"
+          >
+            <button
+              type="button"
+              class="category-tab"
+              data-category="TOPS"
+              aria-pressed="false"
+            >
+              TOPS
+            </button>
+            <button
+              type="button"
+              class="category-tab"
+              data-category="BOTTOMS"
+              aria-pressed="false"
+            >
+              BOTTOMS
+            </button>
+            <button
+              type="button"
+              class="category-tab"
+              data-category="OUTERWEAR"
+              aria-pressed="false"
+            >
+              OUTERWEAR
+            </button>
+            <button
+              type="button"
+              class="category-tab"
+              data-category="ACCESSORIES"
+              aria-pressed="false"
+            >
+              ACCESSORIES
+            </button>
+          </div>
+
+          <div class="catalog-controls d-flex flex-wrap align-items-center justify-content-between justify-content-lg-end gap-2 gap-sm-3">
+            <div class="sort-wrapper">
+              <label for="sort-select" class="visually-hidden">Sort products by price</label>
+              <select id="sort-select" class="form-select sort-select" aria-label="Sort products by price">
+                <option value="default">Sort: Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+
+            <div class="catalog-meta d-flex align-items-center gap-2">
+              <span id="product-count" class="product-count" aria-live="polite">12 ITEMS</span>
+              <button
+                id="reset-filters-btn"
+                type="button"
+                class="reset-filters-btn d-none"
+                aria-label="Clear all active category and sort filters"
+              >
+                Clear filters
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Product Grid (3 columns desktop, 2 columns mobile) -->
+        <div
+          id="product-grid"
+          class="row row-cols-2 row-cols-md-3 g-3 g-md-4"
+          aria-live="polite"
+        ></div>
+
+        <!-- Empty Search/Filter State -->
+        <div id="empty-state" class="empty-state text-center py-5 d-none" role="status">
+          <p class="empty-state-title mb-2">No products found</p>
+          <p class="empty-state-copy mb-3">
+            No items match your current filter or search query.
+          </p>
+          <button id="empty-reset-btn" type="button" class="btn btn-cta">
+            Clear filters
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Quick View Modal -->
+  <div
+    class="modal fade"
+    id="quickViewModal"
+    tabindex="-1"
+    aria-labelledby="quickViewModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
+      <div class="modal-content quick-view-modal-content">
+        <div class="modal-header quick-view-modal-header">
+          <span class="modal-kicker">QUICK VIEW</span>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close quick view modal"
+          ></button>
+        </div>
+
+        <div class="modal-body p-3 p-md-4">
+          <div class="row g-4 align-items-center">
+            <div class="col-12 col-md-6">
+              <div id="modal-img-wrapper" class="product-img-wrapper modal-img-wrapper">
+                <img
+                  id="modal-product-img"
+                  src=""
+                  alt=""
+                  class="product-img"
+                  onerror="this.onerror=null;var w=this.closest('.product-img-wrapper');if(w)w.classList.add('is-fallback');"
+                />
+                <div class="img-fallback" aria-hidden="true">
+                  <span class="fallback-brand">URBANDROPS</span>
+                  <span id="modal-fallback-category" class="fallback-category"></span>
+                  <span id="modal-fallback-title" class="fallback-title"></span>
+                </div>
+                <span id="modal-category-tag" class="product-category-tag"></span>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 d-flex flex-column gap-3">
+              <div>
+                <p id="modal-product-category" class="modal-category-label mb-1"></p>
+                <h2 id="quickViewModalLabel" class="modal-product-title mb-2"></h2>
+                <p id="modal-product-price" class="modal-product-price mb-0"></p>
+              </div>
+
+              <div class="size-selector-group">
+                <label for="modal-size-select" class="form-label size-label">
+                  SELECT SIZE
+                </label>
+                <select id="modal-size-select" class="form-select size-select">
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M" selected>M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+              </div>
+
+              <button
+                id="modal-add-cart-btn"
+                type="button"
+                class="btn btn-cta w-100 mt-2"
+              >
+                ADD TO CART
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div
+      id="cart-toast"
+      class="toast ud-toast align-items-center"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div class="d-flex align-items-center justify-content-between">
+        <div id="cart-toast-body" class="toast-body ud-toast-body">
+          Added to cart
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          data-bs-dismiss="toast"
+          aria-label="Close notification"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SHARED FOOTER START (Swap with shared footer later) ========== -->
+  <footer class="site-footer py-4 mt-auto">
+    <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+      <p class="footer-copy mb-0">URBANDROPS &copy; 2026</p>
+      <p class="footer-tagline mb-0">WOMEN'S STREETWEAR COLLECTION</p>
+    </div>
+  </footer>
+  <!-- ========== SHARED FOOTER END ========== -->
+
+  <!-- Bootstrap 5 JS Bundle (CDN) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Page-specific JavaScript -->
+  <script src="../js/womens-catalog.js"></script>
+</body>
+</html>
