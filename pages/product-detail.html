@@ -10,7 +10,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
   <a href="#mainProductImage" class="ud-skip-link">Skip to product details</a>
@@ -31,12 +31,12 @@
 
       <div class="d-flex align-items-center gap-2 order-lg-3">
         <a
-          href="product-detail.html"
+          href="cart-checkout.html"
           class="btn ud-cart-btn d-flex align-items-center gap-2 px-3 py-2 rounded-3"
           aria-label="Shopping Cart"
         >
           <span>CART</span>
-          <span id="cartBadge" class="badge rounded-pill ud-cart-badge">0</span>
+          <span id="cartBadge" class="badge rounded-pill ud-cart-badge" data-cart-badge>0</span>
         </a>
         <button
           class="navbar-toggler border-secondary"
@@ -52,18 +52,43 @@
       </div>
 
       <div class="collapse navbar-collapse order-lg-2" id="udMainNav">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2 mt-3 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="../index.html">Home</a>
+            <a class="nav-link ud-nav-link" href="../index.html">HOME</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="mens-catalog.html">Men's Catalog</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link ud-nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SHOP</a>
+            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+              <li><a class="dropdown-item" href="../pages/mens-catalog.html">Men's Catalog</a></li>
+              <li><a class="dropdown-item" href="../pages/womens-catalog.html">Women's Catalog</a></li>
+              <li><a class="dropdown-item active" aria-current="page" href="../pages/product-detail.html">Product Detail</a></li>
+              <li><a class="dropdown-item" href="../pages/size-guide.html">Size &amp; Fit Guide</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link ud-nav-link active" aria-current="page" href="product-detail.html">Product Detail</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">DROPS</a>
+            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+              <li><a class="dropdown-item" href="../pages/limited-drops.html">Limited Drops</a></li>
+              <li><a class="dropdown-item" href="../pages/lookbook.html">Drop 04 Lookbook</a></li>
+              <li><a class="dropdown-item" href="../pages/about.html">About Us</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="size-guide.html">Size Guide</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
+            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+              <li><a class="dropdown-item" href="../pages/user-profile.html">Member Profile</a></li>
+              <li><a class="dropdown-item" href="../pages/wishlist.html">Saved Wishlist</a></li>
+              <li><a class="dropdown-item" href="../pages/cart-checkout.html">Cart &amp; Checkout</a></li>
+              <li><a class="dropdown-item" href="../pages/order-tracking.html">Order Tracking</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link ud-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SUPPORT</a>
+            <ul class="dropdown-menu dropdown-menu-dark ud-dropdown-menu">
+              <li><a class="dropdown-item" href="../pages/store-locator.html">Store Locator</a></li>
+              <li><a class="dropdown-item" href="../pages/faq.html">FAQ &amp; Policies</a></li>
+              <li><a class="dropdown-item" href="../pages/contact-support.html">Contact Support</a></li>
+            </ul>
           </li>
         </ul>
       </div>

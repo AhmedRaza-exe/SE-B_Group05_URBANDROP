@@ -58,7 +58,7 @@
   function initCartBadge() {
     renderCartBadge();
     window.addEventListener('storage', function (event) {
-      if (event.key === 'cartCount') {
+      if (event.key === 'cartCount' || event.key === 'cartItems' || event.key === 'cart') {
         renderCartBadge();
       }
     });

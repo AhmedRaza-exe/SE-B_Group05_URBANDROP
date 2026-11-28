@@ -147,7 +147,10 @@
 
   function persistCart() {
     const count = computeCartCount(state.cart);
-    writeStorage(STORAGE_KEYS.CART, JSON.stringify(state.cart));
+    const cartJson = JSON.stringify(state.cart);
+    // Write to both keys so main.js cart drawer and drops-member.js stay in sync
+    writeStorage(STORAGE_KEYS.CART, cartJson);
+    writeStorage('cartItems', cartJson);
     writeStorage(STORAGE_KEYS.CART_COUNT, String(count));
     updateHeaderAndCounts(count);
   }
@@ -164,9 +167,14 @@
   }
 
   function loadOrSeedCart() {
-    const rawCart = readStorage(STORAGE_KEYS.CART);
+    // Check 'cart' first (native key), then fall back to 'cartItems' (main.js key)
+    let rawCart = readStorage(STORAGE_KEYS.CART);
+    if (rawCart === null) {
+      rawCart = readStorage('cartItems');
+    }
 
     if (rawCart === null) {
+      // No cart from any source — seed with demo items
       const seeded = DEFAULT_SEED_CART.map(function (item) {
         return Object.assign({}, item);
       });
@@ -178,7 +186,8 @@
     try {
       const parsed = JSON.parse(rawCart);
       if (Array.isArray(parsed)) {
-        return parsed.map(function (item) {
+        // If it came from main.js (cartItems), items may have unitCount/size — normalise gracefully
+        const normalised = parsed.map(function (item) {
           const parsedQty = Number.parseInt(item && item.qty, 10);
           const safeQty =
             !Number.isNaN(parsedQty) &&
@@ -194,6 +203,10 @@
             image: item.image || ""
           };
         });
+        // Ensure canonical cart key is populated
+        writeStorage(STORAGE_KEYS.CART, JSON.stringify(normalised));
+        writeStorage(STORAGE_KEYS.CART_COUNT, String(computeCartCount(normalised)));
+        return normalised;
       }
     } catch (error) {
       // Fall through to empty array if stored JSON is malformed
@@ -903,6 +916,7 @@
     state.cart = [];
     state.appliedPromo = null;
     writeStorage(STORAGE_KEYS.CART, JSON.stringify([]));
+    writeStorage('cartItems', JSON.stringify([]));
     writeStorage(STORAGE_KEYS.CART_COUNT, "0");
     removeStorage(STORAGE_KEYS.APPLIED_PROMO);
 

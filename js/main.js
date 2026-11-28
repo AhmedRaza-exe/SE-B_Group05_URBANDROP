@@ -28,10 +28,13 @@ const URBANDROPS = (() => {
   }
 
   function renderCartBadge() {
-    const badge = document.getElementById('cartBadge');
-    if (badge) {
-      badge.textContent = String(getCartCount());
-    }
+    // Support both id="cartBadge" and id="cart-badge" / data-cart-badge
+    const count = String(getCartCount());
+    const byId = document.getElementById('cartBadge') || document.getElementById('cart-badge');
+    if (byId) byId.textContent = count;
+    document.querySelectorAll('[data-cart-badge]').forEach(function (b) {
+      b.textContent = count;
+    });
   }
 
   /**
@@ -193,7 +196,8 @@ const URBANDROPS = (() => {
 
   function getCartItems() {
     try {
-      const raw = localStorage.getItem('cartItems');
+      // Check 'cartItems' (main.js key) first, fall back to 'cart' (cart-checkout.js / drops-member.js key)
+      const raw = localStorage.getItem('cartItems') || localStorage.getItem('cart');
       const parsed = raw ? JSON.parse(raw) : [];
       return Array.isArray(parsed) ? parsed : [];
     } catch {
@@ -205,7 +209,9 @@ const URBANDROPS = (() => {
     const safeCount = Math.max(0, Number(count) || 0);
     localStorage.setItem('cartCount', String(safeCount));
     if (items !== undefined) {
+      // Write to both keys so cart-checkout.js and drops-member.js stay in sync
       localStorage.setItem('cartItems', JSON.stringify(items));
+      localStorage.setItem('cart', JSON.stringify(items));
     }
     updateCartBadge(true);
     renderCartDrawer();
@@ -339,7 +345,9 @@ const URBANDROPS = (() => {
         showToast('Your drop bag is currently empty.');
         return;
       }
-      showToast(`Reserved ${count} limited-drop item(s) for 10:00 mins.`);
+      // Navigate to cart-checkout page (relative path works from any depth)
+      const isPagesDir = window.location.pathname.replace(/\\/g, '/').includes('/pages/');
+      window.location.href = isPagesDir ? 'cart-checkout.html' : 'pages/cart-checkout.html';
     });
   }
 
@@ -865,7 +873,7 @@ const URBANDROPS = (() => {
 
     // Sync across browser tabs
     window.addEventListener('storage', (e) => {
-      if (e.key === 'cartCount' || e.key === 'cartItems') {
+      if (e.key === 'cartCount' || e.key === 'cartItems' || e.key === 'cart') {
         updateCartBadge(false);
         renderCartDrawer();
       }

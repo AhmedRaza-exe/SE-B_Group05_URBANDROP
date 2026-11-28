@@ -198,6 +198,7 @@
     const nextCount = prevCount > prevCartQty ? prevCount + 1 : updatedCartQty;
 
     writeStorage(STORAGE_KEYS.CART, JSON.stringify(cart));
+    writeStorage('cartItems', JSON.stringify(cart));
     writeStorage(STORAGE_KEYS.CART_COUNT, String(nextCount));
     renderCartBadge(true);
     return nextCount;
