@@ -12,11 +12,17 @@
   --ud-bg: #0D0D0D;
   --ud-surface: #1A1A1A;
   --ud-surface-alt: #232323;
+  --ud-card: #1A1A1A;
+  --ud-card-hover: #202024;
   --ud-text: #FFFFFF;
   --ud-muted: #A3A3A3;
   --ud-orange: #FF4D00;
   --ud-orange-hover: #FF6826;
+  --ud-cta: #FF4D00;
+  --ud-cta-hover: #E04300;
+  --ud-accent: #FF4D00;
   --ud-lime: #CCFF00;
+  --ud-volt: #CCFF00;
   --ud-border: rgba(255, 255, 255, 0.11);
   --ud-border-strong: rgba(255, 255, 255, 0.24);
   --ud-font-display: 'Syne', 'Space Grotesk', system-ui, sans-serif;
@@ -203,7 +209,7 @@ textarea:focus-visible,
   font-weight: 700;
 }
 
-.ud-nav-link.active::after {
+.ud-nav-link.active:not(.dropdown-toggle)::after {
   content: '';
   position: absolute;
   left: 0.65rem;
@@ -218,7 +224,7 @@ textarea:focus-visible,
     font-size: 0.72rem;
     padding: 0.5rem 0.44rem !important;
   }
-  .ud-nav-link.active::after {
+  .ud-nav-link.active:not(.dropdown-toggle)::after {
     left: 0.44rem;
     right: 0.44rem;
   }
@@ -1017,5 +1023,219 @@ textarea:focus-visible,
   .ud-toast {
     max-width: 100%;
     width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Consolidated Catalog, Product Detail, Size Guide & Dropdown Styles
+   (Merged from css/styles.css into css/style.css)
+   ========================================================================== */
+
+/* Shared Header Dropdown Menu */
+.ud-dropdown-menu {
+  background-color: var(--ud-surface) !important;
+  border: 1px solid var(--ud-border-strong) !important;
+  border-radius: 4px !important;
+  padding: 0.4rem 0 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
+}
+
+.ud-dropdown-menu .dropdown-item {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--ud-font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ud-dropdown-menu .dropdown-item:hover,
+.ud-dropdown-menu .dropdown-item:focus {
+  background-color: var(--ud-surface-alt);
+  color: var(--ud-lime);
+}
+
+.ud-dropdown-menu .dropdown-item.active,
+.ud-dropdown-menu .dropdown-item:active {
+  background-color: rgba(255, 77, 0, 0.16);
+  color: var(--ud-orange);
+}
+
+/* Brand Logo Variants */
+.ud-logo-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--ud-border);
+  background-color: #0B0B0D;
+  flex-shrink: 0;
+}
+
+.ud-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.65);
+  display: block;
+}
+
+.ud-brand-text {
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-size: 1.1rem;
+  color: var(--ud-text);
+}
+
+.ud-brand-accent {
+  color: var(--ud-cta);
+}
+
+.ud-hero-section {
+  background: radial-gradient(circle at 78% 25%, rgba(255, 77, 0, 0.14), transparent 55%),
+              linear-gradient(180deg, #111114 0%, #0D0D0D 100%);
+  border-bottom: 1px solid var(--ud-border);
+}
+
+.ud-card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: var(--ud-cta);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+
+.ud-section-kicker {
+  color: var(--ud-cta);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.ud-badge-accent {
+  background-color: rgba(255, 77, 0, 0.14);
+  border: 1px solid rgba(255, 77, 0, 0.45);
+  color: #FF7840;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.btn-ud-cta {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.18s ease, transform 0.15s ease;
+}
+
+.btn-ud-cta:hover,
+.btn-ud-cta:focus {
+  background-color: var(--ud-cta-hover);
+  border-color: var(--ud-cta-hover);
+  color: var(--ud-text);
+}
+
+.btn-ud-outline {
+  background-color: transparent;
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+.btn-ud-outline:hover,
+.btn-ud-outline.active {
+  border-color: var(--ud-cta);
+  background-color: rgba(255, 77, 0, 0.1);
+  color: var(--ud-text);
+}
+
+.ud-input,
+.ud-select {
+  background-color: #121214;
+  border: 1px solid var(--ud-border);
+  color: var(--ud-text);
+}
+
+.ud-input:focus,
+.ud-select:focus {
+  background-color: #121214;
+  border-color: var(--ud-cta);
+  color: var(--ud-text);
+  box-shadow: 0 0 0 0.2rem rgba(255, 77, 0, 0.2);
+}
+
+.ud-input::placeholder {
+  color: #70707A;
+}
+
+.ud-range {
+  accent-color: var(--ud-cta);
+}
+
+.form-check-input {
+  background-color: #121214;
+  border-color: var(--ud-border);
+}
+
+.form-check-input:checked {
+  background-color: var(--ud-cta);
+  border-color: var(--ud-cta);
+}
+
+.ud-product-img-wrap {
+  background-color: #121214;
+  border-bottom: 1px solid var(--ud-border);
+  overflow: hidden;
+  border-top-left-radius: 0.85rem;
+  border-top-right-radius: 0.85rem;
+  aspect-ratio: 1 / 1;
+}
+
+.ud-product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.ud-card-interactive:hover .ud-product-img-wrap img {
+  transform: scale(1.03);
+}
+
+.ud-thumb-btn {
+  background-color: #121214;
+  border: 2px solid var(--ud-border);
+  border-radius: 0.6rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.ud-thumb-btn.active,
+.ud-thumb-btn:hover {
+  border-color: var(--ud-cta);
+}
+
+.ud-promo-banner {
+  background: linear-gradient(135deg, #1A1A1D 0%, #121214 100%);
+  border: 1px solid rgba(255, 77, 0, 0.45);
+  border-radius: 0.85rem;
+}
+
+.ud-volt-box {
+  background-color: var(--ud-volt);
+  color: #0D0D0D;
+  border-radius: 0.85rem;
+}
+
+@media (max-width: 575.98px) {
+  .ud-product-img-wrap {
+    aspect-ratio: 4 / 3;
   }
 }

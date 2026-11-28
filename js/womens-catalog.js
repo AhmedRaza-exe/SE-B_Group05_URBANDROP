@@ -234,6 +234,7 @@
 
     const totalCount = computeCartCount(cart);
     writeStorage(STORAGE_KEYS.CART, JSON.stringify(cart));
+    writeStorage('cartItems', JSON.stringify(cart));
     writeStorage(STORAGE_KEYS.CART_COUNT, String(totalCount));
 
     if (elements.cartBadge) {
