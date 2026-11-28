@@ -1,226 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URBANDROPS | Drop 05 Streetwear</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous"
-  />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URBANDROPS // NOT FOR EVERYONE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Shared Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
+
+  <!-- Top Drop Ticker -->
+  <div class="ud-ticker text-center">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-        <span class="ud-logo-wrap">
-          <img src="images/Logo.png" alt="URBANDROPS Logo" class="ud-logo-img" />
-        </span>
-        <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
+      DROP 04 LIVE NOW // STRICTLY 100 PIECES PER SKU // ZERO RESTOCKS
+    </div>
+  </div>
+
+  <!-- Shared Sticky Dark Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top ud-navbar" aria-label="Primary Navigation">
+    <div class="container">
+      <a class="ud-brand" href="index.html">
+        <img src="images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.onerror=null;this.src='images/Logo.png';this.style.opacity='0.4'">
+        <div>
+          <span class="ud-brand-name">URBANDROPS</span>
+          <span class="ud-brand-sub">NOT FOR EVERYONE</span>
+        </div>
       </a>
 
       <div class="d-flex align-items-center gap-2 order-lg-3">
-        <a
-          href="pages/product-detail.html"
-          class="btn ud-cart-btn d-flex align-items-center gap-2 px-3 py-2 rounded-3"
-          aria-label="Shopping Cart"
-        >
-          <span>CART</span>
-          <span id="cartBadge" class="badge rounded-pill ud-cart-badge">0</span>
-        </a>
-        <button
-          class="navbar-toggler border-secondary"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#udMainNav"
-          aria-controls="udMainNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+        <!-- Cart Icon + Dynamic Badge -->
+        <button type="button" class="ud-cart-btn" data-open-cart aria-label="Open shopping bag">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="ud-cart-badge" id="cart-badge" data-cart-badge>0</span>
+        </button>
+
+        <!-- Mobile Hamburger Menu (☰) -->
+        <button class="navbar-toggler ud-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#udNavbarCollapse" aria-controls="udNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="ud-hamburger-icon" aria-hidden="true">☰</span>
         </button>
       </div>
 
-      <div class="collapse navbar-collapse order-lg-2" id="udMainNav">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+      <div class="collapse navbar-collapse order-lg-2" id="udNavbarCollapse">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
           <li class="nav-item">
-            <a class="nav-link ud-nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link ud-nav-link active" aria-current="page" href="index.html">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="pages/mens-catalog.html">Men's Catalog</a>
+            <a class="nav-link ud-nav-link" href="#trending-section">SHOP</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="pages/product-detail.html">Product Detail</a>
+            <a class="nav-link ud-nav-link" href="pages/about.html#drop-philosophy">DROPS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ud-nav-link" href="pages/size-guide.html">Size Guide</a>
+            <a class="nav-link ud-nav-link" href="pages/about.html">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="pages/lookbook.html">LOOKBOOK</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="pages/about.html#stores">STORES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="#footer-support">SUPPORT</a>
           </li>
         </ul>
+
+        <!-- Search Input -->
+        <form class="ud-search-wrap me-lg-3" id="navbarSearchForm" role="search">
+          <span class="ud-search-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input class="form-control ud-search-input" type="search" id="navbarSearchInput" placeholder="Search drops..." aria-label="Search drops" autocomplete="off">
+          <div class="ud-search-results" id="navbarSearchResults"></div>
+        </form>
       </div>
     </div>
   </nav>
 
   <main>
-    <!-- Hero Section -->
-    <section class="ud-hero-section py-5">
-      <div class="container py-lg-3">
-        <div class="row align-items-center g-4 g-lg-5">
-          <div class="col-12 col-lg-6">
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <span class="badge ud-badge-accent px-3 py-2 text-uppercase rounded-pill">
-                DROP 05 // NOT FOR EVERYONE
-              </span>
-            </div>
-            <h1 class="display-4 fw-bold text-uppercase mb-3" style="letter-spacing: -0.02em; line-height: 1.06;">
-              Built For The Concrete Runway
-            </h1>
-            <p class="lead text-secondary mb-4">
-              Heavyweight 480 GSM fleece hoodies, boxy graphic jersey tees, and tactical ripstop cargos engineered in
-              obsidian black, charcoal, and signal orange.
+    <!-- Hero Banner -->
+    <section class="ud-hero" id="hero">
+      <img src="images/hero-drop.jpg" alt="URBANDROPS Drop 04 Heavyweight Streetwear Editorial" class="ud-hero-bg" onerror="this.onerror=null;this.style.display='none'">
+      <div class="ud-hero-overlay"></div>
+      <div class="container ud-hero-content">
+        <div class="row">
+          <div class="col-lg-8 col-xl-7">
+            <span class="ud-tag-lime mb-3">ARCHIVE DROP 04 // NUMBERED 001–100</span>
+            <h1 class="ud-hero-title mb-3">NOT FOR EVERYONE</h1>
+            <p class="lead text-white-50 mb-4" style="max-width: 540px;">
+              480 GSM raw-cut fleece, technical ripstop utility, and nocturnal silhouettes engineered for the underground. Once a batch clears 100 units, the pattern is vaulted forever.
             </p>
-            <div class="d-flex flex-wrap gap-3 mb-4">
-              <a href="pages/mens-catalog.html" class="btn btn-ud-cta px-4 py-3">
-                Shop Men's Catalog
-              </a>
-              <a href="pages/product-detail.html" class="btn btn-ud-outline px-4 py-3">
-                Spotlight Hoodie
-              </a>
-            </div>
-            <div class="row g-3 pt-2">
-              <div class="col-4">
-                <div class="ud-card p-3 text-center">
-                  <div class="fw-bold fs-5 text-white">480 GSM</div>
-                  <div class="small text-secondary">French Terry</div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="ud-card p-3 text-center">
-                  <div class="fw-bold fs-5" style="color: var(--ud-cta);">6 DROPS</div>
-                  <div class="small text-secondary">Core Capsule</div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="ud-card p-3 text-center">
-                  <div class="fw-bold fs-5 text-white">S &ndash; XL</div>
-                  <div class="small text-secondary">Boxy Cut</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-lg-6">
-            <div class="ud-card overflow-hidden">
-              <div style="aspect-ratio: 16 / 10; background-color: #121214; overflow: hidden;">
-                <img
-                  src="images/hero-streetwear.jpg"
-                  alt="URBANDROPS Drop 05 Heavyweight Streetwear Editorial"
-                  class="w-100 h-100 d-block"
-                  style="object-fit: cover; object-position: 68% 12%;"
-                />
-              </div>
-              <div class="p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3 border-top" style="border-color: var(--ud-border) !important;">
-                <div class="d-flex align-items-center gap-3">
-                  <img
-                    src="images/Logo.png"
-                    alt="URBANDROPS Monogram"
-                    class="rounded-2 border"
-                    style="width: 48px; height: 48px; object-fit: cover; border-color: var(--ud-border) !important;"
-                  />
-                  <div>
-                    <div class="ud-section-kicker">SPOTLIGHT PIECE</div>
-                    <div class="fw-bold text-white">Heavyweight Oversized Hoodie &mdash; $128</div>
-                  </div>
-                </div>
-                <a href="pages/product-detail.html" class="btn btn-sm btn-ud-cta px-3 py-2">
-                  View Drop
-                </a>
-              </div>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="#trending-section" class="btn btn-ud-orange">SHOP NEW DROP</a>
+              <a href="pages/lookbook.html" class="btn btn-ud-outline-lime">VIEW LOOKBOOK</a>
+              <a href="pages/about.html" class="btn btn-outline-light font-mono-tech text-uppercase px-4 py-3" style="font-size: 0.82rem; border-radius: 3px;">OUR STORY</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- All 6 Clothes Collection Grid -->
-    <section class="py-5" id="allDropsSection">
+    <!-- Trending Products Grid (Rendered from JS Array) -->
+    <section class="py-5 my-lg-4" id="trending-section">
       <div class="container">
-        <div class="row align-items-end g-3 mb-4">
-          <div class="col-12 col-lg-6">
-            <p class="ud-section-kicker mb-1">FULL CAPSULE // 6 PIECES</p>
-            <h2 class="h2 fw-bold text-uppercase mb-0">Drop 05 Collection</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+          <div>
+            <span class="ud-section-eyebrow">DROP 04 // LIVE ALLOCATION</span>
+            <h2 class="ud-section-title mb-0 mt-1">TRENDING NOW</h2>
           </div>
-          <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-lg-end gap-2" role="group" aria-label="Filter home collection by category">
-            <button type="button" class="btn btn-sm btn-ud-outline active home-cat-btn" data-category="all">All (6)</button>
-            <button type="button" class="btn btn-sm btn-ud-outline home-cat-btn" data-category="hoodies">Hoodies (2)</button>
-            <button type="button" class="btn btn-sm btn-ud-outline home-cat-btn" data-category="graphic-tees">Graphic Tees (2)</button>
-            <button type="button" class="btn btn-sm btn-ud-outline home-cat-btn" data-category="cargos">Cargos (2)</button>
+          <div class="d-flex align-items-center gap-3">
+            <span id="trending-search-status" class="font-mono-tech small text-lime d-none"></span>
+            <a href="pages/lookbook.html" class="font-mono-tech small text-decoration-none text-white border-bottom border-warning pb-1">
+              SHOP FULL LOOKS →
+            </a>
           </div>
         </div>
 
-        <div id="homeCartNotice" class="alert d-none mb-4" role="status" style="background-color: #161618; border: 1px solid var(--ud-cta); color: #FFFFFF;"></div>
-
-        <div id="homeProductGrid" class="row g-4"></div>
+        <!-- 4-Item Grid populated dynamically by js/main.js -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="trending-products-grid"></div>
       </div>
     </section>
 
-    <!-- Spotlight Feature Banner -->
-    <section class="pb-5">
+    <!-- Brand Spotlight Strip -->
+    <section class="py-5 border-top border-bottom border-secondary border-opacity-25 bg-charcoal">
       <div class="container">
-        <div class="ud-card p-4 p-lg-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="ud-section-eyebrow">ATELIER ETHOS // NO MASS PRODUCTION</span>
+            <h2 class="ud-section-title fs-2 mt-1 mb-2">HEAVYWEIGHT CRAFTSMANSHIP. 100 PIECES ONLY.</h2>
+            <p class="text-ud-muted mb-0">
+              Custom-milled 480 GSM organic French terry and DWR technical nylon built in strictly numbered micro-runs. Read how URBANDROPS started and why we never restock.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="pages/about.html" class="btn btn-ud-outline-lime">EXPLORE ABOUT US →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Email Newsletter Form with Live Validation -->
+    <section class="py-5 my-lg-3" id="newsletter-section">
+      <div class="container">
+        <div class="ud-newsletter-box">
           <div class="row align-items-center g-4">
-            <div class="col-12 col-lg-5">
-              <div class="rounded-3 overflow-hidden border mx-auto" style="max-width: 360px; aspect-ratio: 1 / 1; border-color: var(--ud-border) !important; background-color: #121214;">
-                <img
-                  src="images/hoodie-zip.jpg"
-                  alt="Asphalt Zip-Up Box Hoodie"
-                  class="w-100 h-100 d-block"
-                  style="object-fit: cover;"
-                />
-              </div>
-            </div>
-            <div class="col-12 col-lg-7">
-              <p class="ud-section-kicker mb-2">UTILITY ARCHIVE // 500 GSM</p>
-              <h2 class="h2 fw-bold text-uppercase mb-2">Asphalt Zip-Up Box Hoodie</h2>
-              <p class="fs-4 fw-bold mb-3" style="color: var(--ud-cta);">$145.00</p>
-              <p class="text-secondary mb-4">
-                Pigment-washed charcoal fleece finished with a two-way matte metal zip, dropped shoulders, and reinforced
-                signal-orange bar-tack pocket stitching.
-              </p>
-              <div class="d-flex flex-wrap gap-3">
-                <button type="button" id="homeQuickAddBtn" class="btn btn-ud-cta px-4 py-2">
-                  Quick Add To Cart
-                </button>
-                <a href="pages/mens-catalog.html" class="btn btn-ud-outline px-4 py-2">
-                  Open Catalog Filters &rarr;
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Size Guide Promo Banner -->
-    <section class="pb-5">
-      <div class="container">
-        <div class="ud-promo-banner p-4 p-md-5">
-          <div class="row align-items-center g-3">
-            <div class="col-lg-8">
-              <p class="ud-section-kicker mb-2">INTERACTIVE FIT ENGINE</p>
-              <h2 class="h3 fw-bold text-uppercase mb-2 text-white">Dial In Your Exact Streetwear Size</h2>
-              <p class="text-secondary mb-0">
-                Enter your height, weight, and preferred silhouette (Slim, Regular, or Oversized) in our Size &amp; Fit
-                Calculator for an instant recommendation.
+            <div class="col-lg-6">
+              <span class="ud-tag-lime mb-2">DROP 05 // EARLY ACCESS</span>
+              <h2 class="font-display fs-2 fw-bold text-uppercase mb-2">GET THE PRIVATE DROP PASSCODE</h2>
+              <p class="text-ud-muted mb-0">
+                Join the inner circle for 30-minute early access before public drop doors open. Zero spam, only release alerts.
               </p>
             </div>
-            <div class="col-lg-4 text-lg-end">
-              <a href="pages/size-guide.html" class="btn btn-ud-cta btn-lg px-4">
-                Launch Size Guide
-              </a>
+            <div class="col-lg-6">
+              <form id="newsletter-form" novalidate>
+                <label for="newsletter-email" class="form-label font-mono-tech small text-ud-muted">EMAIL ADDRESS</label>
+                <div class="input-group flex-column flex-sm-row gap-2">
+                  <input
+                    type="email"
+                    class="form-control ud-input-dark"
+                    id="newsletter-email"
+                    placeholder="operator@urbandrops.io"
+                    aria-describedby="newsletter-feedback"
+                    required>
+                  <button type="submit" class="btn btn-ud-orange px-4">NOTIFY ME</button>
+                </div>
+                <div id="newsletter-feedback" class="font-mono-tech small mt-2 text-ud-muted" aria-live="polite">
+                  Enter your email for early Drop 05 passcodes.
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -228,199 +185,73 @@
     </section>
   </main>
 
-  <!-- Shared Footer -->
-  <footer class="ud-footer py-4 mt-auto">
+  <!-- Shared Dark Footer -->
+  <footer class="ud-footer" id="footer-support">
     <div class="container">
-      <div class="row align-items-center gy-3">
-        <div class="col-md-6 text-center text-md-start">
-          <span class="fw-bold text-white">URBAN<span class="ud-brand-accent">DROPS</span></span>
-          <span class="ms-2 small">&copy; 2026 URBANDROPS Streetwear. Not For Everyone.</span>
+      <div class="row g-4 pb-4 border-bottom border-secondary border-opacity-25">
+        <div class="col-lg-4">
+          <a class="ud-brand mb-3" href="index.html">
+            <img src="images/Logo.png" alt="URBANDROPS Logo" class="ud-brand-logo" onerror="this.onerror=null;this.src='images/Logo.png';this.style.opacity='0.4'">
+            <div>
+              <span class="ud-brand-name">URBANDROPS</span>
+              <span class="ud-brand-sub">NOT FOR EVERYONE</span>
+            </div>
+          </a>
+          <p class="text-ud-muted small mt-2" style="max-width: 320px;">
+            Independent dark streetwear house crafting heavyweight, limited-run silhouettes. Numbered 001 to 100.
+          </p>
         </div>
-        <div class="col-md-6">
-          <ul class="nav justify-content-center justify-content-md-end gap-3 small">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="pages/mens-catalog.html">Men's Catalog</a></li>
-            <li class="nav-item"><a href="pages/product-detail.html">Product Detail</a></li>
-            <li class="nav-item"><a href="pages/size-guide.html">Size Guide</a></li>
+
+        <div class="col-6 col-lg-2">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">NAVIGATION</h3>
+          <ul class="list-unstyled d-grid gap-2 mb-0">
+            <li><a href="index.html" class="ud-footer-link">HOME</a></li>
+            <li><a href="#trending-section" class="ud-footer-link">SHOP</a></li>
+            <li><a href="pages/about.html" class="ud-footer-link">ABOUT US</a></li>
+            <li><a href="pages/lookbook.html" class="ud-footer-link">LOOKBOOK</a></li>
           </ul>
         </div>
+
+        <div class="col-6 col-lg-3">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">FLAGSHIP STORES</h3>
+          <ul class="list-unstyled d-grid gap-2 mb-0 small text-ud-muted">
+            <li><strong class="text-white">TOKYO:</strong> Shibuya-ku, Jinnan 1-14</li>
+            <li><strong class="text-white">LONDON:</strong> Brewer St, Soho W1F</li>
+            <li><strong class="text-white">BERLIN:</strong> Torstraße 112, Mitte</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3">
+          <h3 class="font-mono-tech small text-lime text-uppercase mb-3">SUPPORT &amp; DISPATCH</h3>
+          <p class="text-ud-muted small mb-2">Orders &amp; sizing inquiries:<br><span class="text-white font-mono-tech">support@urbandrops.io</span></p>
+          <span class="ud-tag-lime">MON–SAT // 11:00–20:00 UTC</span>
+        </div>
+      </div>
+
+      <!-- Footer Social Links & AI Disclosure -->
+      <div class="d-flex flex-wrap gap-3 mb-3 mt-4">
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on Instagram">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on X / Twitter">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.733-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25z"/></svg>
+        </a>
+        <a href="#" class="ud-social-link" aria-label="URBANDROPS on TikTok">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.03a8.16 8.16 0 0 0 4.77 1.52V7.1a4.85 4.85 0 0 1-1-.41z"/></svg>
+        </a>
+      </div>
+      <div class="ud-ai-disclosure mb-4">
+        <strong>AI IMAGE DISCLOSURE:</strong> Some editorial and lookbook images on this site may be AI-assisted or AI-generated for creative direction purposes. All garment specifications, materials, and product details are real.
+      </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 gap-2">
+        <p class="font-mono-tech small text-ud-muted mb-0">URBANDROPS © 2026 — ALL RIGHTS RESERVED.</p>
+        <p class="font-mono-tech small text-ud-muted mb-0">OBSIDIAN • ORANGE • VOLT LIME</p>
       </div>
     </div>
   </footer>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
-  <script>
-    (() => {
-      const COLLECTION = [
-        {
-          id: 'ud-hoodie-01',
-          name: 'Heavyweight Oversized Hoodie',
-          category: 'hoodies',
-          categoryLabel: 'Hoodies',
-          price: 128,
-          sizes: ['S', 'M', 'L', 'XL'],
-          image: 'images/hoodie-oversized.jpg',
-          objPos: 'top center',
-          description: '480 GSM brushed French terry with dropped shoulders and double-lined hood.'
-        },
-        {
-          id: 'ud-hoodie-02',
-          name: 'Asphalt Zip-Up Box Hoodie',
-          category: 'hoodies',
-          categoryLabel: 'Hoodies',
-          price: 145,
-          sizes: ['M', 'L', 'XL'],
-          image: 'images/hoodie-zip.jpg',
-          objPos: 'center',
-          description: '500 GSM pigment-washed charcoal zip hoodie with orange bar-tack accents.'
-        },
-        {
-          id: 'ud-tee-01',
-          name: 'Volt Circuit Graphic Tee',
-          category: 'graphic-tees',
-          categoryLabel: 'Graphic Tees',
-          price: 55,
-          sizes: ['S', 'M', 'L'],
-          image: 'images/tee-circuit.jpg',
-          objPos: 'center',
-          description: '280 GSM combed cotton jersey with geometric circuit chest graphic.'
-        },
-        {
-          id: 'ud-tee-02',
-          name: 'Concrete Static Oversized Tee',
-          category: 'graphic-tees',
-          categoryLabel: 'Graphic Tees',
-          price: 62,
-          sizes: ['S', 'L', 'XL'],
-          image: 'images/tee-static.jpg',
-          objPos: 'center',
-          description: '300 GSM washed concrete grey tee with high-density orange static print.'
-        },
-        {
-          id: 'ud-cargo-01',
-          name: 'Ripstop Tactical Cargo Pants',
-          category: 'cargos',
-          categoryLabel: 'Cargos',
-          price: 165,
-          sizes: ['M', 'L', 'XL'],
-          image: 'images/cargo-ripstop.jpg',
-          objPos: 'center',
-          description: 'Matte black cotton ripstop with six bellows pockets and ankle toggles.'
-        },
-        {
-          id: 'ud-cargo-02',
-          name: 'Nylon Parachute Track Cargo',
-          category: 'cargos',
-          categoryLabel: 'Cargos',
-          price: 140,
-          sizes: ['S', 'M', 'L'],
-          image: 'images/cargo-parachute.jpg',
-          objPos: 'center',
-          description: 'Wide-leg technical track cargo cut for structured sneaker stack.'
-        }
-      ];
-
-      const grid = document.getElementById('homeProductGrid');
-      const notice = document.getElementById('homeCartNotice');
-      const catButtons = Array.from(document.querySelectorAll('.home-cat-btn'));
-      const quickAddBtn = document.getElementById('homeQuickAddBtn');
-      let activeCategory = 'all';
-
-      function showNotice(name, total) {
-        notice.innerHTML =
-          '<span style="color: var(--ud-cta);" class="fw-bold">ADDED TO CART:</span> ' +
-          name +
-          ' &mdash; Total cart items: <strong>' +
-          total +
-          '</strong>.';
-        notice.classList.remove('d-none');
-      }
-
-      function renderCollection() {
-        const items =
-          activeCategory === 'all'
-            ? COLLECTION
-            : COLLECTION.filter((p) => p.category === activeCategory);
-
-        grid.innerHTML = items
-          .map((item) => {
-            const sizeChips = item.sizes
-              .map(
-                (sz) =>
-                  `<span class="badge border border-secondary text-light bg-dark">${sz}</span>`
-              )
-              .join(' ');
-
-            return `
-              <div class="col-12 col-md-6 col-lg-4">
-                <article class="ud-card ud-card-interactive h-100 d-flex flex-column">
-                  <div class="ud-product-img-wrap">
-                    <a href="pages/product-detail.html" class="d-block w-100 h-100">
-                      <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                        style="object-position: ${item.objPos};"
-                      />
-                    </a>
-                  </div>
-                  <div class="p-4 d-flex flex-column flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="ud-section-kicker">${item.categoryLabel}</span>
-                      <span class="fw-bold fs-5 text-white">$${item.price}</span>
-                    </div>
-                    <h3 class="h5 fw-bold mb-2">
-                      <a href="pages/product-detail.html" class="text-white text-decoration-none">${item.name}</a>
-                    </h3>
-                    <p class="small text-secondary mb-3 flex-grow-1">${item.description}</p>
-                    <div class="d-flex flex-wrap gap-1 mb-3">${sizeChips}</div>
-                    <div class="d-grid gap-2 d-sm-flex">
-                      <button
-                        type="button"
-                        class="btn btn-ud-cta flex-grow-1 home-add-item-btn"
-                        data-name="${item.name}"
-                      >
-                        Add to Cart
-                      </button>
-                      <a href="pages/product-detail.html" class="btn btn-ud-outline">
-                        Details
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            `;
-          })
-          .join('');
-      }
-
-      catButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          activeCategory = btn.dataset.category;
-          catButtons.forEach((b) => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderCollection();
-        });
-      });
-
-      grid.addEventListener('click', (event) => {
-        const btn = event.target.closest('.home-add-item-btn');
-        if (!btn) return;
-        const total = URBANDROPS.addToCart(1);
-        showNotice(btn.dataset.name, total);
-      });
-
-      quickAddBtn.addEventListener('click', () => {
-        const total = URBANDROPS.addToCart(1);
-        showNotice('Asphalt Zip-Up Box Hoodie', total);
-      });
-
-      renderCollection();
-    })();
-  </script>
 </body>
 </html>
