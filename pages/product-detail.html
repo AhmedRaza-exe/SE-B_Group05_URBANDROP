@@ -17,12 +17,13 @@
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
-        <img
-          src="../images/Logo.png"
-          alt="URBANDROPS Logo"
-          class="ud-logo-img"
-          onerror="this.classList.add('d-none')"
-        />
+        <span class="ud-logo-wrap">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS Logo"
+            class="ud-logo-img"
+          />
+        </span>
         <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
       </a>
 
@@ -171,12 +172,12 @@
             </div>
 
             <!-- Live Add Feedback -->
-            <div
-              id="addSuccessAlert"
-              class="alert d-none mb-4"
-              role="status"
-              style="background-color: #121212; border: 1px solid var(--ud-accent); color: #FFFFFF;"
-            ></div>
+            <div id="addSuccessToast" class="toast align-items-center text-white bg-dark border-0 position-fixed bottom-0 end-0 m-3 d-none" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body" id="addSuccessToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
 
             <!-- Spec Sheet -->
             <div class="border-top pt-4" style="border-color: var(--ud-border) !important;">
@@ -245,20 +246,23 @@
         {
           id: 'front',
           title: 'Front View',
+          image: '../images/hoodie-oversized.jpg',
           label: 'HEAVYWEIGHT HOODIE // FRONT',
           tag: '480 GSM // VOLT STITCH',
           accentHex: '#CCFF00'
         },
         {
-          id: 'back',
-          title: 'Back Silhouette',
-          label: 'DROPPED SHOULDER // BACK',
+          id: 'editorial',
+          title: 'Studio Look',
+          image: '../images/hoodie-editorial.jpg',
+          label: 'DROPPED SHOULDER // STUDIO',
           tag: 'BOXY CUT // ARCHIVE',
           accentHex: '#FF4D00'
         },
         {
           id: 'hood',
           title: 'Double-Lined Hood',
+          image: '../images/hoodie-hood-detail.jpg',
           label: 'DOUBLE-LINED HOOD DETAIL',
           tag: 'STRUCTURED CROWN',
           accentHex: '#CCFF00'
@@ -266,6 +270,7 @@
         {
           id: 'fleece',
           title: '480 GSM Fleece',
+          image: '../images/hoodie-fleece-detail.jpg',
           label: 'HEAVY FRENCH TERRY WEAVE',
           tag: '100% ORGANIC COTTON',
           accentHex: '#FFFFFF'
@@ -280,7 +285,8 @@
       const qtyIncrementBtn = document.getElementById('qtyIncrementBtn');
       const quantityDisplay = document.getElementById('quantityDisplay');
       const addToCartBtn = document.getElementById('addToCartBtn');
-      const addSuccessAlert = document.getElementById('addSuccessAlert');
+            const addSuccessToast = new bootstrap.Toast(document.getElementById('addSuccessToast'));
+      const addSuccessToastBody = document.getElementById('addSuccessToastBody');
 
       let selectedSize = 'L';
       let quantity = 1;
@@ -289,12 +295,17 @@
       function setMainView(index) {
         activeViewIndex = index;
         const view = GALLERY_VIEWS[index];
-        mainProductImage.src = URBANDROPS.createApparelSvg(
+        const fallbackSrc = URBANDROPS.createApparelSvg(
           view.label,
           view.tag,
           view.accentHex,
           'hoodie'
         );
+        mainProductImage.onerror = () => {
+          mainProductImage.onerror = null;
+          mainProductImage.src = fallbackSrc;
+        };
+        mainProductImage.src = view.image || fallbackSrc;
         mainProductImage.alt = 'Heavyweight Oversized Hoodie - ' + view.title;
 
         const thumbButtons = thumbnailSelector.querySelectorAll('.ud-thumb-btn');
@@ -306,12 +317,13 @@
 
       function renderThumbnails() {
         thumbnailSelector.innerHTML = GALLERY_VIEWS.map((view, idx) => {
-          const thumbSrc = URBANDROPS.createApparelSvg(
+          const fallbackSrc = URBANDROPS.createApparelSvg(
             view.title.toUpperCase(),
             view.tag,
             view.accentHex,
             'hoodie'
           );
+          const thumbSrc = view.image || fallbackSrc;
           return `
             <div class="col-3">
               <button
@@ -325,7 +337,8 @@
                   src="${thumbSrc}"
                   alt="${view.title}"
                   class="w-100 d-block rounded-2"
-                  style="height: 76px; object-fit: cover;"
+                  style="height: 76px; object-fit: cover; object-position: top center;"
+                  onerror="this.onerror=null;this.src='${fallbackSrc}'"
                 />
                 <span class="d-block small text-secondary text-truncate mt-1">${view.title}</span>
               </button>

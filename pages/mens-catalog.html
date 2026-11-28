@@ -17,12 +17,13 @@
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
-        <img
-          src="../images/Logo.png"
-          alt="URBANDROPS Logo"
-          class="ud-logo-img"
-          onerror="this.classList.add('d-none')"
-        />
+        <span class="ud-logo-wrap">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS Logo"
+            class="ud-logo-img"
+          />
+        </span>
         <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
       </a>
 
@@ -237,6 +238,7 @@
           tag: '480 GSM // CORE DROP',
           variant: 'hoodie',
           accentHex: '#CCFF00',
+          image: '../images/hoodie-oversized.jpg',
           description: 'Boxy dropped-shoulder silhouette in brushed heavyweight French terry.'
         },
         {
@@ -249,6 +251,7 @@
           tag: '500 GSM // UTILITY',
           variant: 'hoodie',
           accentHex: '#FF4D00',
+          image: '../images/hoodie-zip.jpg',
           description: 'Two-way metal zip closure with pigment-washed matte charcoal finish.'
         },
         {
@@ -261,6 +264,7 @@
           tag: '280 GSM // GRAPHIC',
           variant: 'tee',
           accentHex: '#CCFF00',
+          image: '../images/tee-circuit.jpg',
           description: 'High-density screen print back graphic on combed heavyweight jersey.'
         },
         {
@@ -273,6 +277,7 @@
           tag: '300 GSM // LIMITED',
           variant: 'tee',
           accentHex: '#FF4D00',
+          image: '../images/tee-static.jpg',
           description: 'Relaxed mock-neck collar with puff-ink typographic chest hit.'
         },
         {
@@ -285,6 +290,7 @@
           tag: 'RIPSTOP // 6-POCKET',
           variant: 'cargo',
           accentHex: '#CCFF00',
+          image: '../images/cargo-ripstop.jpg',
           description: 'Articulated knee pleats, bellows pockets, and cinchable hem toggles.'
         },
         {
@@ -297,6 +303,7 @@
           tag: 'WATER-REPELLENT',
           variant: 'cargo',
           accentHex: '#FF4D00',
+          image: '../images/cargo-parachute.jpg',
           description: 'Wide-leg technical nylon weave with contrast bar-tack stitching.'
         }
       ];
@@ -367,12 +374,13 @@
 
         catalogGrid.innerHTML = filtered
           .map((item) => {
-            const imgSrc = URBANDROPS.createApparelSvg(
+            const fallbackSrc = URBANDROPS.createApparelSvg(
               item.name.toUpperCase(),
               item.tag,
               item.accentHex,
               item.variant
             );
+            const imgSrc = item.image || fallbackSrc;
             const sizeChips = item.sizes
               .map(
                 (sz) =>
@@ -384,12 +392,12 @@
               <div class="col-12 col-md-6 col-xl-4">
                 <article class="ud-card ud-card-interactive h-100 d-flex flex-column">
                   <div class="ud-product-img-wrap">
-                    <a href="product-detail.html" class="d-block">
+                    <a href="product-detail.html" class="d-block w-100 h-100">
                       <img
                         src="${imgSrc}"
                         alt="${item.name}"
-                        class="w-100 d-block"
-                        style="height: 240px; object-fit: cover;"
+                        style="object-position: ${item.id === 'ud-hoodie-01' ? 'top center' : 'center'};"
+                        onerror="this.onerror=null;this.src='${fallbackSrc}'"
                       />
                     </a>
                   </div>
