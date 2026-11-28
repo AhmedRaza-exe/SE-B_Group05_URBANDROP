@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heavyweight Oversized Hoodie | URBANDROPS</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top ud-navbar py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+        <span class="ud-logo-wrap">
+          <img
+            src="../images/Logo.png"
+            alt="URBANDROPS Logo"
+            class="ud-logo-img"
+          />
+        </span>
+        <span class="ud-brand-text">URBAN<span class="ud-brand-accent">DROPS</span></span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2 order-lg-3">
+        <a
+          href="product-detail.html"
+          class="btn ud-cart-btn d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+          aria-label="Shopping Cart"
+        >
+          <span>CART</span>
+          <span id="cartBadge" class="badge rounded-pill ud-cart-badge">0</span>
+        </a>
+        <button
+          class="navbar-toggler border-secondary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#udMainNav"
+          aria-controls="udMainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse order-lg-2" id="udMainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="mens-catalog.html">Men's Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link active" aria-current="page" href="product-detail.html">Product Detail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ud-nav-link" href="size-guide.html">Size Guide</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Product Spotlight -->
+  <main class="py-4 py-md-5">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small mb-0">
+          <li class="breadcrumb-item"><a href="../index.html" class="text-secondary text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item"><a href="mens-catalog.html" class="text-secondary text-decoration-none">Men's Catalog</a></li>
+          <li class="breadcrumb-item active" style="color: var(--ud-accent);" aria-current="page">
+            Heavyweight Oversized Hoodie
+          </li>
+        </ol>
+      </nav>
+
+      <div class="row g-4 g-lg-5 align-items-start">
+        <!-- Left Gallery Column -->
+        <div class="col-12 col-lg-6">
+          <div class="ud-card p-3 p-md-4">
+            <div class="rounded-3 overflow-hidden border mb-3" style="border-color: var(--ud-border) !important; background-color: #121212;">
+              <img
+                id="mainProductImage"
+                src=""
+                alt="Heavyweight Oversized Hoodie - Front Silhouette"
+                class="w-100 d-block"
+                style="max-height: 460px; object-fit: contain;"
+              />
+            </div>
+
+            <!-- Thumbnail Selector -->
+            <div class="row g-2" id="thumbnailSelector" role="group" aria-label="Product angle thumbnails"></div>
+          </div>
+        </div>
+
+        <!-- Right Details & Controls Column -->
+        <div class="col-12 col-lg-6">
+          <div class="ud-card p-4 p-md-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+              <span class="ud-section-kicker">DROP 05 // SPOTLIGHT PIECE</span>
+              <span class="badge ud-badge-accent px-2 py-1">IN STOCK</span>
+            </div>
+
+            <h1 class="display-6 fw-bold text-uppercase mb-2">Heavyweight Oversized Hoodie</h1>
+            <p class="fs-3 fw-bold mb-3" style="color: var(--ud-accent);">$128.00</p>
+            <p class="text-secondary mb-4">
+              Cut from custom-milled 480 GSM 100% organic cotton French terry with a boxy dropped-shoulder drape,
+              double-layered structured hood, and reinforced kangaroo pocket.
+            </p>
+
+            <!-- Interactive Size Selector -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold text-uppercase small">
+                  Select Size: <span id="selectedSizeText" style="color: var(--ud-accent);">L</span>
+                </span>
+                <a href="size-guide.html" class="small text-decoration-none" style="color: var(--ud-accent);">
+                  Size &amp; Fit Calculator &rarr;
+                </a>
+              </div>
+              <div class="d-flex flex-wrap gap-2" id="sizeSelector" role="group" aria-label="Select hoodie size">
+                <button type="button" class="btn ud-size-btn py-2 px-3" data-size="S">S</button>
+                <button type="button" class="btn ud-size-btn py-2 px-3" data-size="M">M</button>
+                <button type="button" class="btn ud-size-btn active py-2 px-3" data-size="L">L</button>
+                <button type="button" class="btn ud-size-btn py-2 px-3" data-size="XL">XL</button>
+              </div>
+            </div>
+
+            <!-- Quantity Stepper & CTA -->
+            <div class="mb-4">
+              <label for="quantityDisplay" class="form-label fw-bold text-uppercase small mb-2">Quantity</label>
+              <div class="d-flex flex-column flex-sm-row gap-3">
+                <div class="input-group" style="max-width: 165px;">
+                  <button
+                    type="button"
+                    id="qtyDecrementBtn"
+                    class="btn btn-ud-outline px-3 fw-bold"
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    id="quantityDisplay"
+                    class="form-control ud-input text-center fw-bold"
+                    value="1"
+                    readonly
+                    aria-label="Selected quantity"
+                  />
+                  <button
+                    type="button"
+                    id="qtyIncrementBtn"
+                    class="btn btn-ud-outline px-3 fw-bold"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <button type="button" id="addToCartBtn" class="btn btn-ud-cta flex-grow-1 py-2 px-4 fs-6">
+                  ADD TO CART
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Add Feedback -->
+            <div id="addSuccessToast" class="toast align-items-center text-white bg-dark border-0 position-fixed bottom-0 end-0 m-3 d-none" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex">
+                <div class="toast-body" id="addSuccessToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+            </div>
+
+            <!-- Spec Sheet -->
+            <div class="border-top pt-4" style="border-color: var(--ud-border) !important;">
+              <h2 class="h6 fw-bold text-uppercase mb-3" style="color: var(--ud-accent);">Technical Specs</h2>
+              <div class="row g-3 small">
+                <div class="col-6">
+                  <div class="p-3 rounded-3" style="background-color: #121212; border: 1px solid var(--ud-border);">
+                    <div class="text-secondary">Fabric Weight</div>
+                    <div class="fw-bold text-white">480 GSM French Terry</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-3" style="background-color: #121212; border: 1px solid var(--ud-border);">
+                    <div class="text-secondary">Fit Profile</div>
+                    <div class="fw-bold text-white">Boxy / Dropped Shoulder</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-3" style="background-color: #121212; border: 1px solid var(--ud-border);">
+                    <div class="text-secondary">Ribbing</div>
+                    <div class="fw-bold text-white">2x2 Heavy Rib Cuffs</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-3" style="background-color: #121212; border: 1px solid var(--ud-border);">
+                    <div class="text-secondary">Treatment</div>
+                    <div class="fw-bold text-white">Pre-Shrunk Enzyme Wash</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="ud-footer py-4 mt-auto">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="fw-bold text-white">URBAN<span class="ud-brand-accent">DROPS</span></span>
+          <span class="ms-2 small">&copy; 2026 URBANDROPS Streetwear. All rights reserved.</span>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav justify-content-center justify-content-md-end gap-3 small">
+            <li class="nav-item"><a href="mens-catalog.html">Men's Catalog</a></li>
+            <li class="nav-item"><a href="product-detail.html">Product Detail</a></li>
+            <li class="nav-item"><a href="size-guide.html">Size Guide</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (() => {
+      const GALLERY_VIEWS = [
+        {
+          id: 'front',
+          title: 'Front View',
+          image: '../images/hoodie-oversized.jpg',
+          label: 'HEAVYWEIGHT HOODIE // FRONT',
+          tag: '480 GSM // VOLT STITCH',
+          accentHex: '#CCFF00'
+        },
+        {
+          id: 'editorial',
+          title: 'Studio Look',
+          image: '../images/hoodie-editorial.jpg',
+          label: 'DROPPED SHOULDER // STUDIO',
+          tag: 'BOXY CUT // ARCHIVE',
+          accentHex: '#FF4D00'
+        },
+        {
+          id: 'hood',
+          title: 'Double-Lined Hood',
+          image: '../images/hoodie-hood-detail.jpg',
+          label: 'DOUBLE-LINED HOOD DETAIL',
+          tag: 'STRUCTURED CROWN',
+          accentHex: '#CCFF00'
+        },
+        {
+          id: 'fleece',
+          title: '480 GSM Fleece',
+          image: '../images/hoodie-fleece-detail.jpg',
+          label: 'HEAVY FRENCH TERRY WEAVE',
+          tag: '100% ORGANIC COTTON',
+          accentHex: '#FFFFFF'
+        }
+      ];
+
+      const mainProductImage = document.getElementById('mainProductImage');
+      const thumbnailSelector = document.getElementById('thumbnailSelector');
+      const sizeButtons = Array.from(document.querySelectorAll('#sizeSelector .ud-size-btn'));
+      const selectedSizeText = document.getElementById('selectedSizeText');
+      const qtyDecrementBtn = document.getElementById('qtyDecrementBtn');
+      const qtyIncrementBtn = document.getElementById('qtyIncrementBtn');
+      const quantityDisplay = document.getElementById('quantityDisplay');
+      const addToCartBtn = document.getElementById('addToCartBtn');
+            const addSuccessToast = new bootstrap.Toast(document.getElementById('addSuccessToast'));
+      const addSuccessToastBody = document.getElementById('addSuccessToastBody');
+
+      let selectedSize = 'L';
+      let quantity = 1;
+      let activeViewIndex = 0;
+
+      function setMainView(index) {
+        activeViewIndex = index;
+        const view = GALLERY_VIEWS[index];
+        const fallbackSrc = URBANDROPS.createApparelSvg(
+          view.label,
+          view.tag,
+          view.accentHex,
+          'hoodie'
+        );
+        mainProductImage.onerror = () => {
+          mainProductImage.onerror = null;
+          mainProductImage.src = fallbackSrc;
+        };
+        mainProductImage.src = view.image || fallbackSrc;
+        mainProductImage.alt = 'Heavyweight Oversized Hoodie - ' + view.title;
+
+        const thumbButtons = thumbnailSelector.querySelectorAll('.ud-thumb-btn');
+        thumbButtons.forEach((btn, idx) => {
+          btn.classList.toggle('active', idx === index);
+          btn.setAttribute('aria-pressed', idx === index ? 'true' : 'false');
+        });
+      }
+
+      function renderThumbnails() {
+        thumbnailSelector.innerHTML = GALLERY_VIEWS.map((view, idx) => {
+          const fallbackSrc = URBANDROPS.createApparelSvg(
+            view.title.toUpperCase(),
+            view.tag,
+            view.accentHex,
+            'hoodie'
+          );
+          const thumbSrc = view.image || fallbackSrc;
+          return `
+            <div class="col-3">
+              <button
+                type="button"
+                class="ud-thumb-btn w-100 ${idx === activeViewIndex ? 'active' : ''}"
+                data-view-index="${idx}"
+                aria-label="Select ${view.title}"
+                aria-pressed="${idx === activeViewIndex ? 'true' : 'false'}"
+              >
+                <img
+                  src="${thumbSrc}"
+                  alt="${view.title}"
+                  class="w-100 d-block rounded-2"
+                  style="height: 76px; object-fit: cover; object-position: top center;"
+                  onerror="this.onerror=null;this.src='${fallbackSrc}'"
+                />
+                <span class="d-block small text-secondary text-truncate mt-1">${view.title}</span>
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      thumbnailSelector.addEventListener('click', (event) => {
+        const thumbBtn = event.target.closest('.ud-thumb-btn');
+        if (!thumbBtn) return;
+        const idx = parseInt(thumbBtn.dataset.viewIndex, 10);
+        if (!Number.isNaN(idx)) {
+          setMainView(idx);
+        }
+      });
+
+      sizeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          selectedSize = btn.dataset.size;
+          selectedSizeText.textContent = selectedSize;
+          sizeButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      function updateQuantity(nextQty) {
+        quantity = Math.min(99, Math.max(1, nextQty));
+        quantityDisplay.value = String(quantity);
+      }
+
+      qtyDecrementBtn.addEventListener('click', () => updateQuantity(quantity - 1));
+      qtyIncrementBtn.addEventListener('click', () => updateQuantity(quantity + 1));
+
+      addToCartBtn.addEventListener('click', () => {
+        const updatedTotal = URBANDROPS.addToCart(quantity);
+        addSuccessAlert.innerHTML =
+          '<span style="color: var(--ud-accent);" class="fw-bold">LOCKED IN:</span> Added <strong>' +
+          quantity +
+          ' &times; Heavyweight Oversized Hoodie (Size ' +
+          selectedSize +
+          ')</strong>. Total cart items: <strong>' +
+          updatedTotal +
+          '</strong>.';
+        addSuccessAlert.classList.remove('d-none');
+      });
+
+      renderThumbnails();
+      setMainView(0);
+    })();
+  </script>
+</body>
+</html>
